@@ -119,8 +119,8 @@ namespace Warmups.BLL
         
         public string Front3(string str)
         {
-
-            throw new NotImplementedException();
+            string front = str.Length >= 3 ? str.Substring(0, 3) : str;
+            return front + front + front;
         }
         
         public string BackAround(string str)
@@ -144,11 +144,28 @@ namespace Warmups.BLL
         
         public bool StartHi(string str)
         {
-            if (str.IndexOf("hi") == 0)
+            if (str.StartsWith("hi"))
             {
-                return true;
+                if (str.Length > 2)
+                {
+                    if (char.IsLetter(str[2]))
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        return true;
+                    }
+                }
+                else
+                {
+                    return true;
+                }
             }
-            else return false;
+            else
+            {
+                return false;
+            }
             throw new NotImplementedException();
         }
         
@@ -179,51 +196,104 @@ namespace Warmups.BLL
             {
                 return true;
             }
+            else return false;
             throw new NotImplementedException();
         }
         
         public bool SoAlone(int a, int b)
         {
-            throw new NotImplementedException();
+            return (((a >= 13 && a <= 19) && !(b >= 13 && b <= 19)) || (!(a >= 13 && a <= 19) && (b >= 13 && b <= 19)));
         }
         
         public string RemoveDel(string str)
         {
-            throw new NotImplementedException();
+            var d = "del";
+            return str.Replace(d, "");   
         }
         
         public bool IxStart(string str)
         {
-            throw new NotImplementedException();
+            if (str.Length > 2 && str.Substring(1, 2) == "ix")
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
-        
         public string StartOz(string str)
         {
+            string zero = "";
+            string one = "";
+            if (str.Length>0 && str[0]=='o')
+            {
+                zero = "o";
+            }
+            if (str.Length>1 && str[1]=='z')
+            {
+                one = "z";
+            }
+            return (zero + one);
             throw new NotImplementedException();
         }
-        
+
         public int Max(int a, int b, int c)
         {
+            return Math.Max(a, Math.Max(b, c));
             throw new NotImplementedException();
         }
-        
+
         public int Closer(int a, int b)
         {
+            int A10 = Math.Abs(10 - a);
+            int B10 = Math.Abs(10 - b);
+            if (A10 > B10)
+            {
+                return b;
+            }
+            else if (B10 > A10)
+            {
+                return a;
+            }
+            else return 0;
             throw new NotImplementedException();
         }
         
         public bool GotE(string str)
         {
+            int eCount = 0;
+            for (int i = 0; i < str.Length; i++)
+            {
+                if (str[i] == 'e')
+                    eCount++;
+            }
+            return (eCount >= 1 && eCount <= 3);
             throw new NotImplementedException();
         }
         
         public string EndUp(string str)
         {
-            throw new NotImplementedException();
+            if (str.Length > 2)
+            {
+                string front = str.Substring(0, str.Length - 3);
+                string end = str.Substring(str.Length - 3).ToUpper();
+                return (front + end);
+            }
+            else
+            {
+                return str.ToUpper();
+            }
         }
-        
+
         public string EveryNth(string str, int n)
         {
+            string NewNth = "";
+            for (int i = 0 ;i < str.Length; i+=n)
+            {
+                NewNth += str.Substring(i, 1);
+            }
+            return NewNth;
             throw new NotImplementedException();
         }
     }

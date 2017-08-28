@@ -1,4 +1,5 @@
-Given a string and a non-negative int n, return a larger string that is n copies of the original string. 
+Given a string and a non-negative int n, 
+return a larger string that is n copies of the original string. 
 
 StringTimes("Hi", 2) -> "HiHi"
 StringTimes("Hi", 3) -> "HiHiHi"
