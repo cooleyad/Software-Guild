@@ -13,8 +13,7 @@ namespace BattleShip.UI
             SetUp flow = new SetUp();
             GameState state= flow.Start();
 
-            Gameflow game = new Gameflow();
-            game.PlayGame(state);
+            Gameflow.PlayGame(state);
         }
     }
 }

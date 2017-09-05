@@ -8,6 +8,7 @@ using BattleShip.BLL.GameLogic;
 using BattleShip.BLL.Requests;
 using BattleShip.BLL.Responses;
 using BattleShip.UI;
+using BattleShip.BLL.Ships;
 
 namespace BattleShip.UI
 {
@@ -19,11 +20,15 @@ namespace BattleShip.UI
 
     public class Gameflow
     {
-        internal ShotStatus PlayGame(GameState state)
+        internal static void PlayGame(GameState state)
         {
+            Player AttackingPlayer = null;
+            Player DefendingPlayer = null;
+
+
+            bool Victorious = false;
+            while (!Victorious)
             {
-                Player AttackingPlayer = null;
-                Player DefendingPlayer = null;
 
                 if (state.IsPlayerOneTurn)
                 {
@@ -36,51 +41,58 @@ namespace BattleShip.UI
                     DefendingPlayer = state.P1;
                 }
 
-                BshipOutput.DrawBoard();
+                BshipOutput.DrawBoard(DefendingPlayer.PlayerBoard);
 
                 {
-                    BshipInput.PromptShotCoord();
-                    string UserInput = Console.ReadLine();
+                    var UserInput= BshipInput.GetCoordinate();
 
-                    ShotStatus LastShot = new ShotStatus();
 
-                    if (LastShot !=ShotStatus.Victory)
+                    FireShotResponse response = DefendingPlayer.PlayerBoard.FireShot(UserInput);
 
-                    switch(LastShot)
+                    //ShotHistory LastShot = new ShotHistory();
+
+                    switch (response.ShotStatus)
                     {
-                            case ShotStatus.Invalid:
-                                Console.Write($"you have entered an invalid coordinate, what are you thinking? Try again bozo!");
 
-                            break;
-
-                        case ShotStatus.Duplicate :
-                            Console.WriteLine($"Really!? You have entered a duplicate coordinate. Just.. Try again.");
-                            
-                            
-                            break;
-
-                        case ShotStatus.Miss :
-                            Console.WriteLine($"Well, you missed. Better luck next time.");
+                        case ShotStatus.Invalid:
+                            Console.WriteLine("U WOT M8!? Not a valid coordinate. Try again bozo.");
 
                             break;
 
                         case ShotStatus.Hit:
-                            Console.WriteLine($"Hey look, you managed to hit something! Keep it up bucko!");
+                            Console.WriteLine("Hey look, you proved the haters wrong! You can hit something more than the broad side of a barn! Now it's the next players turn.");
+                            Console.ReadLine();
+                            state.IsPlayerOneTurn = !state.IsPlayerOneTurn;
+                            Console.Clear();
 
                             break;
 
-                        case ShotStatus.HitAndSunk:
-                            Console.WriteLine($" You sunk their ship! Look at you.");
+                        case ShotStatus.Miss:
+                            Console.WriteLine("You missed, better luck next time.");
+                            Console.ReadLine();
+                            state.IsPlayerOneTurn = !state.IsPlayerOneTurn;
+                            Console.Clear();
+
 
                             break;
+                        case ShotStatus.Duplicate:
+                            Console.WriteLine("U WOT M8!? Dont you know you already shot there?");
 
+                            break;
                         case ShotStatus.Victory:
-                            Console.WriteLine($"You won! Your enemies have experienced fire and fury like they have never known and never will know again...");
-                            Console.WriteLine("Because, well, you know, they sank with their ships");
+                            Console.WriteLine("Congratulations, you rained fire and fury down on your enemies, the likes of which they have never known...");
+                            Console.ReadLine();
+                            state.IsPlayerOneTurn = !state.IsPlayerOneTurn;
+                            Console.Clear();
+
+
+                            break;
+                        case ShotStatus.HitAndSunk:
+                            Console.WriteLine("To repeat the old phrase... You sunk their battleship! Well one of their ships anyway");
+
 
                             break;
                     }
-                    return LastShot;                   
                 }
             }
         }

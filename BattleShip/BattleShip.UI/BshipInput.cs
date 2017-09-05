@@ -18,7 +18,7 @@ namespace BattleShip.UI
             return Console.ReadLine();
         }
 
-        internal static Coordinate GetCoordinate(string PlayerName, ShipType s)
+        internal static Coordinate GetCoordinate()
         {
             int ycol;
             int x = -1;
@@ -27,7 +27,7 @@ namespace BattleShip.UI
             {
                 while (!IsValidCoordinate)
                 {
-                    Console.Write($"{PlayerName}, please enter a coordinate for ship {s}: ");
+                    Console.Write("Please enter a coordinate for ship : ");
                     Console.WriteLine();
 
                     string UserInput = Console.ReadLine();
@@ -48,7 +48,7 @@ namespace BattleShip.UI
                     }
                 }
                  ycol = (yPart - 'a' + 1);
-                    Coordinate GoodCoord = new Coordinate(x, ycol);
+                    Coordinate GoodCoord = new Coordinate(ycol, x);
                 return GoodCoord;
 
             }
@@ -67,6 +67,7 @@ namespace BattleShip.UI
                 {
                     Console.Write("please enter a coordinate to reign fire and fury down upon, the likes of which we have never seen before: ");
                     Console.WriteLine();
+                    Console.ReadLine();
 
                     string UserInput = Console.ReadLine();
 
@@ -86,7 +87,7 @@ namespace BattleShip.UI
                     }
                 }
                 ycol = (yPart - 'a' + 1);
-                Coordinate GoodCoord = new Coordinate(x, ycol);
+                Coordinate GoodCoord = new Coordinate(ycol, x);
                 return GoodCoord;
             }
         }

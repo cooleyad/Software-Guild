@@ -58,7 +58,7 @@ namespace BattleShip.UI
                 do
                 {
                     PlaceShipRequest request = new PlaceShipRequest();
-                    request.Coordinate = BshipInput.GetCoordinate(PlayerName, s);
+                    request.Coordinate = BshipInput.GetCoordinate();
                     request.Direction = BshipInput.GetDirection(PlayerName, s);
                     request.ShipType = s;
 

@@ -7,6 +7,7 @@ using BattleShip.BLL;
 using BattleShip.BLL.Requests;
 using BattleShip.UI;
 using BattleShip.BLL.GameLogic;
+using BattleShip.BLL.Responses;
 
 namespace BattleShip.UI
 {
@@ -26,7 +27,7 @@ namespace BattleShip.UI
             Console.Clear();
         }
 
-      
+
         internal static void WelcomePlayers()
         {
             Console.WriteLine("You are the captain of the ship now...");
@@ -56,13 +57,34 @@ namespace BattleShip.UI
             Console.Clear();
         }
 
-        internal static void DrawBoard()
+        internal static void DrawBoard(Board PlayerBoard)
         {
             for (int y = 1; y < 11; y++)
             {
                 for (int x = 1; x <= 11; x++)
                 {
-                    Console.Write($"|  ");
+                    ShotHistory CurrentBoard = PlayerBoard.CheckCoordinate(new Coordinate(y, x));
+                    switch (CurrentBoard)
+                    {
+                        case ShotHistory.Hit:
+                            Console.ForegroundColor = ConsoleColor.DarkRed;
+                            Console.Write("H");
+                            Console.ForegroundColor = ConsoleColor.White;
+                            break;
+
+                        case ShotHistory.Miss:
+                            Console.ForegroundColor = ConsoleColor.DarkYellow;
+                            Console.Write("M");
+                            Console.ForegroundColor = ConsoleColor.White;
+                            break;
+
+                        case ShotHistory.Unknown:
+                            Console.Write(" ");
+                            break;
+
+                    }
+
+                    Console.Write($"| ");
                 }
                 Console.WriteLine("");
                 Console.WriteLine("-------------------------------");
