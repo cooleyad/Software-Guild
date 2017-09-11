@@ -10,10 +10,36 @@ namespace BattleShip.UI
     {
         static void Main(string[] args)
         {
-            SetUp flow = new SetUp();
-            GameState state= flow.Start();
+            bool playAgain = false;
 
-            Gameflow.PlayGame(state);
+            do
+
+            {
+                SetUp flow = new SetUp();
+                GameState state = flow.Start();
+
+                Gameflow.PlayGame(state);
+                break;
+            }
+            while (playAgain);
+            {
+                Console.WriteLine("Want to have another go at it?");
+                Console.WriteLine("Press Y for yes, press N for no..");
+                Console.WriteLine("Or just stare at the screen like a brain dead moron");
+                Console.WriteLine("it's all good, you do you...");
+                String userInput = Console.ReadLine();
+
+                if (userInput== "Y" || userInput=="y")
+                {
+                    SetUp restart = new SetUp();
+                    restart.Start();
+                }
+                else if (userInput== "N" || userInput== "n")
+                {
+                    return;
+                }
+            }
+
         }
     }
 }

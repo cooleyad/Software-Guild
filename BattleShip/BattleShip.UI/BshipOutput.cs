@@ -16,7 +16,7 @@ namespace BattleShip.UI
     //Board gameboard=BuildBoard();
     //Player P1=new Player (name , gameBoard);
 
-    public class BshipOutput
+    public static class BshipOutput
     {
         internal static void DisplayTitle()
         {
@@ -79,7 +79,9 @@ namespace BattleShip.UI
                             break;
 
                         case ShotHistory.Unknown:
-                            Console.Write(" ");
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.Write("?");
+                            Console.ForegroundColor = ConsoleColor.White;
                             break;
 
                     }
@@ -87,10 +89,15 @@ namespace BattleShip.UI
                     Console.Write($"| ");
                 }
                 Console.WriteLine("");
-                Console.WriteLine("-------------------------------");
+                Console.WriteLine("--------------------------------");
                 Board Drawboard = new Board();
             }
             Console.ReadLine();
+        }
+
+        internal static void GameOver()
+        {
+            Console.WriteLine("Contratulations, you won the game! Or did you...");
         }
     }
 }

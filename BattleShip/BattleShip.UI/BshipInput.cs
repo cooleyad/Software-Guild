@@ -10,7 +10,7 @@ using BattleShip.BLL.Responses;
 
 namespace BattleShip.UI
 {
-    static class BshipInput
+    public static class BshipInput
     {
         internal static string GetNameFromPlayer(int PlayerNumber)
         {
@@ -18,79 +18,53 @@ namespace BattleShip.UI
             return Console.ReadLine();
         }
 
-        internal static Coordinate GetCoordinate()
+        internal static Coordinate GetCoordinate(string PlayerName)
         {
-            int ycol;
-            int x = -1;
-            char yPart = 'a';
             bool IsValidCoordinate = false;
+
+            Coordinate validCoordinate = null;
+            while (!IsValidCoordinate)
             {
-                while (!IsValidCoordinate)
+                Console.Write($"{PlayerName}, please enter a coordinate : ");
+
+
+                String userInput = Console.ReadLine();
+                IsValidCoordinate = CoordinateTryParse(userInput, out validCoordinate);
+            }
+            return validCoordinate;
+        }
+
+
+        public static bool CoordinateTryParse(string userInput, out Coordinate validCoordinate)
+        {
+            validCoordinate = null;
+            if (userInput.Length > 1)
+            {
+                char yPart = userInput[0];
+                String xPart = userInput.Substring(1);
+
+                int ycol;
+                int x;
+
+                if (yPart >= 'a' && yPart <= 'j')
                 {
-                    Console.Write("Please enter a coordinate for ship : ");
-                    Console.WriteLine();
-
-                    string UserInput = Console.ReadLine();
-
-                     yPart = UserInput[0];
-
-                    string xPart = UserInput.Substring(1);
-
-                    if (yPart >= 'a' && yPart <= 'j')
+                    if (int.TryParse(xPart, out x))
                     {
-                        if (int.TryParse(xPart, out x))
+                        if (x >= 1 && x <= 10)
                         {
-                            if (x >= 1 && x <= 10)
-                            {
-                                IsValidCoordinate = true;
-                            }
+                            ycol = (yPart - 'a' + 1);
+                            validCoordinate = new Coordinate(ycol, x);
+                            return true;
                         }
                     }
                 }
-                 ycol = (yPart - 'a' + 1);
-                    Coordinate GoodCoord = new Coordinate(ycol, x);
-                return GoodCoord;
-
             }
-
-
+            return false;
         }
 
-        internal static Coordinate PromptShotCoord()
-        {
-            int ycol;
-            int x = -1;
-            char yPart = 'a';
-            bool IsValidCoordinate = false;
-            {
-                while (IsValidCoordinate)
-                {
-                    Console.Write("please enter a coordinate to reign fire and fury down upon, the likes of which we have never seen before: ");
-                    Console.WriteLine();
-                    Console.ReadLine();
 
-                    string UserInput = Console.ReadLine();
 
-                    yPart = UserInput[0];
 
-                    string xPart = UserInput.Substring(1);
-
-                    if (yPart >= 'a' && yPart <= 'j')
-                    {
-                        if (int.TryParse(xPart, out x))
-                        {
-                            if (x >= 1 && x <= 10)
-                            {
-                                IsValidCoordinate = true;
-                            }
-                        }
-                    }
-                }
-                ycol = (yPart - 'a' + 1);
-                Coordinate GoodCoord = new Coordinate(ycol, x);
-                return GoodCoord;
-            }
-        }
 
         internal static ShipDirection GetDirection(string PlayerName, ShipType s)
         {
@@ -124,3 +98,5 @@ namespace BattleShip.UI
         }
     }
 }
+
+

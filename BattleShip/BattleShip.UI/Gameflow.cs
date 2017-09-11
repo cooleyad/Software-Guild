@@ -26,8 +26,8 @@ namespace BattleShip.UI
             Player DefendingPlayer = null;
 
 
-            bool Victorious = false;
-            while (!Victorious)
+            bool victorious = false;
+            while (!victorious)
             {
 
                 if (state.IsPlayerOneTurn)
@@ -40,14 +40,19 @@ namespace BattleShip.UI
                     AttackingPlayer = state.P2;
                     DefendingPlayer = state.P1;
                 }
+                //if (Victorious)
+                //{
+                //    Console.WriteLine("Do you want to play again? Enter Y/N")
+                //}
+              
 
                 BshipOutput.DrawBoard(DefendingPlayer.PlayerBoard);
 
                 {
-                    var UserInput= BshipInput.GetCoordinate();
 
+                    Coordinate ToraToraTora = BshipInput.GetCoordinate(AttackingPlayer.PlayerName);
 
-                    FireShotResponse response = DefendingPlayer.PlayerBoard.FireShot(UserInput);
+                    FireShotResponse response = DefendingPlayer.PlayerBoard.FireShot(ToraToraTora);
 
                     //ShotHistory LastShot = new ShotHistory();
 
@@ -56,7 +61,6 @@ namespace BattleShip.UI
 
                         case ShotStatus.Invalid:
                             Console.WriteLine("U WOT M8!? Not a valid coordinate. Try again bozo.");
-
                             break;
 
                         case ShotStatus.Hit:
@@ -64,7 +68,6 @@ namespace BattleShip.UI
                             Console.ReadLine();
                             state.IsPlayerOneTurn = !state.IsPlayerOneTurn;
                             Console.Clear();
-
                             break;
 
                         case ShotStatus.Miss:
@@ -72,29 +75,30 @@ namespace BattleShip.UI
                             Console.ReadLine();
                             state.IsPlayerOneTurn = !state.IsPlayerOneTurn;
                             Console.Clear();
-
-
                             break;
+
+
                         case ShotStatus.Duplicate:
                             Console.WriteLine("U WOT M8!? Dont you know you already shot there?");
-
                             break;
+
+
                         case ShotStatus.Victory:
                             Console.WriteLine("Congratulations, you rained fire and fury down on your enemies, the likes of which they have never known...");
                             Console.ReadLine();
-                            state.IsPlayerOneTurn = !state.IsPlayerOneTurn;
+                            victorious = true;
                             Console.Clear();
-
-
                             break;
+
+
                         case ShotStatus.HitAndSunk:
                             Console.WriteLine("To repeat the old phrase... You sunk their battleship! Well one of their ships anyway");
-
-
+                            state.IsPlayerOneTurn = !state.IsPlayerOneTurn;
                             break;
                     }
                 }
             }
+            BshipOutput.GameOver();
         }
     }
 }
