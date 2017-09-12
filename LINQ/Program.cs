@@ -23,7 +23,21 @@ namespace LINQ
             //Exercise9();
             //Exercise10();
             //Exercise11();
-            Exercise12();
+            //Exercise12();
+
+            //Exercise14();
+            //Exercise15();
+            //Exercise16();
+            //Exercise17();
+            Exercise18();
+            //Exercise19();
+            //Exercise20();
+            //Exercise22();
+
+
+
+            //Exercise26();
+            //Exercise27();
 
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey();
@@ -191,7 +205,7 @@ namespace LINQ
         {
             List<Product> theProducts = DataLoader.LoadProducts();
 
-            string lineFormat = "{0,-15 }{1,-35}{2,-20}{3,-15:C}{4,-20}{5,-15}";
+            string lineFormat = "{0,-15}{1,-35}{2,-20}{3,-15:C}{4,-20}{5,-15}";
 
             var reprint = from p in theProducts
                           select new { p.ProductID, p.ProductName, p.Category, p.UnitPrice, p.UnitsInStock, ReOrder=p.UnitPrice<3 ? true:false };
@@ -287,7 +301,12 @@ namespace LINQ
         /// </summary>
         static void Exercise14()
         {
+            var sixer = DataLoader.NumbersC.Where(n => n < 6);
 
+            foreach (var i in sixer)
+            {
+                Console.WriteLine(i);
+            }
         }
 
         /// <summary>
@@ -295,7 +314,12 @@ namespace LINQ
         /// </summary>
         static void Exercise15()
         {
+            var threeve = DataLoader.NumbersC;
 
+            foreach (var n in threeve.SkipWhile(n => n % 3 != 0|| n==3))
+            {
+                Console.WriteLine(n);
+            }
         }
 
         /// <summary>
@@ -303,6 +327,11 @@ namespace LINQ
         /// </summary>
         static void Exercise16()
         {
+            List<Product> alpha = DataLoader.LoadProducts();
+            alpha= alpha.OrderBy(p => p.ProductName).ToList();
+
+            PrintProductInformation(alpha);
+
 
         }
 
@@ -311,6 +340,10 @@ namespace LINQ
         /// </summary>
         static void Exercise17()
         {
+            List<Product> stock = DataLoader.LoadProducts();
+            stock = stock.OrderByDescending(p => p.UnitsInStock).ToList();
+
+            PrintProductInformation(stock);
 
         }
 
@@ -319,7 +352,14 @@ namespace LINQ
         /// </summary>
         static void Exercise18()
         {
+            List<Product> product = DataLoader.LoadProducts();
 
+            var sortedproducts =
+                from p in product
+                orderby p.Category, p.UnitPrice descending
+                select p;
+
+            PrintProductInformation(sortedproducts);
         }
 
         /// <summary>
@@ -327,7 +367,12 @@ namespace LINQ
         /// </summary>
         static void Exercise19()
         {
+            var backwards = DataLoader.NumbersB.Reverse();
 
+            foreach(int i in backwards)
+            {
+                Console.WriteLine(i);
+            }
         }
 
         /// <summary>
@@ -344,7 +389,20 @@ namespace LINQ
         /// </summary>
         static void Exercise20()
         {
+            var groups = DataLoader.LoadProducts().GroupBy(p => p.Category);
 
+            foreach(var group in groups)
+            {
+                Console.WriteLine();
+                Console.WriteLine("Category: {0}", group.Key);
+                Console.WriteLine("==========================================");
+
+                foreach (var p in group)
+                {
+                    Console.WriteLine(p.ProductName);
+                    Console.WriteLine();
+                }
+            }
         }
 
         /// <summary>
@@ -368,7 +426,14 @@ namespace LINQ
         /// </summary>
         static void Exercise22()
         {
+            List<Product> categories = DataLoader.LoadProducts();
+            var print = from c in categories
+                        select new { c.Category };
 
+            foreach (var info in print)
+            {
+                Console.WriteLine(info);
+            }                        
         }
 
         /// <summary>
@@ -376,7 +441,7 @@ namespace LINQ
         /// </summary>
         static void Exercise23()
         {
-
+            
         }
 
         /// <summary>
@@ -400,6 +465,9 @@ namespace LINQ
         /// </summary>
         static void Exercise26()
         {
+            var odds = DataLoader.NumbersA.Count(n => n % 2 == 1);
+
+            Console.WriteLine(odds);
 
         }
 
@@ -408,6 +476,16 @@ namespace LINQ
         /// </summary>
         static void Exercise27()
         {
+            List<Customer> orderCount = DataLoader.LoadCustomers();
+            var count = from c in orderCount
+                        select new { custID = c.CustomerID, custOrd= c.Orders };
+            {
+                foreach(var d in count)
+                {
+                    Console.WriteLine(d.custID);
+                    Console.WriteLine(d.custOrd.Count());
+                }
+            }
 
         }
 
