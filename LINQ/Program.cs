@@ -24,20 +24,23 @@ namespace LINQ
             //Exercise10();
             //Exercise11();
             //Exercise12();
-
+            //Exercise13();
             //Exercise14();
             //Exercise15();
             //Exercise16();
             //Exercise17();
-            Exercise18();
+            //Exercise18();
             //Exercise19();
             //Exercise20();
             //Exercise22();
-
-
-
+            //Exercise23();
+            //Exercise24();
+            //Exercise25();
             //Exercise26();
             //Exercise27();
+            //Exercise28();
+            //Exercise29();
+            Exercise30();
 
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey();
@@ -124,12 +127,11 @@ namespace LINQ
         /// </summary>
         static void Exercise2()
         {
-            var costThree = DataLoader.LoadProducts();
+            List<Product> costThree = DataLoader.LoadProducts();
 
-            costThree = costThree.Where(c => c.UnitPrice >= 3).ToList();
-            costThree = costThree.Where(c => c.UnitsInStock >= 1).ToList();
+            var cost = costThree.Where(c => c.UnitPrice >= 3M &&c.UnitsInStock >= 1);
 
-            PrintProductInformation(costThree);
+            PrintProductInformation(cost);
 
         }
 
@@ -138,11 +140,13 @@ namespace LINQ
         /// </summary>
         static void Exercise3()
         {
-            var filtered = DataLoader.LoadCustomers();
+            List<Customer> customer = DataLoader.LoadCustomers();
 
-            filtered = filtered.Where(c => c.Region == "WA").ToList();
-
+            var filtered = from c in customer
+                           where c.Region == "WA"
+                           select c;
             PrintCustomerInformation(filtered);
+
         }
 
         /// <summary>
@@ -167,7 +171,8 @@ namespace LINQ
             List<Product> theProducts = DataLoader.LoadProducts();
 
             var print = from p in theProducts
-                        select new { p.ProductName, p.Category, markup = p.UnitPrice * 0.25M + p.UnitPrice, p.ProductID, p.UnitsInStock };
+                        select new { p.ProductName, p.Category, markup = p.UnitPrice * 0.25M + p.UnitPrice,
+                            p.ProductID, p.UnitsInStock };
 
             foreach (var list in print)
             {
@@ -293,6 +298,15 @@ namespace LINQ
         /// </summary>
         static void Exercise13()
         {
+            List<Customer> custInfo = DataLoader.LoadCustomers();
+            var customers = custInfo.Where(c => c.Region == "WA").Select(c =>
+                new { p = c.CompanyName, d = c.Orders.OrderByDescending(o => o.OrderDate).First() });
+
+            foreach (var customer in customers)
+            {
+                Console.WriteLine(customer.p + "||" + customer.d.OrderDate);
+
+            }
 
         }
 
@@ -427,8 +441,7 @@ namespace LINQ
         static void Exercise22()
         {
             List<Product> categories = DataLoader.LoadProducts();
-            var print = from c in categories
-                        select new { c.Category };
+            var print = categories.Select(c=>c.Category).Distinct();
 
             foreach (var info in print)
             {
@@ -441,7 +454,14 @@ namespace LINQ
         /// </summary>
         static void Exercise23()
         {
-            
+            List<Product> products = DataLoader.LoadProducts();
+
+            var exists =
+                from product in products
+                where product.ProductID == 789
+                select product;
+
+            PrintProductInformation(exists);
         }
 
         /// <summary>
@@ -449,6 +469,14 @@ namespace LINQ
         /// </summary>
         static void Exercise24()
         {
+            List<Product> products = DataLoader.LoadProducts();
+
+            var filtered = products.Where(p => p.UnitsInStock == 0).Select(p => p.Category).Distinct();
+
+            foreach(var i in filtered)
+            {
+                Console.WriteLine(i);
+            }
 
         }
 
@@ -457,7 +485,14 @@ namespace LINQ
         /// </summary>
         static void Exercise25()
         {
+            List<Product> products = DataLoader.LoadProducts();
 
+            var filtered = products.Where(p => p.UnitsInStock >= 1).Select(p => p.Category).Distinct();
+
+            foreach (var i in filtered)
+            {
+                Console.WriteLine(i);
+            }
         }
 
         /// <summary>
@@ -478,12 +513,11 @@ namespace LINQ
         {
             List<Customer> orderCount = DataLoader.LoadCustomers();
             var count = from c in orderCount
-                        select new { custID = c.CustomerID, custOrd= c.Orders };
+                        select new { custID = c.CustomerID, custOrd= c.Orders.Count() };
             {
                 foreach(var d in count)
                 {
-                    Console.WriteLine(d.custID);
-                    Console.WriteLine(d.custOrd.Count());
+                    Console.WriteLine(d);
                 }
             }
 
@@ -494,6 +528,16 @@ namespace LINQ
         /// </summary>
         static void Exercise28()
         {
+            List<Product> products = DataLoader.LoadProducts();
+
+            var filtered = from p in products
+                           group p by p.Category into d
+                           select new { cat = d.Key, count = d.Count() };
+
+            foreach(var i in filtered)
+            {
+                Console.WriteLine(i);
+            }
 
         }
 
@@ -503,14 +547,34 @@ namespace LINQ
         static void Exercise29()
         {
 
+            List<Product> products = DataLoader.LoadProducts();
+
+            var filtered = from p in products
+                           group p by p.Category into d
+                           select new { cat = d.Key, count = d.Sum(c=>c.UnitsInStock) };
+
+            foreach (var i in filtered)
+            {
+                Console.WriteLine(i);
+            }
         }
 
         /// <summary>
         /// Print a distinct list of product categories and the lowest priced product in that category
         /// </summary>
         static void Exercise30()
-        {
+        { List<Product> products = DataLoader.LoadProducts();
 
+            var filtered =
+
+                from p in products
+                group p by p.Category
+                into g
+                select new {cat = g.Key, low = g.OrderBy(c => c.UnitPrice).First() };
+            foreach (var i in filtered)
+            {
+                Console.WriteLine($"{i.cat}, {i.low.ProductName}");
+            }
         }
 
         /// <summary>
