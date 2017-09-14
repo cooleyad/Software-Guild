@@ -119,7 +119,7 @@ namespace LINQ
 
             PrintProductInformation(filtered);
 
-            
+
         }
 
         /// <summary>
@@ -129,7 +129,7 @@ namespace LINQ
         {
             List<Product> costThree = DataLoader.LoadProducts();
 
-            var cost = costThree.Where(c => c.UnitPrice >= 3M &&c.UnitsInStock >= 1);
+            var cost = costThree.Where(c => c.UnitPrice >= 3M && c.UnitsInStock >= 1);
 
             PrintProductInformation(cost);
 
@@ -171,8 +171,14 @@ namespace LINQ
             List<Product> theProducts = DataLoader.LoadProducts();
 
             var print = from p in theProducts
-                        select new { p.ProductName, p.Category, markup = p.UnitPrice * 0.25M + p.UnitPrice,
-                            p.ProductID, p.UnitsInStock };
+                        select new
+                        {
+                            p.ProductName,
+                            p.Category,
+                            markup = p.UnitPrice * 0.25M + p.UnitPrice,
+                            p.ProductID,
+                            p.UnitsInStock
+                        };
 
             foreach (var list in print)
             {
@@ -197,7 +203,7 @@ namespace LINQ
                 Console.WriteLine(index.ProductName.ToUpper());
                 Console.WriteLine();
 
-            }                       
+            }
         }
 
         /// <summary>
@@ -213,7 +219,7 @@ namespace LINQ
             string lineFormat = "{0,-15}{1,-35}{2,-20}{3,-15:C}{4,-20}{5,-15}";
 
             var reprint = from p in theProducts
-                          select new { p.ProductID, p.ProductName, p.Category, p.UnitPrice, p.UnitsInStock, ReOrder=p.UnitPrice<3 ? true:false };
+                          select new { p.ProductID, p.ProductName, p.Category, p.UnitPrice, p.UnitsInStock, ReOrder = p.UnitPrice < 3 ? true : false };
 
             foreach (var print in reprint)
             {
@@ -229,8 +235,15 @@ namespace LINQ
         {
             List<Product> theProducts = DataLoader.LoadProducts();
             var print = from p in theProducts
-                        select new { p.ProductName, p.ProductID, p.Category, p.UnitPrice, p.UnitsInStock,
-                            StockValue = p.UnitPrice * p.UnitsInStock};
+                        select new
+                        {
+                            p.ProductName,
+                            p.ProductID,
+                            p.Category,
+                            p.UnitPrice,
+                            p.UnitsInStock,
+                            StockValue = p.UnitPrice * p.UnitsInStock
+                        };
 
             foreach (var info in print)
             {
@@ -244,8 +257,8 @@ namespace LINQ
         static void Exercise9()
         {
             var onlyEvens = DataLoader.NumbersA.Where(n => n % 2 == 0);
-            
-            foreach(var n in onlyEvens)
+
+            foreach (var n in onlyEvens)
             {
                 Console.WriteLine(n);
             }
@@ -273,7 +286,7 @@ namespace LINQ
         {
             var firstThree = DataLoader.NumbersC.Where(n => n % 2 == 1).Take(3);
 
-            foreach(var i in firstThree)
+            foreach (var i in firstThree)
             {
                 Console.WriteLine(i);
             }
@@ -287,7 +300,7 @@ namespace LINQ
         {
             var afterThree = DataLoader.NumbersB.Skip(3);
 
-            foreach(var i in afterThree)
+            foreach (var i in afterThree)
             {
                 Console.WriteLine(i);
             }
@@ -330,7 +343,7 @@ namespace LINQ
         {
             var threeve = DataLoader.NumbersC;
 
-            foreach (var n in threeve.SkipWhile(n => n % 3 != 0|| n==3))
+            foreach (var n in threeve.SkipWhile(n => n % 3 != 0 || n == 3))
             {
                 Console.WriteLine(n);
             }
@@ -342,7 +355,7 @@ namespace LINQ
         static void Exercise16()
         {
             List<Product> alpha = DataLoader.LoadProducts();
-            alpha= alpha.OrderBy(p => p.ProductName).ToList();
+            alpha = alpha.OrderBy(p => p.ProductName).ToList();
 
             PrintProductInformation(alpha);
 
@@ -383,7 +396,7 @@ namespace LINQ
         {
             var backwards = DataLoader.NumbersB.Reverse();
 
-            foreach(int i in backwards)
+            foreach (int i in backwards)
             {
                 Console.WriteLine(i);
             }
@@ -405,7 +418,7 @@ namespace LINQ
         {
             var groups = DataLoader.LoadProducts().GroupBy(p => p.Category);
 
-            foreach(var group in groups)
+            foreach (var group in groups)
             {
                 Console.WriteLine();
                 Console.WriteLine("Category: {0}", group.Key);
@@ -441,12 +454,12 @@ namespace LINQ
         static void Exercise22()
         {
             List<Product> categories = DataLoader.LoadProducts();
-            var print = categories.Select(c=>c.Category).Distinct();
+            var print = categories.Select(c => c.Category).Distinct();
 
             foreach (var info in print)
             {
                 Console.WriteLine(info);
-            }                        
+            }
         }
 
         /// <summary>
@@ -473,7 +486,7 @@ namespace LINQ
 
             var filtered = products.Where(p => p.UnitsInStock == 0).Select(p => p.Category).Distinct();
 
-            foreach(var i in filtered)
+            foreach (var i in filtered)
             {
                 Console.WriteLine(i);
             }
@@ -513,9 +526,9 @@ namespace LINQ
         {
             List<Customer> orderCount = DataLoader.LoadCustomers();
             var count = from c in orderCount
-                        select new { custID = c.CustomerID, custOrd= c.Orders.Count() };
+                        select new { custID = c.CustomerID, custOrd = c.Orders.Count() };
             {
-                foreach(var d in count)
+                foreach (var d in count)
                 {
                     Console.WriteLine(d);
                 }
@@ -534,7 +547,7 @@ namespace LINQ
                            group p by p.Category into d
                            select new { cat = d.Key, count = d.Count() };
 
-            foreach(var i in filtered)
+            foreach (var i in filtered)
             {
                 Console.WriteLine(i);
             }
@@ -551,7 +564,7 @@ namespace LINQ
 
             var filtered = from p in products
                            group p by p.Category into d
-                           select new { cat = d.Key, count = d.Sum(c=>c.UnitsInStock) };
+                           select new { cat = d.Key, count = d.Sum(c => c.UnitsInStock) };
 
             foreach (var i in filtered)
             {
@@ -563,14 +576,13 @@ namespace LINQ
         /// Print a distinct list of product categories and the lowest priced product in that category
         /// </summary>
         static void Exercise30()
-        { List<Product> products = DataLoader.LoadProducts();
+        {
+            List<Product> products = DataLoader.LoadProducts();
 
-            var filtered =
+            var filtered = from p in products
+                           group p by p.Category into g
+                           select new { cat = g.Key, low = g.OrderBy(c => c.UnitPrice).First() };
 
-                from p in products
-                group p by p.Category
-                into g
-                select new {cat = g.Key, low = g.OrderBy(c => c.UnitPrice).First() };
             foreach (var i in filtered)
             {
                 Console.WriteLine($"{i.cat}, {i.low.ProductName}");
@@ -582,7 +594,25 @@ namespace LINQ
         /// </summary>
         static void Exercise31()
         {
+            var avgPrice = DataLoader.LoadProducts().GroupBy(p => p.Category)
+                               .Select(p => new
+                               {
+                                   category = p.Key,
+                                   average = p.Average(cl => cl.UnitPrice)
+                               })
+                               .OrderByDescending(P => P.average).Take(3);
 
+
+
+            String line = "{0, -35}{1, -30:c}";
+            Console.WriteLine(line, "Product Category", "Lowest Price");
+            Console.WriteLine("==========================================================");
+
+            foreach (var k in avgPrice)
+
+            {
+                Console.WriteLine(line, k.category, k.average);
+            }
         }
     }
 }
