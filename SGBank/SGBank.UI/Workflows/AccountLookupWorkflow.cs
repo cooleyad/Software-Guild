@@ -24,7 +24,7 @@ namespace SGBank.UI.Workflows
 
             if (response.Success)
             {
-                ConsoleIO.DisplayAccountDetails(response.Account);
+                BankIO.DisplayAccountDetails(response.Account);
 
             }
             else

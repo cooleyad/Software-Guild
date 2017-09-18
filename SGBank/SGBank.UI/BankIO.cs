@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SGBank.UI
 {
-    class BankIO
+    public class BankIO
     {
         public static void DisplayAccountDetails(Account account)
         {
