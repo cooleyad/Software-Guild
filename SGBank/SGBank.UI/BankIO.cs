@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace SGBank.UI
 {
-    public class BankIO
+    class BankIO
     {
         public static void DisplayAccountDetails(Account account)
         {
-            Console.WriteLine($"Account Number: {account.AccountNumber} ");
+            Console.WriteLine($"Account Number: {account.AccountNumber}");
             Console.WriteLine($"Name: {account.Name}");
             Console.WriteLine($"Balance: {account.Balance:c}");
         }

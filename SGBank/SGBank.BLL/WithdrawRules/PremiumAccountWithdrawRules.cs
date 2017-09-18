@@ -27,7 +27,7 @@ namespace SGBank.BLL.WithdrawRules
                 response.Message = "Withdrawal amounts must be negative!";
                 return response;
             }
-            if (account.Balance < -500)
+            if (account.Balance+amount < -500)
             {
                 response.Success = false;
                 response.Message = "Withdrawal exceeds $500 overdraft limit!";

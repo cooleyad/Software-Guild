@@ -42,10 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="\\Mac\Home\Desktop\Repos\dotnet-alex-cooley\BankIO.cs">
-      <Link>BankIO.cs</Link>
-    </Compile>
-    <Compile Include="ConsoleIO.cs" />
+    <Compile Include="BankIO.cs" />
     <Compile Include="Menu.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

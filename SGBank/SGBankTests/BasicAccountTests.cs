@@ -15,7 +15,7 @@ namespace SGBankTests
     [TestFixture]
     public class BasicAccountTests
     {
-        [Test]
+        
         [TestCase("33333", "Basic Account", 100, AccountType.Free, 250, false)]
         [TestCase("33333", "Basic Account", 100, AccountType.Basic, -100, false)]
         [TestCase("33333", "Basic Account", 100, AccountType.Basic, 250, true)]
@@ -25,6 +25,7 @@ namespace SGBankTests
         {
             IDeposit deposit = new NoLimitDepositRule();
             Account account = new Account();
+
             account.Name = name;
             account.Balance = balance;
             account.Type = accountType;
@@ -33,6 +34,11 @@ namespace SGBankTests
             AccountDepositResponse response = deposit.Deposit(account, amount);
 
             Assert.AreEqual(expectedResult, response.Success);
+
+            if (response.Success==true)
+            {
+                Assert.AreEqual(response.OldBalance+=amount, response.Account.Balance);
+            }
         }
         [TestCase("33333", "Basic Account", 1500, AccountType.Basic, -1000, 1500, false)]
         [TestCase("33333", "Basic Account", 100, AccountType.Free, -100, 100, false)]
