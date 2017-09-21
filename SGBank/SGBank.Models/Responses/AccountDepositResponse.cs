@@ -13,3 +13,4 @@ namespace SGBank.Models.Responses
         public decimal OldBalance { get; set; }
     }
 }
+    
