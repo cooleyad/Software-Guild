@@ -18,7 +18,7 @@ namespace SGBank.Data
             Type = AccountType.Basic
         };
 
-        public Account LoadAccount(string AccountNumber)
+        public Account loadAccount(string AccountNumber)
         {
             if (_account.AccountNumber == AccountNumber)
             {

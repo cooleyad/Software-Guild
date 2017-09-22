@@ -8,7 +8,7 @@ namespace SGBank.Models.Interfaces
 {
     public interface IAccountRepository
     {
-        Account LoadAccount(string AccountNumber);
+        Account loadAccount(string AccountNumber);
         void SaveAccount(Account account);
     }
 }

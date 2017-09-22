@@ -16,12 +16,12 @@ namespace SGBankTests
     public class BasicAccountTests
     {
         
-        [TestCase("33333", "Basic Account", 100, AccountType.Free, 250, false)]
-        [TestCase("33333", "Basic Account", 100, AccountType.Basic, -100, false)]
-        [TestCase("33333", "Basic Account", 100, AccountType.Basic, 250, true)]
+        [TestCase("33333", "Basic Account", 100, AccountType.Free, 250, 100, false)]
+        [TestCase("33333", "Basic Account", 100, AccountType.Basic, -100, 100, false)]
+        [TestCase("33333", "Basic Account", 100, AccountType.Basic, 250, 350, true)]
 
         public void BasicAccountDepositTest(string accountNumber, string name, decimal balance,
-            AccountType accountType, decimal amount, bool expectedResult)
+            AccountType accountType, decimal amount, decimal newBalance, bool expectedResult)
         {
             IDeposit deposit = new NoLimitDepositRule();
             Account account = new Account();
@@ -37,7 +37,11 @@ namespace SGBankTests
 
             if (response.Success)
             {
-                Assert.AreEqual(response.OldBalance+=amount, response.Account.Balance);
+                Assert.AreEqual(newBalance, response.Account.Balance);
+            }
+            else
+            {
+                Assert.AreEqual(balance, account.Balance);
             }
         }
         [TestCase("33333", "Basic Account", 1500, AccountType.Basic, -1000, 1500, false)]
@@ -58,12 +62,8 @@ namespace SGBankTests
             account.AccountNumber = accountNumber;
 
             AccountWithdrawResponse response = withdraw.Withdraw(account, amount);
-            Assert.AreEqual(expectedResult, response.Success);
 
-            if (response.Success)
-            {
-                Assert.AreEqual(response.Account.Balance, newBalance);
-            }
+            Assert.AreEqual(response.Account.Balance, newBalance);
         }
     }
 }

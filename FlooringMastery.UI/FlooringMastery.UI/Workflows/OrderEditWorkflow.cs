@@ -3,12 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.IO;
 
-namespace FlooringMastery.UI
+namespace FlooringMastery.UI.Workflows
 {
-    public class SystemIO
+    public class OrderEditWorkflow
     {
-        
     }
 }

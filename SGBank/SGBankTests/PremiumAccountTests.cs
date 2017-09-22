@@ -18,13 +18,13 @@ namespace SGBankTests
     public class PremiumAccountTests
     {
         
-        [TestCase("55555", "Premium Account", 100, AccountType.Free, 100, false)]
-        [TestCase("55555", "Premium Account", 100, AccountType.Premium, -100, false)]
-        [TestCase("55555", "Premium Account", 100, AccountType.Premium, 1000, true)]
+        [TestCase("55555", "Premium Account", 100, AccountType.Free, 100, 100, false)]
+        [TestCase("55555", "Premium Account", 100, AccountType.Premium, -100, 100, false)]
+        [TestCase("55555", "Premium Account", 100, AccountType.Premium, 1000, 1100, true)]
         
 
         public void PremiumAccountDepositTest(string accountNumber, string name, decimal balance,
-            AccountType accountType, decimal amount, bool expectedResult)
+            AccountType accountType, decimal amount, decimal newBalance, bool expectedResult)
         {
             IDeposit deposit = new NoLimitDepositRule();
             Account account = new Account();
@@ -38,14 +38,18 @@ namespace SGBankTests
 
             Assert.AreEqual(expectedResult, response.Success);
 
-            if (response.Success==true)
+            if (response.Success)
             {
-                Assert.AreEqual(response.OldBalance += amount, response.Account.Balance);
+                Assert.AreEqual(newBalance, response.Account.Balance);
+            }
+            else
+            {
+                Assert.AreEqual(balance, account.Balance);
             }
         }
         [TestCase("55555", "Premium Account", 1500, AccountType.Basic, -1000, 1500, false)]
         [TestCase("55555", "Premium Account", 1000, AccountType.Premium, 1000, 1000, false)]
-        [TestCase("55555", "Premium Account", 1500, AccountType.Premium, 1500, 1500, false)]
+        [TestCase("55555", "Premium Account", 1500, AccountType.Premium, -2500, 1500, false)]
         [TestCase("55555", "Premium Account", 1500, AccountType.Premium, -500, 1000, true)]
         [TestCase("55555", "Premium Account", 1500, AccountType.Premium, -1600, -100, true)]
 
@@ -61,12 +65,8 @@ namespace SGBankTests
             account.AccountNumber = accountNumber;
 
             AccountWithdrawResponse response = withdraw.Withdraw(account, amount);
-            Assert.AreEqual(expectedResult, response.Success);
+            Assert.AreEqual(newBalance, response.Account.Balance);
 
-            if (response.Success)
-            {
-                Assert.AreEqual(newBalance, response.Account.Balance);
-            }
         }
     }
 }

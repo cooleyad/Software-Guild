@@ -13,7 +13,7 @@ namespace SGBank.Data
     {
         private const string _filePath = @"\\Mac\Home\Desktop\Repos\Accounts.txt";
 
-        public Account LoadAccount(string AccountNumber)
+        public Account loadAccount(string AccountNumber)
         {
             try
             {

@@ -68,9 +68,13 @@ namespace SGBankTests
             AccountWithdrawResponse response = withdraw.Withdraw(account, amount);
             Assert.AreEqual(expectedResult, response.Success);
 
-            if (response.Success==true)
+            if (response.Success)
             {
-                Assert.AreEqual(response.OldBalance+=amount, response.Account.Balance);
+                Assert.AreEqual(response.OldBalance+amount, response.Account.Balance);
+            }
+            else
+            {
+                
             }
         }
     }
