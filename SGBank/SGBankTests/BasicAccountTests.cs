@@ -56,14 +56,23 @@ namespace SGBankTests
         {
             IWithdraw withdraw = new BasicAccountWithdrawRule();
             Account account = new Account();
-            account.Name = name;
-            account.Balance = balance;
-            account.Type = accountType;
-            account.AccountNumber = accountNumber;
+            {
 
+                account.Name = name;
+                account.Balance = balance;
+                account.Type = accountType;
+                account.AccountNumber = accountNumber;
+
+            }
             AccountWithdrawResponse response = withdraw.Withdraw(account, amount);
 
-            Assert.AreEqual(response.Account.Balance, newBalance);
+            Assert.AreEqual(expectedResult, response.Success);
+         
+            if (response.Success)
+            {
+                Assert.AreEqual(newBalance, response.Account.Balance);
+
+            }
         }
     }
 }

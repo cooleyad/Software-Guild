@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FlooringMastery.UI.Workflows;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -33,7 +34,8 @@ namespace FlooringMastery.UI
                 switch (userinput)
                 {
                     case "1":
-                        new NotImplementedException();
+                        OrderLookupWorkflow lookupWorkflow = new OrderLookupWorkflow();
+                        lookupWorkflow.Execute();
                         break;
                     case "2":
                         new NotImplementedException();

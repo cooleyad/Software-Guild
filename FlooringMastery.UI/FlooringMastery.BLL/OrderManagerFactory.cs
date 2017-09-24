@@ -8,5 +8,9 @@ namespace FlooringMastery.BLL
 {
     public class OrderManagerFactory
     {
+        public static OrderFileManager Create()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

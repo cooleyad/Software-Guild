@@ -56,17 +56,26 @@ namespace SGBankTests
         public void PremiumAccountWithdrawalTest(string accountNumber, string name, decimal balance,
             AccountType accountType, decimal amount, decimal newBalance, bool expectedResult)
         {
-            IWithdraw withdraw = new PremiumAccountWithdrawRules();
             Account account = new Account();
-
-            account.Name = name;
-            account.Balance = balance;
-            account.Type = accountType;
-            account.AccountNumber = accountNumber;
+            IWithdraw withdraw = new PremiumAccountWithdrawRules();
+            {
+                account.Name = name;
+                account.Balance = balance;
+                account.Type = accountType;
+                account.AccountNumber = accountNumber;
+            }
 
             AccountWithdrawResponse response = withdraw.Withdraw(account, amount);
-            Assert.AreEqual(newBalance, response.Account.Balance);
 
-        }
+            Assert.AreEqual(expectedResult, response.Success);
+
+
+
+            if (response.Success)
+            {
+                Assert.AreEqual(newBalance, response.Account.Balance);
+            }
+        }   
     }
 }
+

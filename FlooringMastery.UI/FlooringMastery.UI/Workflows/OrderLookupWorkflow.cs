@@ -1,4 +1,6 @@
-﻿using System;
+﻿using FlooringMastery.BLL;
+using FlooringMastery.Models.Responses;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,13 +12,13 @@ namespace FlooringMastery.UI.Workflows
     {
         public void Execute()
         {
-            Console.WriteLine("Lookup Order Number");
-            Console.WriteLine("\n==================================");
-            Console.Write("\nPlease enter an order number: ");
-            string order = Console.ReadLine();
+            OrderFileManager manager = OrderManagerFactory.Create();
 
+            Console.Clear();
 
+            string userInput = SystemIO.OrderDateRequest();
 
+            DateTime order = Convert.ToDateTime(userInput);
         }
     }
 }
