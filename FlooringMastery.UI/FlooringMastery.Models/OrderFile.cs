@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FLooringMastery.Objects
+namespace FLooringMastery.Models
 {
     public class OrderFile
     {
@@ -20,6 +20,5 @@ namespace FLooringMastery.Objects
         public decimal LaborCost { get; set; }
         public decimal Tax { get; set; }
         public decimal Total { get; set; }
-
     }
 }

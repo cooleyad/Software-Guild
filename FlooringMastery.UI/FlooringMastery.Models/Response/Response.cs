@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FlooringMastery.Models
+namespace FlooringMastery.Models.Response
 {
-    public class Responses
+    public class Response
     {
         public bool Success { get; set; }
         public string Message { get; set; }

@@ -1,5 +1,6 @@
 ﻿using FlooringMastery.BLL;
-using FlooringMastery.Models.Responses;
+using FlooringMastery.Models;
+using FlooringMastery.Models.Response;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,20 @@ namespace FlooringMastery.UI.Workflows
             string userInput = SystemIO.OrderDateRequest();
 
             DateTime order = Convert.ToDateTime(userInput);
+
+            OrderResponse response = manager.LookupOrder(order);
+
+            if (response.Success)
+            {
+                SystemIO.DisplayOrderDetails(response.Order);
+            }
+            else
+            {
+                Console.WriteLine("An error occured: ");
+                Console.WriteLine(response.Message);
+            }
+
+            Console.ReadKey();
         }
     }
 }
