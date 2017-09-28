@@ -18,9 +18,9 @@ namespace SGBank.Data
             Type = AccountType.Premium
         };
 
-        public Account loadAccount(string AccountNumber)
+        public Account LoadAccount(string accountNumber)
         {
-            if (_account.AccountNumber == AccountNumber)
+            if (_account.AccountNumber == accountNumber)
             {
                 return _account;
             }

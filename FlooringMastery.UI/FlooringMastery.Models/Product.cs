@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FLooringMastery.Objects
 {
-    public class ProductFile
+    public class Product
     {
         public string ProductType { get; set; }
         public decimal CostPerSquareFoot { get; set; }

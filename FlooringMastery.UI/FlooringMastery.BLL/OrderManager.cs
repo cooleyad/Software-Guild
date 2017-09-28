@@ -9,13 +9,15 @@ using System.Threading.Tasks;
 
 namespace FlooringMastery.BLL
 {
-    public class OrderFileManager
+    public class OrderManager
     {
-        private IOrderFileRepository _orderFileRepo;
+        private IOrderRepository _orderRepo;
+        //private IProductRepository _productRepo;
+        //private ITaxRepository _taxRepo;
 
-        public OrderFileManager (IOrderFileRepository orderFile)
+        public OrderManager (IOrderRepository orderFile)
         {
-            _orderFileRepo = orderFile;
+            _orderRepo = orderFile;
         }
 
         public OrderResponse LookupOrder(DateTime order)

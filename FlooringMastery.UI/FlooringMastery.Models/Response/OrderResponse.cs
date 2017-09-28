@@ -9,6 +9,6 @@ namespace FlooringMastery.Models.Response
 {
     public class OrderResponse : Response
     {
-        public List<OrderFile> Order { get; set; }
+        public List<Order> Order { get; set; }
     }
 }

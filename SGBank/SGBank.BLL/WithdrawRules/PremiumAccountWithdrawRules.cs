@@ -15,6 +15,9 @@ namespace SGBank.BLL.WithdrawRules
         {
             AccountWithdrawResponse response = new AccountWithdrawResponse();
 
+            response.OldBalance = account.Balance;
+            response.Account = account;
+
             if (account.Type != AccountType.Premium)
             {
                 response.Success = false;
@@ -34,9 +37,7 @@ namespace SGBank.BLL.WithdrawRules
                 return response;
             }
             response.Success = true;
-            response.Account = account;
             response.Amount = amount;
-            response.OldBalance = account.Balance;
             account.Balance += amount;            
             return response;
         }

@@ -13,7 +13,11 @@ namespace SGBank.BLL.WithdrawRules
     {
         public AccountWithdrawResponse Withdraw(Account account, decimal amount)
         {
+
             AccountWithdrawResponse response = new AccountWithdrawResponse();
+
+            response.Account = account;
+            response.OldBalance = account.Balance;
 
             if (account.Type != AccountType.Basic)
             {
@@ -40,9 +44,7 @@ namespace SGBank.BLL.WithdrawRules
                 return response;
             }
             response.Success = true;
-            response.Account = account;
             response.Amount = amount;
-            response.OldBalance = account.Balance;
             account.Balance += amount;
             if (account.Balance <0)
             {

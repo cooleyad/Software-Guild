@@ -13,7 +13,7 @@ namespace SGBank.Data
     {
         private const string _filePath = @"\\Mac\Home\Desktop\Repos\Accounts.txt";
 
-        public Account loadAccount(string AccountNumber)
+        public Account LoadAccount(string accountNumber)
         {
             try
             {
@@ -28,7 +28,7 @@ namespace SGBank.Data
 
                         string[] input = line.Split(',');
 
-                        if (input[0] == AccountNumber)
+                        if (input[0] == accountNumber)
                         {
 
                             return ParseAccount(input);

@@ -15,7 +15,7 @@ namespace SGBankTests
     [TestFixture]
     public class BasicAccountTests
     {
-        
+
         [TestCase("33333", "Basic Account", 100, AccountType.Free, 250, 100, false)]
         [TestCase("33333", "Basic Account", 100, AccountType.Basic, -100, 100, false)]
         [TestCase("33333", "Basic Account", 100, AccountType.Basic, 250, 350, true)]
@@ -56,23 +56,19 @@ namespace SGBankTests
         {
             IWithdraw withdraw = new BasicAccountWithdrawRule();
             Account account = new Account();
-            {
 
-                account.Name = name;
-                account.Balance = balance;
-                account.Type = accountType;
-                account.AccountNumber = accountNumber;
 
-            }
+            account.Name = name;
+            account.Balance = balance;
+            account.Type = accountType;
+            account.AccountNumber = accountNumber;
+
+
             AccountWithdrawResponse response = withdraw.Withdraw(account, amount);
 
-            Assert.AreEqual(expectedResult, response.Success);
-         
-            if (response.Success)
-            {
-                Assert.AreEqual(newBalance, response.Account.Balance);
+            Assert.AreEqual(newBalance, response.Account.Balance);
 
-            }
+            Assert.AreEqual(expectedResult, response.Success);
         }
     }
 }

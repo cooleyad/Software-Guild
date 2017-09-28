@@ -17,11 +17,11 @@ namespace SGBankTests
     [TestFixture]
     public class PremiumAccountTests
     {
-        
+
         [TestCase("55555", "Premium Account", 100, AccountType.Free, 100, 100, false)]
         [TestCase("55555", "Premium Account", 100, AccountType.Premium, -100, 100, false)]
         [TestCase("55555", "Premium Account", 100, AccountType.Premium, 1000, 1100, true)]
-        
+
 
         public void PremiumAccountDepositTest(string accountNumber, string name, decimal balance,
             AccountType accountType, decimal amount, decimal newBalance, bool expectedResult)
@@ -58,24 +58,21 @@ namespace SGBankTests
         {
             Account account = new Account();
             IWithdraw withdraw = new PremiumAccountWithdrawRules();
-            {
-                account.Name = name;
-                account.Balance = balance;
-                account.Type = accountType;
-                account.AccountNumber = accountNumber;
-            }
+
+            account.Name = name;
+            account.Balance = balance;
+            account.Type = accountType;
+            account.AccountNumber = accountNumber;
+
 
             AccountWithdrawResponse response = withdraw.Withdraw(account, amount);
+
+            Assert.AreEqual(newBalance, response.Account.Balance);
 
             Assert.AreEqual(expectedResult, response.Success);
 
 
-
-            if (response.Success)
-            {
-                Assert.AreEqual(newBalance, response.Account.Balance);
-            }
-        }   
+        }
     }
 }
 

@@ -11,16 +11,20 @@ namespace FlooringMastery.BLL
 {
     public static class OrderManagerFactory
     {
-        public static OrderFileManager Create()
+        public static OrderManager Create()
         {
             string mode = ConfigurationManager.AppSettings["Mode"].ToString();
+
+            
 
             switch (mode)
             {
                 case "Test":
-                    throw new Exception("Mode value in app config is not valid");
+                    return new OrderManager(new OrderTestRepository());
+                    //throw new Exception("Mode value in app config is not valid");
 
                 case "Product":
+                    //return new OrderFileManager(new OrderTestRepository());
                     throw new NotImplementedException();
 
                 default:

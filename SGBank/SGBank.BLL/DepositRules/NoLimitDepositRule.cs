@@ -15,6 +15,9 @@ namespace SGBank.BLL.DepositRules
         {
             AccountDepositResponse response = new AccountDepositResponse();
 
+            response.Account = account;
+            response.OldBalance = account.Balance;
+
             if (account.Type ==AccountType.Free)
             {
                 response.Success = false;
@@ -28,9 +31,7 @@ namespace SGBank.BLL.DepositRules
                 return response;
             }
             response.Success = true;
-            response.Account = account;
             response.Amount = amount;
-            response.OldBalance = account.Balance;
             account.Balance += amount;
             return response;
         }

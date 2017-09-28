@@ -9,16 +9,18 @@ using FLooringMastery.Models;
 
 namespace FlooringMastery.Data
 {
-    public class OrderTestRepository : IOrderFileRepository
+    public class OrderTestRepository : IOrderRepository
     {
 
-        private static OrderFile _order = new OrderFile
+        //create test account information here for workflows, ect like SGBank
+
+        private static Order _order = new Order
 
         {
             OrderNumber = 1,
-            CustomerName="Wise",
-            State="OH",
-            TaxRate=6.25M,
+            CustomerName = "Wise",
+            State = "OH",
+            TaxRate = 6.25M,
             ProductType = "Wood",
             Area = 100M,
             CostPerSquareFoot = 5.15M,
@@ -30,10 +32,27 @@ namespace FlooringMastery.Data
 
         };
 
-        //create test account information here for workflows, ect like SGBank
+        public bool DeleteOrder(Order order)
+        {
+            throw new NotImplementedException();
+        }
 
+        public List<Order> LookupOrder(DateTime time)
+        {
+            throw new NotImplementedException();
+        }
 
-        public OrderFile LookupOrder(string OrderNumber)
+        public Order LookupOrder(DateTime time, int orderNumber)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool SaveExistingOrder(Order order)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool SaveNewOrder(Order order)
         {
             throw new NotImplementedException();
         }

@@ -22,7 +22,7 @@ namespace LINQ
             //Exercise8();
             //Exercise9();
             //Exercise10();
-            //Exercise11();
+            Exercise11();
             //Exercise12();
             //Exercise13();
             //Exercise14();
@@ -40,7 +40,7 @@ namespace LINQ
             //Exercise27();
             //Exercise28();
             //Exercise29();
-            Exercise30();
+            //Exercise30();
 
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey();

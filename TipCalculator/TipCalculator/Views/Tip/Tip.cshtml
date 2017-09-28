@@ -1,0 +1,35 @@
+﻿@model TipCalculator.Models.TipModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Tip</title>
+</head>
+<body>
+    <div> 
+		<h1>Tip Calculator</h1>
+		@using (Html.BeginForm())
+		{
+			<div>
+				@Html.LabelFor(m => m.Bill)
+				@Html.TextBoxFor(m => m.Bill)
+			</div>
+
+			<div>
+				@Html.LabelFor(m => m.Percent)
+				@Html.TextBoxFor(m => m.Percent)
+			</div>
+			<button type="submit" class="btn btn-primary">Calculate</button>
+		}
+		
+		@Html.TextBoxFor(m=>m.Tip)
+
+    </div>
+</body>
+</html>

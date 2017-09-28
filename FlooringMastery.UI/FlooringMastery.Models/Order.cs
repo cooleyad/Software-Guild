@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FLooringMastery.Models
 {
-    public class OrderFile
+    public class Order
     {
         public int OrderNumber { get; set; }
         public string CustomerName { get; set; }

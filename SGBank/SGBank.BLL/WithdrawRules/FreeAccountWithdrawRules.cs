@@ -15,6 +15,10 @@ namespace SGBank.BLL.WithdrawRules
         {
             AccountWithdrawResponse response = new AccountWithdrawResponse();
 
+            response.OldBalance = account.Balance;
+            response.Account = account;
+
+
             if (account.Type!= AccountType.Free)
             {
                 response.Success = false;
@@ -39,9 +43,7 @@ namespace SGBank.BLL.WithdrawRules
                 response.Message = "Free accounts cannot overdraft!";
                 return response;
             }
-            response.OldBalance = account.Balance;
             account.Balance += amount;
-            response.Account = account;
             response.Amount = amount;
             response.Success = true;
             return response;

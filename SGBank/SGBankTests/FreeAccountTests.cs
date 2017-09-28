@@ -46,13 +46,11 @@ namespace SGBankTests
             
             AccountDepositResponse response = deposit.Deposit(account, amount);
 
+            Assert.AreEqual(response.Account.Balance, newBalance);
+
+
             Assert.AreEqual(expectedResult, response.Success);
-
-            if (response.Success)
-            {
-                Assert.AreEqual(response.Account.Balance, newBalance);
-            }
-
+            
 
         }
         [TestCase("12345", "Free Account", 100, AccountType.Free, 1, false)]

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using FLooringMastery.Models;
 
 namespace FlooringMastery.UI
 {
@@ -21,9 +22,14 @@ namespace FlooringMastery.UI
            
         }
 
-        internal static void DisplayOrderDetails(object orders)
+        internal static void DisplayOrderDetails(List <Order> orders)
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Here are your order details: ");
+
+            foreach (var order in orders)
+            {
+                throw new NotImplementedException();
+            }
         }
     }
 }

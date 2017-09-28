@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FLooringMastery.Objects
 {
-    public class TaxFile
+    public class Tax
     {
         public string StateAbbreviation { get; set; }
         public string StateName { get; set; }

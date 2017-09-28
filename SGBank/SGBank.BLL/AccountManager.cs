@@ -22,7 +22,7 @@ namespace SGBank.BLL
         public AccountLookupResponse LookupAccount (string accountNumber)
         {
             AccountLookupResponse response = new AccountLookupResponse();
-            response.Account = _accountRepository.loadAccount(accountNumber);
+            response.Account = _accountRepository.LoadAccount(accountNumber);
 
             if(response.Account==null)
             {
@@ -41,7 +41,7 @@ namespace SGBank.BLL
         {
             AccountDepositResponse response = new AccountDepositResponse();
 
-            response.Account = _accountRepository.loadAccount(accountNumber);
+            response.Account = _accountRepository.LoadAccount(accountNumber);
 
             if (response.Account == null)
             {
@@ -68,7 +68,7 @@ namespace SGBank.BLL
         {
             AccountWithdrawResponse response = new AccountWithdrawResponse();
 
-            response.Account = _accountRepository.loadAccount(accountNumber);
+            response.Account = _accountRepository.LoadAccount(accountNumber);
 
             if (response.Account == null)
             {

@@ -38,14 +38,11 @@ namespace FlooringMastery.UI
                         lookupWorkflow.Execute();
                         break;
                     case "2":
-                        new NotImplementedException();
-                        break;
+                        throw new NotImplementedException();
                     case "3":
-                        new NotImplementedException();
-                        break;
+                        throw new NotImplementedException();
                     case "4":
-                        new NotImplementedException();
-                        break;
+                        throw new NotImplementedException();
                     case "Q":
                         return;
                 }
