@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FLooringMastery.Objects
+namespace FlooringMastery.Models
 {
     public class Tax
     {

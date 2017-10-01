@@ -4,8 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using FLooringMastery.Objects;
-using FLooringMastery.Models;
+using FlooringMastery.Models;
 
 namespace FlooringMastery.Data
 {
@@ -14,23 +13,23 @@ namespace FlooringMastery.Data
 
         //create test account information here for workflows, ect like SGBank
 
-        private static Order _order = new Order
+        private static readonly List<Order> _order = new List<Order>
 
         {
-            OrderNumber = 1,
-            CustomerName = "Wise",
-            State = "OH",
-            TaxRate = 6.25M,
-            ProductType = "Wood",
-            Area = 100M,
-            CostPerSquareFoot = 5.15M,
-            LaborCostPerSquareFoot = 4.75M,
-            MaterialCost = 515.00M,
-            LaborCost = 475.00M,
-            Tax = 61.88M,
-            Total = 1051.88M
-
+            new Order
+            {
+                Date=new DateTime(2018,1,1),
+                OrderNumber = 1,
+                CustomerName = "Wise",
+                State = "OH",
+                TaxRate = 6.25M,
+                ProductType = "Wood",
+                Area = 100M,
+                CostPerSquareFoot = 5.15M,
+                LaborCostPerSquareFoot = 4.75M,
+            }
         };
+
 
         public bool DeleteOrder(Order order)
         {
@@ -39,7 +38,16 @@ namespace FlooringMastery.Data
 
         public List<Order> LookupOrder(DateTime time)
         {
-            throw new NotImplementedException();
+            List<Order> result = new List<Order>();
+            foreach (var order in _order)
+            {
+                if (order.Date==time)
+                {
+                    result.Add(order);
+                }
+            }
+            return result;
+       
         }
 
         public Order LookupOrder(DateTime time, int orderNumber)

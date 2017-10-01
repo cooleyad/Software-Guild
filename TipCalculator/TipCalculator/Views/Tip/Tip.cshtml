@@ -9,6 +9,8 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
+
+
     <title>Tip</title>
 </head>
 <body>
@@ -18,17 +20,25 @@
 		{
 			<div>
 				@Html.LabelFor(m => m.Bill)
+				<br />
 				@Html.TextBoxFor(m => m.Bill)
 			</div>
 
+			<br/>
+			<br />
+
 			<div>
 				@Html.LabelFor(m => m.Percent)
+				<br />
 				@Html.TextBoxFor(m => m.Percent)
 			</div>
+			<br />
+			<br />
 			<button type="submit" class="btn btn-primary">Calculate</button>
-		}
-		
-		@Html.TextBoxFor(m=>m.Tip)
+		}		
+
+		@Html.TextBoxFor(m => m.Tip)
+
 
     </div>
 </body>

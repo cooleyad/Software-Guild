@@ -15,13 +15,13 @@ namespace FlooringMastery.BLL
         {
             string mode = ConfigurationManager.AppSettings["Mode"].ToString();
 
-            
+
 
             switch (mode)
             {
                 case "Test":
-                    return new OrderManager(new OrderTestRepository());
-                    //throw new Exception("Mode value in app config is not valid");
+                    return new OrderManager(new OrderTestRepository(), TaxTestRepository(), ProductTestRepository());
+                //throw new Exception("Mode value in app config is not valid");
 
                 case "Product":
                     //return new OrderFileManager(new OrderTestRepository());
