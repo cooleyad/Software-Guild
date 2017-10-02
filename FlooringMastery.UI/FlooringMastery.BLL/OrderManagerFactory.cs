@@ -1,4 +1,5 @@
 ﻿using FlooringMastery.Data;
+using FlooringMastery.Data.Repos;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -24,9 +25,11 @@ namespace FlooringMastery.BLL
                         new ProductTestRepository(), 
                         new TaxTestRepository());
 
-                case "Product":
-                   
-                    throw new NotImplementedException();
+                case "Live":
+                    return new OrderManager(new FileOrderRepo(), 
+                        new FileProductRepo(), 
+                        new FileTaxRepo());
+
 
                 default:
                     throw new Exception("Mode value in app config is not valid");
