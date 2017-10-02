@@ -54,8 +54,6 @@ namespace FlooringMastery.Data
         public List<Tax> LoadTax()
         {
             return StateTax;
-        }
-
- 
+        } 
     }
 }

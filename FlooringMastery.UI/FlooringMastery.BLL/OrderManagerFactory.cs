@@ -20,11 +20,12 @@ namespace FlooringMastery.BLL
             switch (mode)
             {
                 case "Test":
-                    return new OrderManager(new OrderTestRepository(), TaxTestRepository(), ProductTestRepository());
-                //throw new Exception("Mode value in app config is not valid");
+                    return new OrderManager(new OrderTestRepository(), 
+                        new ProductTestRepository(), 
+                        new TaxTestRepository());
 
                 case "Product":
-                    //return new OrderFileManager(new OrderTestRepository());
+                   
                     throw new NotImplementedException();
 
                 default:

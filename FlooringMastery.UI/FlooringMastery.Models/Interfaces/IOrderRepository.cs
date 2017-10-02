@@ -9,7 +9,7 @@ namespace FlooringMastery.Models.Interfaces
 {
     public interface IOrderRepository
     {
-        List<Order> LookupOrder(DateTime time);
+        List<Order> LookupOrders(DateTime time);
         Order LookupOrder(DateTime time, int orderNumber);
         bool DeleteOrder(Order order);
         bool SaveExistingOrder(Order order);

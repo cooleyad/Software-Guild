@@ -46,6 +46,10 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SystemIO.cs" />
+    <Compile Include="Workflows\EditWorkflows\EditAreaWorkflow.cs" />
+    <Compile Include="Workflows\EditWorkflows\EditCustomerNameWorkflow.cs" />
+    <Compile Include="Workflows\EditWorkflows\EditProductTypeWorkflow.cs" />
+    <Compile Include="Workflows\EditWorkflows\EditStateWorkflow.cs" />
     <Compile Include="Workflows\OrderAddWorkflow.cs" />
     <Compile Include="Workflows\OrderDeleteWorkflow.cs" />
     <Compile Include="Workflows\OrderEditWorkflow.cs" />

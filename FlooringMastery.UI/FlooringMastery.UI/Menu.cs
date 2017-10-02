@@ -40,9 +40,13 @@ namespace FlooringMastery.UI
                         lookupWorkflow.Execute();
                         break;
                     case "2":
-                        throw new NotImplementedException();
+                        OrderAddWorkflow orderAddWorkflow = new OrderAddWorkflow();
+                        orderAddWorkflow.Execute();
+                        break;
                     case "3":
-                        throw new NotImplementedException();
+                        OrderEditWorkflow orderEditWorkflow = new OrderEditWorkflow();
+                        orderEditWorkflow.Execute();
+                        break;
                     case "4":
                         throw new NotImplementedException();
                     case "Q":

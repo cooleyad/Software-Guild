@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using FlooringMastery.Models;
+using FlooringMastery.UI.Workflows.EditWorkflows;
 
 namespace FlooringMastery.UI
 {
@@ -24,6 +25,79 @@ namespace FlooringMastery.UI
            
         }
 
+        internal static int OrderNumberRequest()
+        {
+            Console.WriteLine(BorderBar);
+            Console.WriteLine("\nLookup Order Number");
+            Console.WriteLine(BorderBar);
+            Console.WriteLine("Please enter an order number: ");
+
+            string orderNumber = Console.ReadLine();
+            return int.Parse(orderNumber);
+        }
+
+        internal static void DisplaySingleOrderDetails(Order order)
+        {
+            Console.WriteLine(BorderBar);
+            Console.WriteLine("Here is your order: ");
+            Console.WriteLine(BorderBar);
+            Console.WriteLine($"Order Number: {order.OrderNumber}");
+            Console.WriteLine($"Customer Name: {order.CustomerName}");
+            Console.WriteLine($"State: {order.State}");
+            Console.WriteLine($"Tax Rate: {order.TaxRate}");
+            Console.WriteLine($"Product Type: {order.ProductType}");
+            Console.WriteLine($"Area: {order.Area}");
+            Console.WriteLine($"Cost Per Square Foot: {order.CostPerSquareFoot}");
+            Console.WriteLine($"Labor Cost Per Square Foot: {order.LaborCostPerSquareFoot}");
+            Console.WriteLine($"Material Cost: {order.MaterialCost}");
+            Console.WriteLine($"Labor Cost: {order.LaborCost}");
+            Console.WriteLine($"Tax: {order.Tax}");
+            Console.WriteLine($"Total: {order.Total}");
+        }
+
+        internal static void EditOrderMenu(Order order)
+        {
+            bool isValid = false;
+
+            while (!isValid)
+            {
+                Console.WriteLine(BorderBar);
+                Console.WriteLine("Edit Menu: Please choose from the following menu what you wish to edit");
+                Console.WriteLine(BorderBar);
+                Console.WriteLine(BorderBar);
+                Console.WriteLine("1. Customer Name");
+                Console.WriteLine("2. State");
+                Console.WriteLine("3. Product Type");
+                Console.WriteLine("4. Area");
+
+                string userInput = Console.ReadLine();
+
+                switch (userInput)
+                {
+                    case "1":
+                        isValid = true;
+                        EditCustomerNameWorkflow editCustomerName = new EditCustomerNameWorkflow();
+                        editCustomerName.EditCustomerName(order);
+                        break;
+
+                    case "2":
+                        isValid = true;
+                        EditStateWorkflow editState = new EditStateWorkflow();
+                        editState.EditState(order);
+                        break;
+                    case "3":
+                        isValid = true;
+                        EditProductTypeWorkflow editProduct = new EditProductTypeWorkflow();
+                        editProduct.EditProduct(order);
+                        break;
+                    case "4":
+                        EditAreaWorkflow editArea = new EditAreaWorkflow();
+                        editArea.EditArea(order);
+                        break;
+                }
+            }
+        }
+
         internal static string EditCustName()
         {
             Console.WriteLine("Please enter your new customer name: ");
@@ -33,23 +107,33 @@ namespace FlooringMastery.UI
 
         internal static string EditState()
         {
+            Console.WriteLine(BorderBar);
             Console.WriteLine("Enter new State: ");
+            Console.WriteLine(BorderBar);
             string userInput = Console.ReadLine();
 
             return userInput;
         }
 
-        //internal static int OrderNumberRequest()
-        //{
-        //    Console.WriteLine(BorderBar);
-        //    Console.WriteLine("\nLookup Order Number");
-        //    Console.WriteLine(BorderBar);
-        //    Console.WriteLine("Please enter an order number: ");
+        internal static string EditGetProduct()
+        {
+            Console.WriteLine(BorderBar);
+            Console.WriteLine("Please enter the product ordered: ");
+            string userInput = Console.ReadLine();
+            Console.WriteLine(BorderBar);
 
-        //    string orderNumber = Console.ReadLine();
+            return userInput;
+        }
 
-        //    return int.Parse(orderNumber);
-        //}
+        internal static decimal EditGetArea()
+        {
+            Console.WriteLine(BorderBar);
+            Console.WriteLine("Enter the area for the order: ");
+            Console.WriteLine(BorderBar);
+            decimal userInput = decimal.Parse(Console.ReadLine());
+
+            return userInput;
+        }
 
         public static void DisplayOrderDetails(List <Order> orders)
         {
@@ -57,7 +141,6 @@ namespace FlooringMastery.UI
 
             foreach (var order in orders)
             {
-                Console.Clear();
                 Console.WriteLine($"Order Number: {order.OrderNumber}");
                 Console.WriteLine($"Customer Name: {order.CustomerName}");
                 Console.WriteLine($"State: {order.State}");

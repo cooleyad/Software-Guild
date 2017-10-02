@@ -36,7 +36,7 @@ namespace FlooringMastery.Data
             throw new NotImplementedException();
         }
 
-        public List<Order> LookupOrder(DateTime time)
+        public List<Order> LookupOrders(DateTime time)
         {
             List<Order> result = new List<Order>();
             foreach (var order in _order)
@@ -52,17 +52,21 @@ namespace FlooringMastery.Data
 
         public Order LookupOrder(DateTime time, int orderNumber)
         {
-            throw new NotImplementedException();
+            var dayOrders = LookupOrders(time);
+            var orderChoice = dayOrders.SingleOrDefault(o => o.OrderNumber == orderNumber);
+            return orderChoice;
         }
 
         public bool SaveExistingOrder(Order order)
         {
-            throw new NotImplementedException();
+            _order.Add(order);
+            return true;
         }
 
         public bool SaveNewOrder(Order order)
         {
-            throw new NotImplementedException();
+            _order.Add(order);
+            return true;
         }
     }
 }

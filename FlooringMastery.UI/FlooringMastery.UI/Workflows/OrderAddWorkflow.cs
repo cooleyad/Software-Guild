@@ -14,7 +14,7 @@ namespace FlooringMastery.UI.Workflows
     {
         public void Execute()
         {
-            TaxTestRepository manager = new;
+            OrderManager manager = OrderManagerFactory.Create();
             Order order = new Order();
 
             string dateInput = SystemIO.OrderDateRequest();
@@ -25,8 +25,35 @@ namespace FlooringMastery.UI.Workflows
             order.CustomerName = input;
 
             string stateInput = SystemIO.EditState();
-            //TaxTextRepository stateTax = OrderManagerFactory.Create();
-            //FindStateResponse stateResponse =
+            OrderManager stateTax = OrderManagerFactory.Create();
+            FindStateResponse stateResponse = manager.GetStateTax(stateInput);
+
+            if (stateResponse.Success)
+            {
+                order.TaxRate = stateResponse.StateTax.TaxRate;
+            }
+            else
+            {
+                stateResponse.Success = false;
+            }
+            string productInput = SystemIO.EditGetProduct();
+            OrderManager productManager = OrderManagerFactory.Create();
+            FindProductTypeResponse findProduct = productManager.GetProductData(productInput);
+            if (findProduct.Success)
+            {
+                order.ProductType = findProduct.Product.ProductType;
+            }
+            else
+            {
+                findProduct.Success = false;
+            }
+
+            decimal areaInput = SystemIO.EditGetArea();
+            order.Area = areaInput;
+
+            manager.SaveNewOrder(order);
+
+            Console.ReadKey();
 
         }
     }
