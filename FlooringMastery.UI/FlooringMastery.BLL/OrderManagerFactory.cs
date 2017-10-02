@@ -27,7 +27,7 @@ namespace FlooringMastery.BLL
 
                 case "Live":
                     return new OrderManager(new FileOrderRepo(), 
-                        new FileProductRepo(), 
+                        new FileProductRepo(),
                         new FileTaxRepo());
 
 

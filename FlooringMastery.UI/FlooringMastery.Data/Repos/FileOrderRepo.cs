@@ -17,11 +17,11 @@ namespace FlooringMastery.Data.Repos
 
         FileProductRepo _fileProductRepo = new FileProductRepo();
 
-        public FileOrderRepo(FileTaxRepo taxRepo, FileProductRepo productRepo)
-        {
-            _fileTaxRepo = taxRepo;
-            _fileProductRepo = productRepo;
-        }
+        //public FileOrderRepo()
+        //{
+        //    _fileTaxRepo = taxRepo;
+        //    _fileProductRepo = productRepo;
+        //}
 
         public bool DeleteOrder(Order order)
         {
