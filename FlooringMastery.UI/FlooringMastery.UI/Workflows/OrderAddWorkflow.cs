@@ -54,7 +54,6 @@ namespace FlooringMastery.UI.Workflows
             manager.SaveNewOrder(order);
 
             Console.ReadKey();
-
         }
     }
 }

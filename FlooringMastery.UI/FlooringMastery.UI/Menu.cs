@@ -48,7 +48,9 @@ namespace FlooringMastery.UI
                         orderEditWorkflow.Execute();
                         break;
                     case "4":
-                        throw new NotImplementedException();
+                        OrderDeleteWorkflow orderDeleteWorkflow = new OrderDeleteWorkflow();
+                        orderDeleteWorkflow.Execute();
+                        break;
                     case "Q":
                         return;
                 }

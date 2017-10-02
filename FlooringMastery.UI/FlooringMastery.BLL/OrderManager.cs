@@ -80,6 +80,8 @@ namespace FlooringMastery.BLL
         {
             LookupOrderResponse response = new LookupOrderResponse();
 
+            response.Order = _orderRepo.LookupOrder(date, orderNumber);
+
             if (response.Order==null)
             {
                 response.Success = false;

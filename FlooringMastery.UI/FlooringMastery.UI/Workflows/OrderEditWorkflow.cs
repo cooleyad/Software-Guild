@@ -16,13 +16,13 @@ namespace FlooringMastery.UI.Workflows
 
             Console.Clear();
 
-            string dateInput = SystemIO.OrderDateRequest();
+            string userInput = SystemIO.OrderDateRequest();
 
-            DateTime orderDate = Convert.ToDateTime(dateInput);
+            DateTime order = Convert.ToDateTime(userInput);
 
-            int orderNumberInput = SystemIO.OrderNumberRequest();
+            int orderNumber = SystemIO.OrderNumberRequest();
 
-            LookupOrderResponse response = manager.AccountByDateAndNumber(orderDate, orderNumberInput);
+            LookupOrderResponse response = manager.AccountByDateAndNumber(order, orderNumber);
 
             if (response.Success)
             {
@@ -30,6 +30,12 @@ namespace FlooringMastery.UI.Workflows
                 Console.ReadKey();
                 SystemIO.EditOrderMenu(response.Order);
             }
+            else
+            {
+                Console.WriteLine(response.Message);
+                Console.WriteLine("An error has occured: ");
+            }
+            Console.ReadKey();
         }
     }
 }

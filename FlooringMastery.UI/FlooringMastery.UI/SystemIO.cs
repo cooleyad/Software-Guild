@@ -94,6 +94,8 @@ namespace FlooringMastery.UI
                         EditAreaWorkflow editArea = new EditAreaWorkflow();
                         editArea.EditArea(order);
                         break;
+                    default:
+                        break;
                 }
             }
         }

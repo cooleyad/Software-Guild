@@ -27,13 +27,28 @@ namespace FlooringMastery.Data
                 Area = 100M,
                 CostPerSquareFoot = 5.15M,
                 LaborCostPerSquareFoot = 4.75M,
-            }
+            },
+            new Order
+            {
+                Date=new DateTime(2018,2,11),
+                OrderNumber=2,
+                CustomerName="Cooley",
+                State="MI",
+                TaxRate=5.75M,
+                ProductType="Laminate",
+                Area=200M,
+                CostPerSquareFoot=1.75M,
+                LaborCostPerSquareFoot=2.10M
+            },
+
+
         };
 
 
         public bool DeleteOrder(Order order)
         {
-            throw new NotImplementedException();
+            _order.Remove(order);
+            return true;
         }
 
         public List<Order> LookupOrders(DateTime time)
