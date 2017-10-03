@@ -47,11 +47,14 @@ namespace FlooringMastery.UI.Workflows
             if (findProduct.Success)
             {
                 order.ProductType=findProduct.Product.ProductType;
+                order.CostPerSquareFoot = findProduct.Product.CostPerSquareFoot;
+                order.LaborCostPerSquareFoot = findProduct.Product.LaborCostPerSquareFoot;
             }
             else
             {
                 findProduct.Success = false;
             }
+            
 
             decimal areaInput = SystemIO.EditGetArea();
             order.Area = areaInput;

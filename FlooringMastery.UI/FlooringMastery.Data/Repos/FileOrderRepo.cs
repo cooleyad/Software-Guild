@@ -108,7 +108,8 @@ namespace FlooringMastery.Data.Repos
 
             orderList.Remove(order);
 
-            string header = "OrderNumber,CustomerName,State,TaxRate,ProductType,Area,CostPerSquareFoot,LaborCostPerSquareFoot,MaterialCost,LaborCost,Tax,Total";
+            string header = "OrderNumber,CustomerName,State,TaxRate,ProductType,Area," +
+                "CostPerSquareFoot,LaborCostPerSquareFoot,MaterialCost,LaborCost,Tax,Total";
 
             string orderString = "Orders_";
 
@@ -148,7 +149,8 @@ namespace FlooringMastery.Data.Repos
             order.OrderNumber = (orderList.Count > 0) ? orderList.Max(l => l.OrderNumber) + 1 : 1;
             orderList.Add(order);
 
-            string header = "OrderNumber,CustomerName,State,TaxRate,ProductType,Area,CostPerSquareFoot,LaborCostPerSquareFoot,MaterialCost,LaborCost,Tax,Total";
+            string header = "OrderNumber,CustomerName,State,TaxRate,ProductType,Area," +
+                "CostPerSquareFoot,LaborCostPerSquareFoot,MaterialCost,LaborCost,Tax,Total";
 
             string orderString = "Orders_";
 

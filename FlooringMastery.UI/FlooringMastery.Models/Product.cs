@@ -12,5 +12,9 @@ namespace FlooringMastery.Models
         public decimal CostPerSquareFoot { get; set; }
         public decimal LaborCostPerSquareFoot { get; set; }
 
+        public static implicit operator Product(string v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

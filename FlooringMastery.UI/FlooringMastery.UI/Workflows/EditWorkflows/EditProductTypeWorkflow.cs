@@ -24,6 +24,8 @@ namespace FlooringMastery.UI.Workflows.EditWorkflows
                 //edit issue is here
             {
                 order.ProductType = response.Product.ProductType;
+                order.CostPerSquareFoot = response.Product.CostPerSquareFoot;
+                order.LaborCostPerSquareFoot = response.Product.LaborCostPerSquareFoot;
 
                 manager.SaveExistingOrder(order);
                 SystemIO.DisplaySingleOrderDetails(order);

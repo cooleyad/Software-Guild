@@ -22,6 +22,5 @@ namespace FlooringMastery.Models
         public decimal LaborCost => Area * LaborCostPerSquareFoot;
         public decimal Tax => ((MaterialCost + LaborCost) * TaxData)/100;
         public decimal Total => (MaterialCost + LaborCost + Tax);
-
     }
 }
