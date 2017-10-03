@@ -24,24 +24,29 @@ namespace FlooringMastery.UI.Workflows
             string input = SystemIO.EditCustName();
             order.CustomerName = input;
 
-            string stateInput = SystemIO.EditState();
-            OrderManager stateTax = OrderManagerFactory.Create();
-            FindStateResponse stateResponse = manager.GetStateTax(stateInput);
 
+            string userInput = SystemIO.EditState();
+
+
+            FindStateResponse stateResponse = manager.GetStateTax(userInput);
+            order.State = userInput;
             if (stateResponse.Success)
             {
-                order.TaxRate = stateResponse.StateTax.TaxRate;
+                order.TaxData = stateResponse.StateTax.TaxRate;
             }
             else
             {
                 stateResponse.Success = false;
             }
+
+
             string productInput = SystemIO.EditGetProduct();
             OrderManager productManager = OrderManagerFactory.Create();
             FindProductTypeResponse findProduct = productManager.GetProductData(productInput);
+            order.ProductType = productInput;
             if (findProduct.Success)
             {
-                order.ProductType = findProduct.Product.ProductType;
+                order.ProductType=findProduct.Product.ProductType;
             }
             else
             {
@@ -52,6 +57,9 @@ namespace FlooringMastery.UI.Workflows
             order.Area = areaInput;
 
             manager.SaveNewOrder(order);
+
+            SystemIO.DisplaySingleOrderDetails(order);
+
 
             Console.ReadKey();
         }

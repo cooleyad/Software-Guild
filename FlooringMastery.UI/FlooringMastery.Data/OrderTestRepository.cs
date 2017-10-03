@@ -22,7 +22,7 @@ namespace FlooringMastery.Data
                 OrderNumber = 1,
                 CustomerName = "Wise",
                 State = "OH",
-                TaxRate = 6.25M,
+                TaxData = 6.25M,
                 ProductType = "Wood",
                 Area = 100M,
                 CostPerSquareFoot = 5.15M,
@@ -34,7 +34,7 @@ namespace FlooringMastery.Data
                 OrderNumber=2,
                 CustomerName="Cooley",
                 State="MI",
-                TaxRate=5.75M,
+                TaxData=5.75M,
                 ProductType="Laminate",
                 Area=200M,
                 CostPerSquareFoot=1.75M,
@@ -68,7 +68,7 @@ namespace FlooringMastery.Data
         public Order LookupOrder(DateTime time, int orderNumber)
         {
             var dayOrders = LookupOrders(time);
-            var orderChoice = dayOrders.SingleOrDefault(o => o.OrderNumber == orderNumber);
+            var orderChoice = dayOrders.FirstOrDefault(o => o.OrderNumber == orderNumber);
             return orderChoice;
         }
 

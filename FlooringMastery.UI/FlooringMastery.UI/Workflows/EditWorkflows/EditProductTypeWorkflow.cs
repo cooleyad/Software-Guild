@@ -16,10 +16,12 @@ namespace FlooringMastery.UI.Workflows.EditWorkflows
             OrderManager manager = OrderManagerFactory.Create();
 
             var newProduct = SystemIO.EditGetProduct();
+            order.ProductType = newProduct;
 
             FindProductTypeResponse response = manager.GetProductData(newProduct);
 
             if (response.Success)
+                //edit issue is here
             {
                 order.ProductType = response.Product.ProductType;
 

@@ -45,7 +45,7 @@ namespace FlooringMastery.Data
 
         public Product GetProductData(string productType)
         {
-            return Products.SingleOrDefault(p => p.ProductType == productType);
+            return Products.FirstOrDefault(p => p.ProductType == productType);
         }
 
         public List<Product> LoadProduct()

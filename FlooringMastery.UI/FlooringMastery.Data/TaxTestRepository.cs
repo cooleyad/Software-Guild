@@ -48,7 +48,7 @@ namespace FlooringMastery.Data
 
         public Tax State(string stateInput)
         {
-            return StateTax.SingleOrDefault(t => t.StateName == stateInput);
+            return StateTax.FirstOrDefault(t => t.StateName == stateInput); 
         }
 
         public List<Tax> LoadTax()

@@ -15,13 +15,14 @@ namespace FlooringMastery.UI.Workflows.EditWorkflows
         {
             OrderManager manager = OrderManagerFactory.Create();
 
-            var newState = SystemIO.EditState();
-
+            string newState = SystemIO.EditState();
+            order.State = newState;
             FindStateResponse response = manager.GetStateTax(newState);
 
             if(response.Success)
+                //edit state issue is in the following potentially
             {
-                order.TaxRate = response.StateTax.TaxRate;
+                order.TaxData = response.StateTax.TaxRate;
 
                 manager.SaveExistingOrder(order);
                 SystemIO.DisplaySingleOrderDetails(order);

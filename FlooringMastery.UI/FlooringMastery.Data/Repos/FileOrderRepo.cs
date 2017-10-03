@@ -11,17 +11,12 @@ namespace FlooringMastery.Data.Repos
 {
     public class FileOrderRepo : IOrderRepository
     {
-        public const string DirectoryPath = @"\\Mac\Home\Desktop\Sample Data\Orders_06012013.txt";
+        public const string directoryPath = @"\\Mac\Home\Desktop\Sample Data\Orders_06012013.txt";
 
-        FileTaxRepo _fileTaxRepo = new FileTaxRepo();
+        FileTaxRepo fileTaxRepo = new FileTaxRepo();
+        FileProductRepo fileProductRepo = new FileProductRepo();
 
-        FileProductRepo _fileProductRepo = new FileProductRepo();
 
-        //public FileOrderRepo()
-        //{
-        //    _fileTaxRepo = taxRepo;
-        //    _fileProductRepo = productRepo;
-        //}
 
         public bool DeleteOrder(Order order)
         {
@@ -34,23 +29,23 @@ namespace FlooringMastery.Data.Repos
 
             string orderString = "Orders_";
 
-            string userInput = DirectoryPath + orderString + String.Format(order.Date.ToString("MMddyyyy")) + ".txt";
+            string userInput = directoryPath + orderString + String.Format(order.Date.ToString("MMddyyyy")) + ".txt";
 
             using (StreamWriter sw = new StreamWriter(userInput))
             {
                 sw.WriteLine(header);
 
-                foreach(var singleOrder in orderList)
+                foreach (var singleOrder in orderList)
                 {
-                    if (singleOrder.OrderNumber==order.OrderNumber)
+                    if (singleOrder.OrderNumber == order.OrderNumber)
                     {
 
                     }
                     else
                     {
-                        string row = $"{singleOrder.OrderNumber}, {singleOrder.CustomerName}, {singleOrder.State}, " +
-                            $"{singleOrder.TaxRate}, {singleOrder.ProductType}, {singleOrder.Area}, {singleOrder.CostPerSquareFoot}, " +
-                            $"{singleOrder.LaborCostPerSquareFoot}, {singleOrder.MaterialCost}, {singleOrder.LaborCost}, " +
+                        string row = $"{singleOrder.OrderNumber},{singleOrder.CustomerName},{singleOrder.State}," +
+                            $"{singleOrder.TaxData},{singleOrder.ProductType},{singleOrder.Area},{singleOrder.CostPerSquareFoot}," +
+                            $"{singleOrder.LaborCostPerSquareFoot},{singleOrder.MaterialCost},{singleOrder.LaborCost}," +
                             $"{singleOrder.Tax},{singleOrder.Total}";
 
                         sw.WriteLine(row);
@@ -63,7 +58,7 @@ namespace FlooringMastery.Data.Repos
 
         public Order LookupOrder(DateTime time, int orderNumber)
         {
-            var dailyOrders=LookupOrders(time);
+            var dailyOrders = LookupOrders(time);
 
             var selectedOrder = dailyOrders.SingleOrDefault(s => s.OrderNumber == orderNumber);
 
@@ -76,31 +71,32 @@ namespace FlooringMastery.Data.Repos
 
             string orderString = "Orders_";
 
-            string userInput = DirectoryPath + orderString + string.Format(time.ToString("MMddyyyy")) + ".txt";
+            string userInput = directoryPath + orderString + string.Format(time.ToString("MMddyyyy")) + ".txt";
 
-            if (File.Exists(userInput))
+
+            using (StreamReader sr = new StreamReader(directoryPath))
+            {
+                sr.ReadLine();
+                string line;
+
+                while ((line = sr.ReadLine()) != null)
                 {
-                using (StreamReader sr = new StreamReader(userInput))
-                {
-                    sr.ReadLine();
-                    string line;
+                    Order order = new Order();
 
-                    while((line=sr.ReadLine())!= null)
-                    {
-                        Order order = new Order();
+                    string[] columns = line.Split(',');
 
-                        string[] columns = line.Split(',');
+                    order.OrderNumber = int.Parse(columns[0]);
+                    order.CustomerName = columns[1];
+                    order.State = columns[2];
+                    order.TaxData= decimal.Parse(columns[3]);
+                    order.ProductType=(columns[4]);
+                    order.Area=decimal.Parse(columns[5]);
+                    order.CostPerSquareFoot = decimal.Parse(columns[6]);
+                    order.LaborCostPerSquareFoot = decimal.Parse(columns[7]);
 
-                        order.OrderNumber = int.Parse(columns[0]);
-                        order.CustomerName = columns[1];
-                        _fileTaxRepo.State(columns[2]);
-                        _fileProductRepo.GetProductData(columns[4]);
-                        decimal.Parse(columns[5]);
+                    order.Date = time;
 
-                        order.Date = time;
-
-                        orderList.Add(order);
-                    }
+                    orderList.Add(order);
                 }
             }
             return orderList;
@@ -116,7 +112,7 @@ namespace FlooringMastery.Data.Repos
 
             string orderString = "Orders_";
 
-            string userInput = DirectoryPath + orderString + String.Format(order.Date.ToString("MMddyyyy")) + ".txt";
+            string userInput = directoryPath + orderString + String.Format(order.Date.ToString("MMddyyyy")) + ".txt";
 
             using (StreamWriter sw = new StreamWriter(userInput))
             {
@@ -126,17 +122,20 @@ namespace FlooringMastery.Data.Repos
                 {
                     Order saveOrder = anOrder;
                     {
-                        if (anOrder.OrderNumber==order.OrderNumber)
+                        if (anOrder.OrderNumber == order.OrderNumber)
                         {
                             saveOrder = order;
                         }
                         else
                         {
-                            string row = $"{saveOrder.OrderNumber}, {saveOrder.CustomerName}, {saveOrder.State}, {saveOrder.TaxRate}, {saveOrder.ProductType}, {saveOrder.Area}, {saveOrder.CostPerSquareFoot}, {saveOrder.LaborCostPerSquareFoot}, {saveOrder.MaterialCost}, {saveOrder.LaborCost}, {saveOrder.Tax},{saveOrder.Total}";
+                            string row = $"{saveOrder.OrderNumber},{saveOrder.CustomerName}," +
+                                $"{saveOrder.State},{saveOrder.TaxData},{saveOrder.ProductType},{saveOrder.Area}," +
+                                $"{saveOrder.CostPerSquareFoot},{saveOrder.LaborCostPerSquareFoot},{saveOrder.MaterialCost}," +
+                                $"{saveOrder.LaborCost},{saveOrder.Tax},{saveOrder.Total}";
 
                             sw.WriteLine(row);
                         }
-                    }              
+                    }
                 }
 
             }
@@ -153,17 +152,17 @@ namespace FlooringMastery.Data.Repos
 
             string orderString = "Orders_";
 
-            string userInput = DirectoryPath + orderString + String.Format(order.Date.ToString("MMddyyyy")) + ".txt";
+            string userInput = directoryPath + orderString + String.Format(order.Date.ToString("MMddyyyy")) + ".txt";
 
             using (StreamWriter sw = new StreamWriter(userInput))
             {
                 sw.WriteLine(header);
 
-                foreach(var singleOrder in orderList)
+                foreach (var singleOrder in orderList)
                 {
                     Order orderToSave = singleOrder;
 
-                    string row = $"{orderToSave.OrderNumber},{orderToSave.CustomerName},{orderToSave.State},{orderToSave.TaxRate}," +
+                    string row = $"{orderToSave.OrderNumber},{orderToSave.CustomerName},{orderToSave.State},{orderToSave.TaxData}," +
                         $"{orderToSave.ProductType},{orderToSave.Area},{orderToSave.CostPerSquareFoot}," +
                         $"{orderToSave.LaborCostPerSquareFoot},{orderToSave.MaterialCost}," +
                         $"{orderToSave.LaborCost},{orderToSave.Tax},{orderToSave.Total}";

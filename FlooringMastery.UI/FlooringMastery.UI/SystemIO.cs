@@ -44,7 +44,7 @@ namespace FlooringMastery.UI
             Console.WriteLine($"Order Number: {order.OrderNumber}");
             Console.WriteLine($"Customer Name: {order.CustomerName}");
             Console.WriteLine($"State: {order.State}");
-            Console.WriteLine($"Tax Rate: {order.TaxRate}");
+            Console.WriteLine($"Tax Rate: {order.TaxData}");
             Console.WriteLine($"Product Type: {order.ProductType}");
             Console.WriteLine($"Area: {order.Area}");
             Console.WriteLine($"Cost Per Square Foot: {order.CostPerSquareFoot}");
@@ -146,7 +146,7 @@ namespace FlooringMastery.UI
                 Console.WriteLine($"Order Number: {order.OrderNumber}");
                 Console.WriteLine($"Customer Name: {order.CustomerName}");
                 Console.WriteLine($"State: {order.State}");
-                Console.WriteLine($"Tax Rate: {order.TaxRate}");
+                Console.WriteLine($"Tax Rate: {order.TaxData}");
                 Console.WriteLine($"Product Type: {order.ProductType}");
                 Console.WriteLine($"Area: {order.Area}");
                 Console.WriteLine($"Cost Per Square Foot: {order.CostPerSquareFoot}");
