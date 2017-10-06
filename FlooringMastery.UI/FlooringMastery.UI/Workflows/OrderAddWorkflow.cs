@@ -24,7 +24,6 @@ namespace FlooringMastery.UI.Workflows
             string input = SystemIO.EditCustName();
             order.CustomerName = input;
 
-
             string userInput = SystemIO.EditState();
 
 

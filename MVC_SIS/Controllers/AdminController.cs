@@ -58,6 +58,111 @@ namespace Exercises.Controllers
             MajorRepository.Delete(major.MajorId);
             return RedirectToAction("Majors");
         }
+        [HttpGet]
+        public ActionResult States()
+        {
+            var model = StateRepository.GetAll();
+            return View(model.ToList());
+        }
+        [HttpGet]
+        public ActionResult AddState()
+        {
+            return View(new State());
+        }
+        [HttpPost]
+        public ActionResult AddState(State state)
+        {
+            if (ModelState.IsValid)
+            {
+                StateRepository.Add(state);
+                return RedirectToAction("States");
+            }
+            else
+            {
+                return View(state);
+            }
+        }
 
+        [HttpGet]
+        public ActionResult EditState(string id)
+        {
+            var state = StateRepository.Get(id);
+            return View(state);
+        }
+
+        [HttpPost]
+        public ActionResult EditState(State state)
+        {
+            StateRepository.Edit(state);
+            return RedirectToAction("States");
+        }
+
+        [HttpGet]
+        public ActionResult DeleteState(string id)
+        {
+            var state = StateRepository.Get(id);
+            return View(state);
+        }
+
+        [HttpPost]
+        public ActionResult DeleteState(State state)
+        {
+            StateRepository.Delete(state.StateAbbreviation);
+            return RedirectToAction("States");
+        }
+
+        [HttpGet]
+        public ActionResult Courses()
+        {
+            var course = CourseRepository.GetAll();
+            return View(course.ToList());
+        } //Start of Courses
+
+        [HttpGet]
+        public ActionResult AddCourse()
+        {
+            return View(new Course());
+        }
+
+        [HttpPost]
+        public ActionResult AddCourse(Course course)
+        {
+            if (ModelState.IsValid)
+            {
+                CourseRepository.Add(course.CourseName);
+                return RedirectToAction("Courses");
+            }
+            else
+            {
+                return View(course);
+            }
+        }
+
+        [HttpGet]
+        public ActionResult EditCourse(int id)
+        {
+            var course = CourseRepository.Get(id);
+            return View(course);
+        }
+
+        [HttpPost]
+        public ActionResult EditCourse(Course course)
+        {
+            CourseRepository.Edit(course);
+            return RedirectToAction("Courses");
+        }
+
+        [HttpGet]
+        public ActionResult DeleteCourse(int id)
+        {
+            var course = CourseRepository.Get(id);
+            return View(course);
+        }
+        [HttpPost]
+        public ActionResult DeleteCourse(Course course)
+        {
+            CourseRepository.Delete(course.CourseId);
+            return RedirectToAction("Courses");
+        }
     }
 }

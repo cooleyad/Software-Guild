@@ -17,9 +17,8 @@ namespace FlooringMastery.Data.Repos
 
         public FileTaxRepo()
         {
-            _stateDictionary = LoadTax().ToDictionary(d => d.StateAbbreviation);
+            _stateDictionary = LoadTax().ToDictionary(d => d.StateName);
         }
-
         public List<Tax> LoadTax()
         {
             List<Tax> taxList = new List<Tax>();
@@ -29,7 +28,7 @@ namespace FlooringMastery.Data.Repos
                 sr.ReadLine();
                 string line;
 
-                while ((line=sr.ReadLine())!=null)
+                while ((line = sr.ReadLine()) != null)
                 {
                     Tax tax = new Tax();
 
@@ -44,10 +43,9 @@ namespace FlooringMastery.Data.Repos
             }
             return taxList;
         }
-
         public Tax State(string stateInput)
         {
-            if(_stateDictionary.ContainsKey(stateInput))
+            if (_stateDictionary.ContainsKey(stateInput))
             {
                 return _stateDictionary[stateInput];
             }

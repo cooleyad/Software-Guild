@@ -11,11 +11,15 @@ namespace FlooringMastery.Data.Repos
 {
     public class FileOrderRepo : IOrderRepository
     {
-        public const string directoryPath = @"\\Mac\Home\Desktop\Sample Data\Orders_06012013.txt";
+        public const string directoryPath = @"\\Mac\Home\Desktop\Sample Data\";
+
+        public const string header = "OrderNumber,CustomerName,State,TaxRate,ProductType,Area,CostPerSquareFoot," +
+                "LaborCostPerSquareFoot,MaterialCost,LaborCost,Tax,Total";
+
+        public const string orderString = "Orders_";
 
         FileTaxRepo fileTaxRepo = new FileTaxRepo();
         FileProductRepo fileProductRepo = new FileProductRepo();
-
 
 
         public bool DeleteOrder(Order order)
@@ -23,9 +27,6 @@ namespace FlooringMastery.Data.Repos
             List<Order> orderList = LookupOrders(order.Date);
 
             orderList.Remove(order);
-
-            string header = "OrderNumber,CustomerName,State,TaxRate,ProductType,Area,CostPerSquareFoot," +
-                "LaborCostPerSquareFoot,MaterialCost,LaborCost,Tax,Total";
 
             string orderString = "Orders_";
 
@@ -69,12 +70,10 @@ namespace FlooringMastery.Data.Repos
         {
             List<Order> orderList = new List<Order>();
 
-            string orderString = "Orders_";
-
             string userInput = directoryPath + orderString + string.Format(time.ToString("MMddyyyy")) + ".txt";
 
 
-            using (StreamReader sr = new StreamReader(directoryPath))
+            using (StreamReader sr = new StreamReader(userInput))
             {
                 sr.ReadLine();
                 string line;
@@ -108,10 +107,7 @@ namespace FlooringMastery.Data.Repos
 
             orderList.Remove(order);
 
-            string header = "OrderNumber,CustomerName,State,TaxRate,ProductType,Area," +
-                "CostPerSquareFoot,LaborCostPerSquareFoot,MaterialCost,LaborCost,Tax,Total";
 
-            string orderString = "Orders_";
 
             string userInput = directoryPath + orderString + String.Format(order.Date.ToString("MMddyyyy")) + ".txt";
 
@@ -145,31 +141,51 @@ namespace FlooringMastery.Data.Repos
 
         public bool SaveNewOrder(Order order)
         {
-            List<Order> orderList = LookupOrders(order.Date);
-            order.OrderNumber = (orderList.Count > 0) ? orderList.Max(l => l.OrderNumber) + 1 : 1;
-            orderList.Add(order);
-
-            string header = "OrderNumber,CustomerName,State,TaxRate,ProductType,Area," +
-                "CostPerSquareFoot,LaborCostPerSquareFoot,MaterialCost,LaborCost,Tax,Total";
-
-            string orderString = "Orders_";
 
             string userInput = directoryPath + orderString + String.Format(order.Date.ToString("MMddyyyy")) + ".txt";
 
-            using (StreamWriter sw = new StreamWriter(userInput))
+            if (File.Exists(userInput))
             {
-                sw.WriteLine(header);
-
-                foreach (var singleOrder in orderList)
+                List<Order> orderList = LookupOrders(order.Date);
+                if (orderList.Count == 0)
                 {
-                    Order orderToSave = singleOrder;
+                    order.OrderNumber = 1;
+                }
+                else
+                {
+                    order.OrderNumber = (orderList.Count > 0) ? orderList.Max(l => l.OrderNumber) + 1 : 1;
+                    orderList.Add(order);
 
-                    string row = $"{orderToSave.OrderNumber},{orderToSave.CustomerName},{orderToSave.State},{orderToSave.TaxData}," +
-                        $"{orderToSave.ProductType},{orderToSave.Area},{orderToSave.CostPerSquareFoot}," +
-                        $"{orderToSave.LaborCostPerSquareFoot},{orderToSave.MaterialCost}," +
-                        $"{orderToSave.LaborCost},{orderToSave.Tax},{orderToSave.Total}";
+                    using (StreamWriter sw = new StreamWriter(userInput))
+                    {
 
-                    sw.WriteLine(row);
+                        foreach (var singleOrder in orderList)
+                        {
+                            Order orderToSave = singleOrder;
+
+                            sw.WriteLine(header);
+
+                            string row = $"{orderToSave.OrderNumber},{orderToSave.CustomerName},{orderToSave.State},{orderToSave.TaxData}," +
+                                $"{orderToSave.ProductType},{orderToSave.Area},{orderToSave.CostPerSquareFoot}," +
+                                $"{orderToSave.LaborCostPerSquareFoot},{orderToSave.MaterialCost}," +
+                                $"{orderToSave.LaborCost},{orderToSave.Tax},{orderToSave.Total}";
+                            sw.WriteLine(row);
+                        }
+                    }
+
+                }           
+            }
+            else
+            {
+                using (File.Create(userInput)) { }
+
+                using (StreamWriter saving = new StreamWriter(userInput))
+                {
+                    saving.WriteLine(header);
+
+                    saving.WriteLine("1," + order.CustomerName + "," + order.State + "," + order.TaxData
+                           + "," + order.ProductType + "," + order.Area + "," + order.CostPerSquareFoot + "," + order.LaborCostPerSquareFoot
+                           + "," + order.MaterialCost + "," + order.LaborCost + "," + order.Tax + "," + order.Total);
                 }
             }
             return true;
