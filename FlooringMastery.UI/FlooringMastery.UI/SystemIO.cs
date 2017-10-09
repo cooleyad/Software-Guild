@@ -102,7 +102,9 @@ namespace FlooringMastery.UI
 
         internal static string EditCustName()
         {
+            Console.WriteLine(BorderBar);
             Console.WriteLine("Please enter your new customer name: ");
+            Console.WriteLine(BorderBar);
             string editCustName = Console.ReadLine();
             return editCustName;
         }

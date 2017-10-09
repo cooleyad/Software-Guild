@@ -107,34 +107,31 @@ namespace FlooringMastery.Data.Repos
 
             orderList.Remove(order);
 
-
-
             string userInput = directoryPath + orderString + String.Format(order.Date.ToString("MMddyyyy")) + ".txt";
 
             using (StreamWriter sw = new StreamWriter(userInput))
             {
-                sw.WriteLine(header);
 
                 foreach (var anOrder in orderList)
                 {
                     Order saveOrder = anOrder;
                     {
+                        sw.WriteLine(header);
+
                         if (anOrder.OrderNumber == order.OrderNumber)
                         {
                             saveOrder = order;
                         }
-                        else
                         {
                             string row = $"{saveOrder.OrderNumber},{saveOrder.CustomerName}," +
-                                $"{saveOrder.State},{saveOrder.TaxData},{saveOrder.ProductType},{saveOrder.Area}," +
-                                $"{saveOrder.CostPerSquareFoot},{saveOrder.LaborCostPerSquareFoot},{saveOrder.MaterialCost}," +
-                                $"{saveOrder.LaborCost},{saveOrder.Tax},{saveOrder.Total}";
+                                   $"{saveOrder.State},{saveOrder.TaxData},{saveOrder.ProductType},{saveOrder.Area}," +
+                                   $"{saveOrder.CostPerSquareFoot},{saveOrder.LaborCostPerSquareFoot},{saveOrder.MaterialCost}," +
+                                   $"{saveOrder.LaborCost},{saveOrder.Tax},{saveOrder.Total}";
 
                             sw.WriteLine(row);
                         }
                     }
                 }
-
             }
             return true;
         }
@@ -162,8 +159,6 @@ namespace FlooringMastery.Data.Repos
                         foreach (var singleOrder in orderList)
                         {
                             Order orderToSave = singleOrder;
-
-                            sw.WriteLine(header);
 
                             string row = $"{orderToSave.OrderNumber},{orderToSave.CustomerName},{orderToSave.State},{orderToSave.TaxData}," +
                                 $"{orderToSave.ProductType},{orderToSave.Area},{orderToSave.CostPerSquareFoot}," +
