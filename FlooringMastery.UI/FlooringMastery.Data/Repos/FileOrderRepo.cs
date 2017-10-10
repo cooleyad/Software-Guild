@@ -21,7 +21,6 @@ namespace FlooringMastery.Data.Repos
         FileTaxRepo fileTaxRepo = new FileTaxRepo();
         FileProductRepo fileProductRepo = new FileProductRepo();
 
-
         public bool DeleteOrder(Order order)
         {
             List<Order> orderList = LookupOrders(order.Date);
