@@ -19,6 +19,7 @@
                             <th>First Name</th>
                             <th>Last Name</th>
                             <th>Major</th>
+							<th>Courses</th>
                             <th>GPA</th>
                         </tr>
                     </thead>
@@ -29,8 +30,13 @@
                                 <td>@student.FirstName</td>
                                 <td>@student.LastName</td>
                                 <td>@student.Major.MajorName</td>
+								<td>@student.Courses</td>
                                 <td>@student.GPA</td>
                             </tr>
+							<tr>
+								@Html.ActionLink("Edit", "EditStudent", "Student", new {studentId=student.StudentId }, null) |
+								@Html.ActionLink("Delete", "DeleteStudent", "Student", new {studentId=student.StudentId }, null)
+							</tr>
                         }
                     </tbody>
                 </table>

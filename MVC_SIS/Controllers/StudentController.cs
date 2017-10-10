@@ -48,5 +48,51 @@ namespace Exercises.Controllers
 
             return RedirectToAction("List");
         }
+
+        [HttpPost]
+        public ActionResult EditStudent(int studentId)
+        {
+            var student = StudentRepository.Get(studentId);
+
+            StudentVM studentVm = new StudentVM();
+
+            studentVm.Student = student;
+            studentVm.SelectedCourseIds = student.Courses.Select(c => c.CourseId).ToList();
+            studentVm.SetCourseItems(CourseRepository.GetAll());
+            studentVm.SetMajorItems(MajorRepository.GetAll());
+            studentVm.SetStateItems(StateRepository.GetAll());
+
+            return View(studentVm);
+        }
+        [HttpPost]
+        public ActionResult EditStudent(StudentVM student)
+        {
+            if (ModelState.IsValid)
+            {
+                StudentRepository.Edit(student.Student);
+            }
+            else
+            {
+                return View(student);
+            }
+            return RedirectToAction("List");
+        }
+
+        [HttpGet]
+
+        public ActionResult DeleteStudent (int studentId)
+        {
+            var model = StudentRepository.Get(studentId);
+
+            return View(model);
+        }
+        [HttpPost]
+        [ActionName("DeleteStudent")]
+        public ActionResult DeleteMoreStudents (int studentId)
+        {
+            StudentRepository.Delete(studentId);
+            return RedirectToAction("List");
+
+        }
     }
 }

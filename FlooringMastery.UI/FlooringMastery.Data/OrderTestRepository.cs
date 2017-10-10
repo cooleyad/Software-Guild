@@ -40,6 +40,31 @@ namespace FlooringMastery.Data
                 CostPerSquareFoot=1.75M,
                 LaborCostPerSquareFoot=2.10M
             },
+            new Order
+            {
+                Date=new DateTime(2018,2,11),
+                OrderNumber=3,
+                CustomerName="Bob Loblaw",
+                State="IN",
+                TaxData=6.00M,
+                ProductType="Tile",
+                Area=200M,
+                CostPerSquareFoot=3.5M,
+                LaborCostPerSquareFoot=4.15M
+            },
+            new Order
+            {
+                Date=new DateTime(2999,9,9),
+                OrderNumber=4,
+                CustomerName="",
+                State="PA",
+                TaxData=6.75M,
+                ProductType="Carpet",
+                Area=50M,
+                CostPerSquareFoot=2.25M,
+                LaborCostPerSquareFoot=2.10M
+            }
+
 
 
         };
