@@ -59,7 +59,7 @@ namespace Exercises.Controllers
             return RedirectToAction("List");
         }
 
-        [HttpPost]
+        [HttpGet]
         public ActionResult EditStudent(int studentId)
         {
 
@@ -70,6 +70,11 @@ namespace Exercises.Controllers
             viewStudent.SetMajorItems(MajorRepository.GetAll());
             viewStudent.SetStateItems(StateRepository.GetAll());
 
+            if (!(viewStudent.Student.Courses == null))
+            {
+                viewStudent.SelectedCourseIds = viewStudent.Student.Courses.Select(s => s.CourseId).ToList();
+            }
+
             return View(viewStudent);
         }
         [HttpPost]
@@ -77,20 +82,33 @@ namespace Exercises.Controllers
         {
             if (ModelState.IsValid)
             {
+                studentVM.Student.Courses = new List<Course>();
+
+                foreach (var id in studentVM.SelectedCourseIds)
+                    studentVM.Student.Courses.Add(CourseRepository.Get(id));
+
+                studentVM.Student.Major = MajorRepository.Get(studentVM.Student.Major.MajorId);
                 StudentRepository.Edit(studentVM.Student);
+                return RedirectToAction("List");
             }
             else
             {
+                studentVM.SetCourseItems(CourseRepository.GetAll());
+                studentVM.SetMajorItems(MajorRepository.GetAll());
+                studentVM.SetStateItems(StateRepository.GetAll());
+                if (!(studentVM.Student.Courses == null))
+                {
+                    studentVM.SelectedCourseIds = studentVM.Student.Courses.Select(s => s.CourseId).ToList();
+                }
                 return View(studentVM);
             }
-            return RedirectToAction("List");
         }
 
         [HttpGet]
 
         public ActionResult DeleteStudent(int studentId)
         {
-            var model = StudentRepository.Get(studentId);
+            var model = StudentRepository.Get(studentId);   
 
             return View(model);
         }

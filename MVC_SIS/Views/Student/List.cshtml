@@ -24,21 +24,21 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach(var student in Model)
-                        {
-                            <tr>
-                                <td>@student.FirstName</td>
-                                <td>@student.LastName</td>
-                                <td>@student.Major.MajorName</td>
-                                <td>@student.GPA</td>
-                            </tr>
-							<td>
-								@Html.ActionLink("Edit", "EditStudent", "Student", new {studentId=student.StudentId }, 
-							   new {@class = "btn btn-xs btn-primary" }) |
-								@Html.ActionLink("Delete", "DeleteStudent", "Student", 
-							   new {studentId=student.StudentId }, new { @class = "btn btn-xs btn-danger" })
+                        @foreach (var student in Model)
+						{
+							<tr>
+								<td>@student.FirstName</td>
+								<td>@student.LastName</td>
+								<td>@student.Major.MajorName</td>
+								<td>@student.GPA</td>
+								<td>
+									@Html.ActionLink("Edit", "EditStudent", "Student", new { studentId = student.StudentId },
+							   new { @class = "btn btn-xs btn-primary" }) |
+								@Html.ActionLink("Delete", "DeleteStudent", "Student",
+							   new { studentId = student.StudentId }, new { @class = "btn btn-xs btn-danger" })
 							</td>
-                        }
+						</tr>
+						}
                     </tbody>
                 </table>
             </div>
