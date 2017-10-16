@@ -37,50 +37,58 @@ namespace Exercises.Controllers
         [HttpPost]
         public ActionResult Add(StudentVM studentVM)
         {
-            studentVM.Student.Courses = new List<Course>();
+            if (ModelState.IsValid)
+            {
+                studentVM.Student.Courses = new List<Course>();
 
-            foreach (var id in studentVM.SelectedCourseIds)
-                studentVM.Student.Courses.Add(CourseRepository.Get(id));
+                foreach (var id in studentVM.SelectedCourseIds)
+                    studentVM.Student.Courses.Add(CourseRepository.Get(id));
 
-            studentVM.Student.Major = MajorRepository.Get(studentVM.Student.Major.MajorId);
+                studentVM.Student.Major = MajorRepository.Get(studentVM.Student.Major.MajorId);
 
-            StudentRepository.Add(studentVM.Student);
+                StudentRepository.Add(studentVM.Student);
+            }
+            else
+            {
+                var viewModel = new StudentVM();
+                viewModel.SetCourseItems(CourseRepository.GetAll());
+                viewModel.SetMajorItems(MajorRepository.GetAll());
+            }
 
+                
             return RedirectToAction("List");
         }
 
         [HttpPost]
         public ActionResult EditStudent(int studentId)
         {
-            var student = StudentRepository.Get(studentId);
 
-            StudentVM studentVm = new StudentVM();
+            var viewStudent = new StudentVM();
 
-            studentVm.Student = student;
-            studentVm.SelectedCourseIds = student.Courses.Select(c => c.CourseId).ToList();
-            studentVm.SetCourseItems(CourseRepository.GetAll());
-            studentVm.SetMajorItems(MajorRepository.GetAll());
-            studentVm.SetStateItems(StateRepository.GetAll());
+            viewStudent.Student = StudentRepository.Get(studentId);
+            viewStudent.SetCourseItems(CourseRepository.GetAll());
+            viewStudent.SetMajorItems(MajorRepository.GetAll());
+            viewStudent.SetStateItems(StateRepository.GetAll());
 
-            return View(studentVm);
+            return View(viewStudent);
         }
         [HttpPost]
-        public ActionResult EditStudent(StudentVM student)
+        public ActionResult EditStudent(StudentVM studentVM)
         {
             if (ModelState.IsValid)
             {
-                StudentRepository.Edit(student.Student);
+                StudentRepository.Edit(studentVM.Student);
             }
             else
             {
-                return View(student);
+                return View(studentVM);
             }
             return RedirectToAction("List");
         }
 
         [HttpGet]
 
-        public ActionResult DeleteStudent (int studentId)
+        public ActionResult DeleteStudent(int studentId)
         {
             var model = StudentRepository.Get(studentId);
 
@@ -88,7 +96,7 @@ namespace Exercises.Controllers
         }
         [HttpPost]
         [ActionName("DeleteStudent")]
-        public ActionResult DeleteMoreStudents (int studentId)
+        public ActionResult DeleteMoreStudents(int studentId)
         {
             StudentRepository.Delete(studentId);
             return RedirectToAction("List");
