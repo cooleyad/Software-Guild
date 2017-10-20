@@ -45,18 +45,17 @@ namespace Exercises.Controllers
                     studentVM.Student.Courses.Add(CourseRepository.Get(id));
 
                 studentVM.Student.Major = MajorRepository.Get(studentVM.Student.Major.MajorId);
-
                 StudentRepository.Add(studentVM.Student);
+
+                return RedirectToAction("List");
             }
             else
             {
-                var viewModel = new StudentVM();
-                viewModel.SetCourseItems(CourseRepository.GetAll());
-                viewModel.SetMajorItems(MajorRepository.GetAll());
+                studentVM.SetCourseItems(CourseRepository.GetAll());
+                studentVM.SetMajorItems(MajorRepository.GetAll());
+                return View(studentVM);
             }
-
                 
-            return RedirectToAction("List");
         }
 
         [HttpGet]
@@ -88,7 +87,9 @@ namespace Exercises.Controllers
                     studentVM.Student.Courses.Add(CourseRepository.Get(id));
 
                 studentVM.Student.Major = MajorRepository.Get(studentVM.Student.Major.MajorId);
+
                 StudentRepository.Edit(studentVM.Student);
+
                 return RedirectToAction("List");
             }
             else
@@ -96,10 +97,12 @@ namespace Exercises.Controllers
                 studentVM.SetCourseItems(CourseRepository.GetAll());
                 studentVM.SetMajorItems(MajorRepository.GetAll());
                 studentVM.SetStateItems(StateRepository.GetAll());
+
                 if (!(studentVM.Student.Courses == null))
                 {
                     studentVM.SelectedCourseIds = studentVM.Student.Courses.Select(s => s.CourseId).ToList();
                 }
+
                 return View(studentVM);
             }
         }
