@@ -1,4 +1,3 @@
-var total=0;
 $(document).ready(function () {
 	loadProducts();
 	addMoney();
@@ -25,10 +24,10 @@ function loadProducts() {
 				var price = this.price;
 				var quantity = this.quantity;
 
-				var row = '<div class="col-md-4 items" data-id=" ' + product.id + '">';
+				var row = '<div class="col-md-4 items" data-id=' + product.id + '>';
 				row += '<p>' + item + '</p>';
 				row += '<p>' + name + '</p>';
-				row += '<p>' + '$' + cost.toFixed(2) + '</p>';
+				row += '<p>' + '$' + price.toFixed(2) + '</p>';
 				row += '<p>' + 'Quantity Remaining: ' + quantity + '</p>' + '</div>';
 
 				itemsPlace.append(row);
@@ -43,39 +42,40 @@ function addMoney() {
 	var quarter = .25;
 	var dime = .10;
 	var nickel = .05;	
+	var total=0;	
 
 
-	$('#addDollar').click( function () {
+	$('#addDollar').on('click', function () {
 		total = total + dollar;
-		$('#totalAdded').val(total,toFixed(2));
+		$('#totalAdded').val(total.toFixed(2));
 	})
-	$('#addQuarter').click( function () {
+	$('#addQuarter').on('click', function () {
 		total = total + quarter;
-		$('#totalAdded').val(total,toFixed(2));
+		$('#totalAdded').val(total.toFixed(2));
 	})
-	$('#addDime').click( function () {
+	$('#addDime').on('click', function () {
 		total = total + dime;
-		$('#totalAdded').val(total,toFixed(2));
+		$('#totalAdded').val(total.toFixed(2));
 	})
-	$('#addNickel').click( function () {
+	$('#addNickel').on('click', function () {
 		total = total + nickel;
-		$('#totalAdded').val(total,toFixed(2));
+		$('#totalAdded').val(total.toFixed(2));
 	})
 }
 $('#purchaseButton').click(function () {
-	var total = $('#moneyDisplay').val();
-	var itemId = $('#item')
+	// var total = $('#moneyDisplay').val();
+	// var itemId = $('#item')
 
-	if (itemId == "") {
+	if ($('#item').val() == "") {	
 		$('#displayMessage').val('Please make a selection.')
 	}
-	else if (total == "") {
+	else if ($('#totalAdded').val() == "") {
 		$('#displayMessage').val('Show me the money.');
 	}
 	else {
 		$.ajax({
 			type: 'GET',
-			url: 'http://localhost:8080/money/' + total + '/item/' + selectedItemId,
+			url: 'http://localhost:8080/money/' + $('#totalAdded').val() + '/item/' + $('#item').val(),
 			success: function (change) {
 				$('#displayMessage').val("Thank you for your purchase.");
 
@@ -86,10 +86,10 @@ $('#purchaseButton').click(function () {
 				var returnChange = 'Quarter(s): ' + quarters + 'Dime(s): ' + dimes + 'Nickel(s): ' + nickels;
 				loadProducts();
 
-				total = 0;
-				$('#cashDisplay').val('');
+				// total = 0;
+				// $('#cashDisplay').val('');
 
-				$('#changeDisplay').val(returnChange);
+				$('#itemChange').val(returnChange);
 			},
 			error: function (xhr) {
 				$('#displayMessage').append(xhr.responseJSON.message);
@@ -98,12 +98,13 @@ $('#purchaseButton').click(function () {
 	}
 });
 function getChange() {
-	$('#changeButton').click(function () {
-		$('#changeDisplay').val('');
-		total = 0;
+	$('#makeChange').click(function () {
+		// $('#itemChange').val('');
+		location.reload(true);
+		// total = 0;
 
-		$('#item').val('');
+		// $('#item').val('');
 
-		loadProducts();
+		// loadProducts();
 	})
 }
