@@ -92,7 +92,7 @@ $('#purchaseButton').click(function () {
 				$('#itemChange').val(returnChange);
 			},
 			error: function (xhr) {
-				$('#displayMessage').append(xhr.responseJSON.message);
+				$('#displayMessage').val(xhr.responseJSON.message);
 			}
 		});
 	}

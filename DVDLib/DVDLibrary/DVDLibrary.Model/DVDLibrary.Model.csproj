@@ -48,13 +48,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DVDLibraryEntities.cs" />
-    <Compile Include="Dvds.cs" />
+    <Compile Include="Dvd.cs" />
+    <Compile Include="Migrations\201710232028008_init.cs" />
+    <Compile Include="Migrations\201710232028008_init.Designer.cs">
+      <DependentUpon>201710232028008_init.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201710232028008_init.resx">
+      <DependentUpon>201710232028008_init.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
