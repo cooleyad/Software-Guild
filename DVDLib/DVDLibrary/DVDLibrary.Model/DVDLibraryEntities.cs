@@ -13,6 +13,6 @@ namespace DVDLibrary.Model
         {
 
         }
-        DbSet<Dvd> Dvd { get; set; }
+        public DbSet<Dvd> Dvds { get; set; }
     }
 }

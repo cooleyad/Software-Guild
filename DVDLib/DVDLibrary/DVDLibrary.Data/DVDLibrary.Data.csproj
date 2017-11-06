@@ -47,6 +47,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DvdRepositoryADO.cs" />
+    <Compile Include="DvdRepositoryEF.cs" />
     <Compile Include="Interfaces\IDvdRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repos\DvdMockRepository.cs" />

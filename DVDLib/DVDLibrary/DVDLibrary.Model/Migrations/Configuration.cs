@@ -14,18 +14,48 @@ namespace DVDLibrary.Model.Migrations
 
         protected override void Seed(DVDLibrary.Model.DVDLibraryEntities context)
         {
-            //  This method will be called after migrating to the latest version.
+            context.Dvds.AddOrUpdate(
+                d => d.Id,
+                new Dvd
+                {
+                    Id = 1,
+                    Title = "Bio-Dome",
+                    ReleaseYear =1996,
+                    DirectorName = "Jason Bloom",
+                    RatingType = "PG-13",
+                    Notes= "Sigh... what do you even say?"
+                },
+                new Dvd
+                {
+                    Id=2,
+                    Title="I Am Legend",
+                    ReleaseYear=2007,
+                    DirectorName="Francis Lawrence",
+                    RatingType="PG-13",
+                    Notes="This movie has practically nothing to do with the book."
+                },
+                new Dvd
+                {
+                    Id=3,
+                    Title="Ex Machina",
+                    ReleaseYear=2014,
+                    DirectorName="Alex Garland",
+                    RatingType="R",
+                    Notes="Sci-Fi meets small ensemble cast with exquisite results"
+                },
 
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data. E.g.
-            //
-            //    context.People.AddOrUpdate(
-            //      p => p.FullName,
-            //      new Person { FullName = "Andrew Peters" },
-            //      new Person { FullName = "Brice Lambson" },
-            //      new Person { FullName = "Rowan Miller" }
-            //    );
-            //
+                new Dvd
+                {
+                    Id=4,
+                    Title="Spider-Pig",
+                    ReleaseYear=2009,
+                    DirectorName="Homer Simpson",
+                    RatingType="PG-13",
+                    Notes="Spider Pig, Spider Pig, does whatever a Spider Pig does... "
+
+                }
+                );
+            context.SaveChanges();
         }
     }
 }

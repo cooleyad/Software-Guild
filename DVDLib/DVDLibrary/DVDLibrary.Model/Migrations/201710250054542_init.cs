@@ -24,20 +24,7 @@ namespace DVDLibrary.Model.Migrations
         }
         
         public override void Down()
-        {
-            CreateTable(
-                "dbo.Dvds",
-                c => new
-                    {
-                        DvdId = c.Int(nullable: false, identity: true),
-                        Title = c.String(),
-                        ReleaseYear = c.Int(nullable: false),
-                        DirectorName = c.String(),
-                        RatingType = c.String(),
-                        Notes = c.String(),
-                    })
-                .PrimaryKey(t => t.DvdId);
-            
+        {            
             DropTable("dbo.Dvds");
         }
     }
