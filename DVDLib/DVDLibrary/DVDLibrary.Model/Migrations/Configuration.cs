@@ -14,45 +14,46 @@ namespace DVDLibrary.Model.Migrations
 
         protected override void Seed(DVDLibrary.Model.DVDLibraryEntities context)
         {
-            context.Dvds.AddOrUpdate(
+            context.Dvd.AddOrUpdate(
                 d => d.Id,
                 new Dvd
                 {
                     Id = 1,
-                    Title = "Bio-Dome",
-                    ReleaseYear =1996,
-                    DirectorName = "Jason Bloom",
+                    Title = "The Dude",
+                    ReleaseYear = 1996,
+                    DirectorName = "Lebowski",
+                    RatingType = "R",
+                    Notes = "Like, it's about a rug, or something, Man..."
+
+                },
+                new Dvd
+                {
+                    Id = 2,
+                    Title = "Some Indie Flick",
+                    ReleaseYear = 2007,
+                    DirectorName = "Zach Braff",
                     RatingType = "PG-13",
-                    Notes= "Sigh... what do you even say?"
+                    Notes = "We get it, you're having an existential crisis"
+
                 },
                 new Dvd
                 {
-                    Id=2,
-                    Title="I Am Legend",
-                    ReleaseYear=2007,
-                    DirectorName="Francis Lawrence",
-                    RatingType="PG-13",
-                    Notes="This movie has practically nothing to do with the book."
-                },
-                new Dvd
-                {
-                    Id=3,
-                    Title="Ex Machina",
-                    ReleaseYear=2014,
-                    DirectorName="Alex Garland",
-                    RatingType="R",
-                    Notes="Sci-Fi meets small ensemble cast with exquisite results"
+                    Id = 3,
+                    Title = "2012",
+                    ReleaseYear = 2012,
+                    DirectorName = "Some Guy",
+                    RatingType = "PG-13",
+                    Notes = "MSan Trump is making the end of the world look more appealing..."
                 },
 
                 new Dvd
                 {
-                    Id=4,
-                    Title="Spider-Pig",
-                    ReleaseYear=2009,
-                    DirectorName="Homer Simpson",
-                    RatingType="PG-13",
-                    Notes="Spider Pig, Spider Pig, does whatever a Spider Pig does... "
-
+                    Id = 4,
+                    Title = "Black Panther",
+                    ReleaseYear = 2018,
+                    DirectorName = "Ryan Coogler",
+                    RatingType = "PG-13",
+                    Notes = "I swear, if this movie sucks, I'm going to stop watching Marvel movies"
                 }
                 );
             context.SaveChanges();

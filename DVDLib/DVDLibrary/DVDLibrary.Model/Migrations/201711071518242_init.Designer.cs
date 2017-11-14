@@ -13,7 +13,7 @@ namespace DVDLibrary.Model.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201710250054542_init"; }
+            get { return "201711071518242_init"; }
         }
         
         string IMigrationMetadata.Source

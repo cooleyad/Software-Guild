@@ -20,11 +20,10 @@ namespace DVDLibrary.Model.Migrations
                     })
                 .PrimaryKey(t => t.Id);
             
-            DropTable("dbo.Dvds");
         }
         
         public override void Down()
-        {            
+        {
             DropTable("dbo.Dvds");
         }
     }

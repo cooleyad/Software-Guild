@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A2751396-621E-444A-AF04-DD9A198F5197}</ProjectGuid>
+    <ProjectGuid>{42E131EE-51B9-4BEA-85F8-5032B1A1C183}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DVDLibrary.Data</RootNamespace>
-    <AssemblyName>DVDLibrary.Data</AssemblyName>
+    <RootNamespace>SWGDealer.Data</RootNamespace>
+    <AssemblyName>SWGDealer.Data</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -31,10 +31,16 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -48,23 +54,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DvdRepoFactory.cs" />
-    <Compile Include="Repos\DvdRepositoryADO.cs" />
-    <Compile Include="Repos\DvdRepositoryEF.cs" />
-    <Compile Include="Interfaces\IDvdRepository.cs" />
+    <Compile Include="Interfaces\ISWGDealerRepo.cs" />
+    <Compile Include="MockRepos\EFDealerRepository.cs" />
+    <Compile Include="MockRepos\MockDealerRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repos\DvdMockRepository.cs" />
-    <Compile Include="StringBridge.cs" />
+    <Compile Include="SWGDealerManager.cs" />
+    <Compile Include="SWGDealerManagerFactory.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\DVDLibrary.Model\DVDLibrary.Model.csproj">
-      <Project>{758bcdde-7d34-469e-b17a-ab830aaabc37}</Project>
-      <Name>DVDLibrary.Model</Name>
+    <ProjectReference Include="..\SWGDealer.Models\SWGDealer.Models.csproj">
+      <Project>{481B167D-D8DE-406C-B6F9-0DB431E20757}</Project>
+      <Name>SWGDealer.Models</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
