@@ -21,8 +21,8 @@ namespace DVDLibrary.Data
 
                 command.Parameters.AddWithValue("@Title", dvd.Title);
                 command.Parameters.AddWithValue("@ReleaseYear", dvd.ReleaseYear);
-                command.Parameters.AddWithValue("@DirectorName", dvd.DirectorName);
-                command.Parameters.AddWithValue("@RatingName", dvd.RatingType);
+                command.Parameters.AddWithValue("@DirectorName", dvd.Director);
+                command.Parameters.AddWithValue("@RatingName", dvd.Rating);
                 command.Parameters.AddWithValue("@Notes", dvd.Notes);
                 cn.Open();
                 command.ExecuteNonQuery();
@@ -59,11 +59,11 @@ namespace DVDLibrary.Data
                     while (rd.Read())
                     {
                         Dvd dvd = new Dvd();
-                        dvd.Id = (int)rd["Id"];
+                        dvd.DvdId = (int)rd["Id"];
                         dvd.Title = rd["Title"].ToString();
                         dvd.ReleaseYear = (int)rd["ReleaseYear"];
-                        dvd.DirectorName = rd["DirectorName"].ToString();
-                        dvd.RatingType = rd["RatingType"].ToString();
+                        dvd.Director = rd["DirectorName"].ToString();
+                        dvd.Rating = rd["RatingType"].ToString();
                         dvd.Notes = rd["Notes"].ToString();
 
                         dvds.Add(dvd);
@@ -89,11 +89,11 @@ namespace DVDLibrary.Data
                     while (rd.Read())
                     {
                         Dvd dvd = new Dvd();
-                        dvd.Id = (int)rd["Id"];
+                        dvd.DvdId = (int)rd["Id"];
                         dvd.Title = rd["Title"].ToString();
                         dvd.ReleaseYear = (int)rd["ReleaseYear"];
-                        dvd.DirectorName = rd["DirectorName"].ToString();
-                        dvd.RatingType = rd["RatingType"].ToString();
+                        dvd.Director = rd["DirectorName"].ToString();
+                        dvd.Rating = rd["RatingType"].ToString();
                         dvd.Notes = rd["Notes"].ToString();
 
                         dvds.Add(dvd);
@@ -119,11 +119,11 @@ namespace DVDLibrary.Data
                     while (rd.Read())
                     {
                         Dvd dvd = new Dvd();
-                        dvd.Id = (int)rd["Id"];
+                        dvd.DvdId = (int)rd["Id"];
                         dvd.Title = rd["Title"].ToString();
                         dvd.ReleaseYear = (int)rd["ReleaseYear"];
-                        dvd.DirectorName = rd["DirectorName"].ToString();
-                        dvd.RatingType = rd["RatingType"].ToString();
+                        dvd.Director = rd["DirectorName"].ToString();
+                        dvd.Rating = rd["RatingType"].ToString();
                         dvd.Notes = rd["Notes"].ToString();
 
                         dvds.Add(dvd);
@@ -150,11 +150,11 @@ namespace DVDLibrary.Data
                     while (rd.Read())
                     {
                         Dvd dvd = new Dvd();
-                        dvd.Id = (int)rd["Id"];
+                        dvd.DvdId = (int)rd["Id"];
                         dvd.Title = rd["Title"].ToString();
                         dvd.ReleaseYear = (int)rd["ReleaseYear"];
-                        dvd.DirectorName = rd["DirectorName"].ToString();
-                        dvd.RatingType = rd["RatingType"].ToString();
+                        dvd.Director = rd["DirectorName"].ToString();
+                        dvd.Rating = rd["RatingType"].ToString();
                         dvd.Notes = rd["Notes"].ToString();
 
                         dvds.Add(dvd);
@@ -172,10 +172,10 @@ namespace DVDLibrary.Data
                 SqlCommand command = new SqlCommand("EditDvd", cn);
                 command.CommandType = CommandType.StoredProcedure;
 
-                command.Parameters.AddWithValue("@ID", dvd.Id);
+                command.Parameters.AddWithValue("@ID", dvd.DvdId);
                 command.Parameters.AddWithValue("@ReleaseYear", dvd.ReleaseYear);
-                command.Parameters.AddWithValue("@DirectorName", dvd.DirectorName);
-                command.Parameters.AddWithValue("@RatingName", dvd.RatingType);
+                command.Parameters.AddWithValue("@DirectorName", dvd.Director);
+                command.Parameters.AddWithValue("@RatingName", dvd.Rating);
                 command.Parameters.AddWithValue("@Notes", dvd.Notes);
                 cn.Open();
                 command.ExecuteNonQuery();
@@ -198,11 +198,11 @@ namespace DVDLibrary.Data
                     while (rd.Read())
                     {
                         Dvd dvd = new Dvd();
-                        dvd.Id = (int)rd["Id"];
+                        dvd.DvdId = (int)rd["Id"];
                         dvd.Title = rd["Title"].ToString();
                         dvd.ReleaseYear = (int)rd["ReleaseYear"];
-                        dvd.DirectorName = rd["DirectorName"].ToString();
-                        dvd.RatingType = rd["RatingType"].ToString();
+                        dvd.Director = rd["DirectorName"].ToString();
+                        dvd.Rating = rd["RatingType"].ToString();
                         dvd.Notes = rd["Notes"].ToString();
 
                         dvds.Add(dvd);
@@ -228,11 +228,11 @@ namespace DVDLibrary.Data
                 {
                     while (rd.Read())
                     {
-                        dvd.Id = (int)rd["Id"];
+                        dvd.DvdId = (int)rd["Id"];
                         dvd.Title = rd["Title"].ToString();
                         dvd.ReleaseYear = (int)rd["ReleaseYear"];
-                        dvd.DirectorName = rd["DirectorName"].ToString();
-                        dvd.RatingType = rd["RatingType"].ToString();
+                        dvd.Director = rd["DirectorName"].ToString();
+                        dvd.Rating = rd["RatingType"].ToString();
                         dvd.Notes = rd["Notes"].ToString();
                     }
                 }

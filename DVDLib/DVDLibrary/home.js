@@ -61,7 +61,7 @@ function save() {
 
     var dvd = {
         "title": this.current.title,
-        "realeaseYear": this.current.realeaseYear,
+        "releaseYear": this.current.releaseYear,
         "director": this.current.director,
         "rating": this.current.rating,
         "notes": this.current.notes
@@ -88,7 +88,7 @@ function validate(dvd) {
         message += "The DVD Title is required.<br />"
     }
     var regex = /^\d{4}$/;
-    if (!regex.test(dvd.realeaseYear)) {
+    if (!regex.test(dvd.releaseYear)) {
         message += "Release Year must be a four digit number.<br />"
     }
 

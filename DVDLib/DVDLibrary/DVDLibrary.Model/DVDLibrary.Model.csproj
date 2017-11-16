@@ -47,8 +47,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DVDLibraryEntities.cs" />
     <Compile Include="Dvd.cs" />
+    <Compile Include="DVDLibraryEntities.cs" />
     <Compile Include="Migrations\201711071518242_init.cs" />
     <Compile Include="Migrations\201711071518242_init.Designer.cs">
       <DependentUpon>201711071518242_init.cs</DependentUpon>

@@ -17,12 +17,12 @@ namespace DVDLibrary.Data.EF
         {
             if(dvdEntity.Dvd.Count()==0)
             {
-                dvd.Id = 1;
+                dvd.DvdId = 1;
             }
             else
             {
-                var maxID = dvdEntity.Dvd.Max(d => d.Id);
-                dvd.Id = maxID + 1;
+                var maxID = dvdEntity.Dvd.Max(d => d.DvdId);
+                dvd.DvdId = maxID + 1;
             }
             dvdEntity.Dvd.Add(dvd);
             dvdEntity.SaveChanges();
@@ -37,12 +37,12 @@ namespace DVDLibrary.Data.EF
 
         public List<Dvd> DvdByDirector(string director)
         {
-            return dvdEntity.Dvd.Where(d => d.DirectorName == director).ToList();
+            return dvdEntity.Dvd.Where(d => d.Director == director).ToList();
         }
 
         public List<Dvd> DvdByRating(string rating)
         {
-            return dvdEntity.Dvd.Where(r => r.RatingType == rating).ToList();
+            return dvdEntity.Dvd.Where(r => r.Rating == rating).ToList();
         }
 
         public List<Dvd> DvdByTitle(string dvdTitle)
@@ -67,7 +67,7 @@ namespace DVDLibrary.Data.EF
 
         public Dvd GetDvdById(int id)
         {
-            return dvdEntity.Dvd.FirstOrDefault(d => d.Id == id);
+            return dvdEntity.Dvd.FirstOrDefault(d => d.DvdId == id);
         }
     }
 }

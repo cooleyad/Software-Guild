@@ -16,41 +16,117 @@ namespace DVDLibrary.Controllers
     {
         IDvdRepository repo = DvdRepoFactory.Create();
 
-        [Route("dvd/{id}")]
-        [AcceptVerbs("GET")]
-        public IHttpActionResult DvdId (int id)
-        {
-            return Ok(repo.GetDvdById(id));
-        }
-
         [Route("dvds")]
         [AcceptVerbs("GET")]
-        public IHttpActionResult Dvds()
+        public IHttpActionResult GetAll()
         {
             return Ok(repo.GetAll());
         }
 
+
+        [Route("dvd/{id}")]
+        [AcceptVerbs("GET")]
+        public IHttpActionResult DvdId (int id)
+        {
+            Dvd returnId = repo.GetDvdById(id);
+
+            if (returnId==null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(returnId);
+            }
+        }
+
+        [Route("dvds/rating/{ratingType}")]
+        [AcceptVerbs("GET")]
+        public IHttpActionResult dvdRating(string ratingType)
+        {
+            List<Dvd> dvdFound = repo.DvdByRating(ratingType);
+
+            if (dvdFound==null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(dvdFound);
+            }
+
+        }
+
         [Route("dvds/title/{title}")]
         [AcceptVerbs("GET")]
-        public IHttpActionResult DvdTitle(string title)
+        public IHttpActionResult dvdTitle(string title)
         {
-            return Ok(repo.DvdByTitle(title));
+            List<Dvd> dvdFound = repo.DvdByTitle(title);
+
+            if (dvdFound==null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(dvdFound);
+            }
         }
 
         [Route("dvds/year/{releaseYear}")]
         [AcceptVerbs("GET")]
-        public IHttpActionResult DvdYear (int dvdYear)
+        public IHttpActionResult DvdYear (int releaseYear)
         {
-            return Ok(repo.DvdReleaseYear(dvdYear));
+            List<Dvd> dvdFound = repo.DvdReleaseYear(releaseYear);
+
+            if(dvdFound==null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(dvdFound);
+            }
         }
 
-        [Route("/dvds/director/{directorName}")]
+        [Route("dvds/director/{directorName}")]
         [AcceptVerbs("GET")]
-        public IHttpActionResult DvdDirector(string director)
+        public IHttpActionResult DvdDirector(string directorName)
         {
-            return Ok(repo.DvdByDirector(director));
+            List<Dvd> dvdFound = repo.DvdByDirector(directorName);
+
+            if(dvdFound==null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(dvdFound);
+            }
         }
 
+        [Route("dvd")]
+        [AcceptVerbs("POST")]
+        public IHttpActionResult Add(Dvd dvd)
+        {
+            repo.AddDvd(dvd);
+            return Created($"dvd/{dvd.DvdId}", dvd);
+        }
 
+        [Route("dvd/{dvd}")]
+        [AcceptVerbs("PUT")]
+        public IHttpActionResult Edit(Dvd dvd)
+        {
+            repo.EditDvd(dvd);
+            return Ok();
+        }
+
+        [Route("dvd/{id}")]
+        [AcceptVerbs("DELETE")]
+        public IHttpActionResult Delete(int id)
+        {
+            repo.DeleteDvd(id);
+            return Ok();
+        }
     }
 }

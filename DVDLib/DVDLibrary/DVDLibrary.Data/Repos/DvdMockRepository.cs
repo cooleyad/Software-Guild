@@ -13,38 +13,38 @@ namespace DVDLibrary.Data.Repos
         private static List<Dvd> _dvds = new List<Dvd>
         {
             new Dvd {
-                Id=1,
+                DvdId=1,
                 Title="The Dude",
                 ReleaseYear=1996,
-                DirectorName="Lebowski",
-                RatingType="R",
+                Director="Lebowski",
+                Rating="R",
                 Notes="Like, it's about a rug, or something, Man..."
             },
             new Dvd
             {
-                Id=2,
+                DvdId=2,
                 Title="Some Indie Flick",
                 ReleaseYear=2007,
-                DirectorName="Zach Braff",
-                RatingType="PG-13",
+                Director="Zach Braff",
+                Rating="PG-13",
                 Notes="We get it, you're having an existential crisis"
             },
             new Dvd
             {
-                Id= 3,
+                DvdId= 3,
                 Title="2012",
                 ReleaseYear=2012,
-                DirectorName="Some Guy",
-                RatingType="PG-13",
-                Notes="MSan Trump is making the end of the world look more appealing..."
+                Director="Some Guy",
+                Rating="PG-13",
+                Notes="Man Trump is making the end of the world look more appealing..."
             },
             new Dvd
             {
-                Id=4,
+                DvdId=4,
                 Title="Black Panther",
                 ReleaseYear=2018,
-                DirectorName="Ryan Coogler",
-                RatingType="PG-13",
+                Director="Ryan Coogler",
+                Rating="PG-13",
                 Notes="I swear, if this movie sucks, I'm going to stop watching Marvel movies"
             }
         };
@@ -52,29 +52,30 @@ namespace DVDLibrary.Data.Repos
         {
             if (_dvds.Count()==0)
             {
-                dvd.Id = 1;
+                var maxId = _dvds.Max(d => d.DvdId);
+                dvd.DvdId = maxId + 1;
             }
             else
             {
-                var maxId = _dvds.Max(d => d.Id);
-                dvd.Id = maxId + 1;
+                dvd.DvdId = 1;
             }
             _dvds.Add(dvd);
         }
 
         public void DeleteDvd(int id)
         {
-            _dvds.RemoveAll(d => d.Id == id);
+            //List<Dvd> dvd = new DvdMockRepository().GetAll();
+            _dvds.RemoveAll(d => d.DvdId == id);
         }
 
         public List<Dvd> DvdByDirector(string director)
         {
-            return _dvds.Where(d => d.DirectorName == director).ToList();
+            return _dvds.Where(d => d.Director == director).ToList();
         }
 
         public List<Dvd> DvdByRating(string rating)
         {
-            return _dvds.Where(r => r.RatingType == rating).ToList();
+            return _dvds.Where(r => r.Rating == rating).ToList();
         }
 
         public List<Dvd> DvdByTitle(string dvdTitle)
@@ -99,7 +100,7 @@ namespace DVDLibrary.Data.Repos
 
         public Dvd GetDvdById(int id)
         {
-            return _dvds.FirstOrDefault(d => d.Id == id);
+            return _dvds.FirstOrDefault(d => d.DvdId == id);
         }
     }
 }
