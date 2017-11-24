@@ -137,7 +137,10 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\SalesController.cs" />
+    <Compile Include="Controllers\VehicleController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -158,7 +161,19 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\Admin\" />
     <Folder Include="Views\Home\" />
+    <Folder Include="Views\Sales\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SWGDealer.Data\SWGDealer.Data.csproj">
+      <Project>{42e131ee-51b9-4bea-85f8-5032b1a1c183}</Project>
+      <Name>SWGDealer.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SWGDealer.Models\SWGDealer.Models.csproj">
+      <Project>{481b167d-d8de-406c-b6f9-0db431e20757}</Project>
+      <Name>SWGDealer.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

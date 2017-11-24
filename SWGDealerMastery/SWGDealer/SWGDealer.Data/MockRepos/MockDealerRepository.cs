@@ -16,109 +16,283 @@ namespace SWGDealer.Data.MockRepos
         private static List<Vehicle> _vehicles;
         private static List<SalesSpecials> _salesSpecials;
         private static List<Purchase> _purchases;
+        private static List<PurchaseType> _purchaseType;
         private static List<AppUser> _users;
         private static List<VehicleMake> _makes;
         private static List<VehicleModel> _models;
-        private static List<AppRole> _roles;
+        private static List<Customer> _customers;
+
+        public MockDealerRepository()
+        {
+            _contacts = new List<Contact>
+            {
+                new Contact{ContactId=1, FirstName="Alex", LastName="Cooley",
+                    Email ="Coolio@gmail.com", Phone="481-516-2342" },
+
+                new Contact{
+                    ContactId=2, FirstName="Luna",LastName="The Lunatic",
+                    Email="LooneyToons@hotmail.com", Phone="612-BESTDOG" }
+            };
+
+            _vehicles = new List<Vehicle>
+            {
+                new Vehicle{VehicleId=1,}
+            };
+
+            _salesSpecials = new List<SalesSpecials>
+            {
+                new SalesSpecials{SalesSpecialsId=1,
+                SpecialDesc="15% off dealer inventory for first time buyers",
+                SpecialsName="YUGE ONE",
+                },
+
+                new SalesSpecials{SalesSpecialsId=2,
+                SpecialDesc="We gotta move inventory, and move it fast! 45% off MSRP on anything over $35,000",
+                SpecialsName="Sellout Sale",
+                },
+
+                new SalesSpecials{SalesSpecialsId=3,
+                SpecialDesc="It's so crazy, we shouldn't tell you about it... but... " +
+                "make us an offer we cannot refuse and we'll talk",
+                SpecialsName="Tha Big Kahuna",
+                }
+            };
+
+            _purchases = new List<Purchase>
+            {
+
+            };
+
+            _purchaseType = new List<PurchaseType>
+            {
+                new PurchaseType{PurchaseTypeId=1, Description="Bank Finance"},
+                new PurchaseType{PurchaseTypeId=2, Description="Lease"},
+                new PurchaseType{PurchaseTypeId=3, Description="straight cash homie"}
+            };
+
+            _users = new List<AppUser>
+            {
+                new AppUser{Id="1", FirstName="Whalen",
+                    LastName ="JonesFace",
+                    Email ="W.JonesFace@SWGDealer.com",
+                    Role ="Admin"},
+
+                new AppUser{Id="2",
+                    FirstName ="Jerry",
+                    LastName ="Lundegaard",
+                    Email="J.Lundegaard@SWGDealer.com",
+                    Role="Sales"
+                },
+                new AppUser{Id="3",
+                    FirstName ="Gil",
+                    LastName ="Gunderson",
+                    Email="G.Gunderson@SWGDealer.com",
+                    Role="Disabled"
+                }
+
+            };
+
+            _makes = new List<VehicleMake>
+            {
+                new VehicleMake{VehicleMakeId=1, VehicleMakeName="Audi"},
+                new VehicleMake{VehicleMakeId=2, VehicleMakeName="BMW"},
+                new VehicleMake{VehicleMakeId=3, VehicleMakeName="Chevrolet"},
+                new VehicleMake{VehicleMakeId=4, VehicleMakeName="Honda"},
+                new VehicleMake{VehicleMakeId=5,VehicleMakeName="Land Rover"},
+                new VehicleMake{VehicleMakeId=6, VehicleMakeName="Peugeot"},
+                new VehicleMake{VehicleMakeId=7, VehicleMakeName="Toyota"},
+                new VehicleMake{VehicleMakeId=8, VehicleMakeName="Volkswagen"},
+                new VehicleMake{VehicleMakeId=9, VehicleMakeName="Yugo"}
+            };
+
+            _models = new List<VehicleModel>
+            {
+                new VehicleModel{VehicleModelId=1,
+                VehicleModelName="S8",
+                VehicleMakeId=_makes[1].VehicleMakeId
+                },
+
+                new VehicleModel
+                {
+                    VehicleModelId=2,
+                    VehicleModelName="Defender",
+                    VehicleMakeId=_makes[5].VehicleMakeId
+                },
+
+                new VehicleModel
+                {
+                    VehicleModelId=3,
+                    VehicleModelName="CRX",
+                    VehicleMakeId=_makes[4].VehicleMakeId
+                }
+            };
+
+            _customers = new List<Customer>
+            {
+            };
+        }
 
         public void AddContact(Contact newContact)
         {
-            throw new NotImplementedException();
+            if (_contacts.Any())
+            {
+                newContact.ContactId = _contacts.Max(c => c.ContactId) + 1;
+            }
+            else
+            {
+                newContact.ContactId = 1;
+            }
+            _contacts.Add(newContact);
         }
 
         public void AddMake(VehicleMake newMake)
         {
-            throw new NotImplementedException();
+            if (_makes.Any())
+            {
+                newMake.VehicleMakeId = _makes.Max(m => m.VehicleMakeId) + 1;
+            }
+            else
+            {
+                newMake.VehicleMakeId = 1;
+            }
+            _makes.Add(newMake);
         }
 
         public void AddModel(VehicleModel newModel)
         {
-            throw new NotImplementedException();
+            if (_models.Any())
+            {
+                newModel.VehicleModelId = _models.Max(m => m.VehicleModelId) + 1;
+            }
+            else
+            {
+                newModel.VehicleModelId = 1;
+            }
+            _models.Add(newModel);
         }
 
         public void AddPurchase(Purchase newPurchase)
         {
-            throw new NotImplementedException();
+            if (_purchases.Any())
+            {
+                newPurchase.PurchaseId = _purchases.Max(p => p.PurchaseId) + 1;
+            }
+            else
+            {
+                newPurchase.PurchaseId = 1;
+            }
+            _purchases.Add(newPurchase);
         }
 
         public void AddSpecial(SalesSpecials newSpecial)
         {
-            throw new NotImplementedException();
+            if(_salesSpecials.Any())
+            {
+                newSpecial.SalesSpecialsId = _salesSpecials.Max(s => s.SalesSpecialsId) + 1;
+            }
+            else
+            {
+                newSpecial.SalesSpecialsId = 1;
+            }
+            _salesSpecials.Add(newSpecial); 
         }
 
-        public void AddUser(AppUser user)
+        public void AddUser(AppUser newUser)
         {
-            throw new NotImplementedException();
+            if (_users.Any())
+            {
+                newUser.Id = _users.Max(u => u.Id) + 1;
+            }
+            else
+            {
+                newUser.Id = "1";
+            }
+            _users.Add(newUser);
         }
 
         public void AddVehicle(Vehicle newVehicle)
         {
-            throw new NotImplementedException();
+            if (_vehicles.Any())
+            {
+                newVehicle.VehicleId = _vehicles.Max(v => v.VehicleId) + 1;
+            }
+            else
+            {
+                newVehicle.VehicleId = 1;
+            }
+            _vehicles.Add(newVehicle);
         }
 
         public void DeleteContact(int id)
         {
-            throw new NotImplementedException();
+            _contacts.RemoveAll(c => c.ContactId == id);
         }
 
         public void DeleteMake(int id)
         {
-            throw new NotImplementedException();
+            _makes.RemoveAll(m => m.VehicleMakeId == id);
         }
 
         public void DeleteModel(int id)
         {
-            throw new NotImplementedException();
+            _models.RemoveAll(m => m.VehicleModelId == id);
         }
 
         public void DeleteSpecial(int id)
         {
-            throw new NotImplementedException();
+            _salesSpecials.RemoveAll(s => s.SalesSpecialsId == id);
         }
 
         public void DeleteUser(int id)
         {
-            throw new NotImplementedException();
+            _users.RemoveAll(u => u.Id == id.ToString());
         }
 
         public void DeleteVehicle(int id)
         {
-            throw new NotImplementedException();
+            _vehicles.RemoveAll(v => v.VehicleId == id);
         }
 
         public void EditContact(Contact editedContact)
         {
-            throw new NotImplementedException();
+            _contacts.RemoveAll(c => c.ContactId == editedContact.ContactId);
+            _contacts.Add(editedContact);
         }
 
         public void EditMake(VehicleMake editedMake)
         {
-            throw new NotImplementedException();
+            _makes.RemoveAll(c => c.VehicleMakeId == editedMake.VehicleMakeId);
+            _makes.Add(editedMake);
         }
 
         public void EditModel(VehicleModel editedModel)
         {
-            throw new NotImplementedException();
+            _models.RemoveAll(m => m.VehicleModelId == editedModel.VehicleModelId);
+            _models.Add(editedModel);
         }
 
         public void EditPurchase(Purchase editedPurchase)
         {
-            throw new NotImplementedException();
+            _purchases.RemoveAll(p => p.PurchaseId == editedPurchase.PurchaseId);
+            _purchases.Add(editedPurchase);
         }
 
         public void EditSpecial(SalesSpecials editedSpecial)
         {
-            throw new NotImplementedException();
-        }
+            _salesSpecials.RemoveAll(s => s.SalesSpecialsId == editedSpecial.SalesSpecialsId);
+            _salesSpecials.Add(editedSpecial)
+;        }
 
         public void EditUser(AppUser user)
         {
-            throw new NotImplementedException();
+            _users.RemoveAll(u => u.Id == user.Id);
+            _users.Add(user);
         }
 
         public void EditVehicle(Vehicle editedVehicle)
         {
-            throw new NotImplementedException();
+            _vehicles.RemoveAll(v => v.VehicleId == editedVehicle.VehicleId);
+            _vehicles.Add(editedVehicle);
         }
 
         public List<Contact> GetAllContacts()
@@ -143,7 +317,7 @@ namespace SWGDealer.Data.MockRepos
 
         public IEnumerable<IdentityRole> GetAllRoles()
         {
-            return _roles;
+            throw new NotImplementedException();
         }
 
         public List<SalesSpecials> GetAllSpecials()
@@ -178,7 +352,7 @@ namespace SWGDealer.Data.MockRepos
 
         public List<Vehicle> GetNewVehicles()
         {
-            throw new NotImplementedException();
+            return _vehicles.Where(v => v.VehicleIsNew == true).ToList();
         }
 
         public Purchase GetPurchaseById(int id)
@@ -193,17 +367,17 @@ namespace SWGDealer.Data.MockRepos
 
         public List<Vehicle> GetUsedVehicles()
         {
-            throw new NotImplementedException();
+            return _vehicles.Where(v => v.VehicleIsNew == false).ToList();
         }
 
         public AppUser GetUser(int id)
         {
-            throw new NotImplementedException();
+            return _users.FirstOrDefault(u => u.Id == id.ToString());
         }
 
         public Vehicle GetVehicleById(int vehicleId)
         {
-            return _vehicles.FirstOrDefault(v => v.VehicleId == id);
+            return _vehicles.FirstOrDefault(v => v.VehicleId == vehicleId);
         }
     }
 }

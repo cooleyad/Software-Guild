@@ -12,8 +12,6 @@ namespace SWGDealer.Models.Identity
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
-
-        [NotMapped]
-        public string RoleName { get; set; }
+        public string Role { get; set; }
     }
 }

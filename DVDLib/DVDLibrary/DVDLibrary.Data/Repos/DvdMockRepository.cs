@@ -50,7 +50,7 @@ namespace DVDLibrary.Data.Repos
         };
         public void AddDvd(Dvd dvd)
         {
-            if (_dvds.Count()==0)
+            if (_dvds.Any())
             {
                 var maxId = _dvds.Max(d => d.DvdId);
                 dvd.DvdId = maxId + 1;
@@ -64,7 +64,6 @@ namespace DVDLibrary.Data.Repos
 
         public void DeleteDvd(int id)
         {
-            //List<Dvd> dvd = new DvdMockRepository().GetAll();
             _dvds.RemoveAll(d => d.DvdId == id);
         }
 

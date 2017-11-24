@@ -11,6 +11,6 @@ namespace SWGDealer.Models.DealerModels
     {
         public int VehicleMakeId { get; set; }
         public string VehicleMakeName { get; set; }
-        public virtual List <VehicleModel> ModelList { get; set; }
+        //public virtual List <VehicleModel> ModelList { get; set; }
     }
 }

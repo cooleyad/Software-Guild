@@ -12,8 +12,6 @@ namespace SWGDealer.Models.DealerModels
         public int VehicleModelId { get; set; }
         public string VehicleModelName { get; set; }
         public int VehicleMakeId { get; set; }
-
-        [ForeignKey("VehicleMakeId")]
         public virtual VehicleMake Make { get; set; }
     }
 }

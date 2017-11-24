@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web.Http;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using System.Web.Http.Cors;
 
 namespace DVDLibrary
 {
@@ -13,6 +14,7 @@ namespace DVDLibrary
         {
             // Web API configuration and services
 
+            config.EnableCors();
 
             var jsonSettings = GlobalConfiguration.Configuration.Formatters.JsonFormatter.SerializerSettings;
             jsonSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();

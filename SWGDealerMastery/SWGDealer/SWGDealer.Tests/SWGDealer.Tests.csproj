@@ -56,5 +56,19 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SWGDealer.Data\SWGDealer.Data.csproj">
+      <Project>{42e131ee-51b9-4bea-85f8-5032b1a1c183}</Project>
+      <Name>SWGDealer.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SWGDealer.Models\SWGDealer.Models.csproj">
+      <Project>{481b167d-d8de-406c-b6f9-0db431e20757}</Project>
+      <Name>SWGDealer.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SWGDealer\SWGDealer.UI.csproj">
+      <Project>{0a16f9fa-d8e2-43e4-92bb-b1c15ce43274}</Project>
+      <Name>SWGDealer.UI</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

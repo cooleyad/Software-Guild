@@ -79,6 +79,7 @@
     <Compile Include="DealerModels\Purchase.cs" />
     <Compile Include="DealerModels\PurchaseType.cs" />
     <Compile Include="DealerModels\SalesSpecials.cs" />
+    <Compile Include="DealerModels\User.cs" />
     <Compile Include="DealerModels\Vehicle.cs" />
     <Compile Include="DealerModels\VehicleMake.cs" />
     <Compile Include="DealerModels\VehicleModel.cs" />
