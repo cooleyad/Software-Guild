@@ -206,6 +206,7 @@
     <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\PurchaseViewModel.cs" />
     <Compile Include="Models\SalesSpecialViewModel.cs" />
+    <Compile Include="Models\UpdatePasswordViewModel.cs" />
     <Compile Include="Models\UserViewModel.cs" />
     <Compile Include="Models\VehicleViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -223,6 +224,7 @@
     <Content Include="Views\Home\Specials.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Auth\Login.cshtml" />
+    <Content Include="Views\Auth\UpdatePassword.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

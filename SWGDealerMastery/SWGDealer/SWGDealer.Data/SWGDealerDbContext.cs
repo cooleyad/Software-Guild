@@ -11,7 +11,7 @@ namespace SWGDealer.Data
 {
     public class SWGDealerDbContext :IdentityDbContext
     {
-        public SWGDealerDbContext(): base ("GuildCars")
+        public SWGDealerDbContext(): base ("SWGDealer")
         {
         }
 
