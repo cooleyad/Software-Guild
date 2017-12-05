@@ -41,6 +41,28 @@ namespace SWGDealer.Data.Migrations
             {
                 userMgr.AddToRole(user.Id, "admin");
             }
+
+            if (!roleMgr.RoleExists("sales"))
+            {
+                roleMgr.Create(new IdentityRole() { Name = "sales" });
+            }
+
+            if (userMgr.FindByName("ggunderson@swgdealer.com")==null)
+            {
+                var newuser = new AppUser()
+                {
+                    FirstName="Gil",
+                    LastName="Gunderson",
+                    UserName= "ggunderson@swgdealer.com",
+                    Email= "ggunderson@swgdealer"
+                };
+                userMgr.Create(newuser, "Test123");
+            }
+            var salesUser = userMgr.FindByName("ggunderson@swgdealer.com");
+            if(!userMgr.IsInRole(salesUser.Id, "sales"))
+            {
+                userMgr.AddToRole(salesUser.Id, "sales");
+            }
         }
     }
 }

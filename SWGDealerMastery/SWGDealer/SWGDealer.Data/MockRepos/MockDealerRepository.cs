@@ -21,9 +21,18 @@ namespace SWGDealer.Data.MockRepos
         private static List<VehicleMake> _makes;
         private static List<VehicleModel> _models;
         private static List<Customer> _customers;
+        public static List<AppRole> _appRole;
 
         public MockDealerRepository()
         {
+            _appRole = new List<AppRole>()
+            {
+                new AppRole{Id="1", Name="admin"},
+                new AppRole{Id="2", Name="sales"},
+                new AppRole{Id="3", Name="disabled"}
+            };
+
+
             _contacts = new List<Contact>
             {
                 new Contact{ContactId=1, FirstName="Alex", LastName="Cooley",
@@ -107,22 +116,18 @@ namespace SWGDealer.Data.MockRepos
 
             _users = new List<AppUser>
             {
-                new AppUser{Id="1", FirstName="Whalen",
-                    LastName ="JonesFace",
-                    Email ="W.JonesFace@SWGDealer.com",
-                    Role ="Admin"},
 
-                new AppUser{Id="2",
+                new AppUser{Id="1",
                     FirstName ="Jerry",
                     LastName ="Lundegaard",
                     Email="J.Lundegaard@SWGDealer.com",
-                    Role="Sales",
+                    Role="Admin",
                 },
-                new AppUser{Id="3",
+                new AppUser{Id="2",
                     FirstName ="Gil",
                     LastName ="Gunderson",
                     Email="G.Gunderson@SWGDealer.com",
-                    Role="Disabled"
+                    Role="Sales"
                 }
 
             };
@@ -352,7 +357,7 @@ namespace SWGDealer.Data.MockRepos
 
         public IEnumerable<IdentityRole> GetAllRoles()
         {
-            throw new NotImplementedException();
+            return _appRole;
         }
 
         public List<SalesSpecials> GetAllSpecials()
@@ -405,7 +410,7 @@ namespace SWGDealer.Data.MockRepos
             return _vehicles.Where(v => v.VehicleIsNew == false).ToList();
         }
 
-        public AppUser GetUser(int id)
+        public AppUser GetUser(string id)
         {
             return _users.FirstOrDefault(u => u.Id == id.ToString());
         }

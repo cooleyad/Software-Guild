@@ -20,7 +20,7 @@ namespace SWGDealer.Data.Interfaces
         void DeleteVehicle(int id);
 
         List<AppUser> GetAllUsers();
-        AppUser GetUser(int id);
+        AppUser GetUser(string id);
         IEnumerable<IdentityRole> GetAllRoles();
         void AddUser(AppUser user);
         void EditUser(AppUser user);

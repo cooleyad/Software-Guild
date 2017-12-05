@@ -187,7 +187,7 @@ namespace SWGDealer.Data.MockRepos
             throw new NotImplementedException();
         }
 
-        public AppUser GetUser(int id)
+        public AppUser GetUser(string id)
         {
             throw new NotImplementedException();
         }
