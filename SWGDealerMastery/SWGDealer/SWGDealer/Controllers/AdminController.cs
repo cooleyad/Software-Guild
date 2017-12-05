@@ -1,18 +1,23 @@
-﻿using SWGDealer.Models;
+﻿using SWGDealer.Data.Interfaces;
+using SWGDealer.Models;
 using SWGDealer.Models.DealerModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using SWGDealer.Data;
 
 namespace SWGDealer.Controllers
 {
     public class AdminController : Controller
     {
+        ISWGDealerRepo repo = SWGDealerManagerFactory.Create();
+
+
         [Authorize(Roles ="admin")]
         // GET: Admin
-        public ActionResult Index()
+        public ActionResult Admin()
         {
             return View();
         }
@@ -23,7 +28,7 @@ namespace SWGDealer.Controllers
         }
 
         [HttpPost]
-        public ActionResult Ad(VehicleViewModel model)
+        public ActionResult Add(VehicleViewModel model)
         {
             return View();
         }
@@ -46,6 +51,11 @@ namespace SWGDealer.Controllers
 
         [HttpPost]
         public ActionResult Delete(Vehicle vehicle)
+        {
+            return View();
+        }
+
+        public ActionResult Users()
         {
             return View();
         }

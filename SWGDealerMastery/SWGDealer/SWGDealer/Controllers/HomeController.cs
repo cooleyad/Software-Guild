@@ -39,13 +39,18 @@ namespace SWGDealer.Controllers
 
         public ActionResult Contact()
         {
-            return View();
+            return View(new Contact());
         }
 
         [HttpPost]
         public ActionResult Contact(Contact model)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                repo.AddContact(model);
+                return RedirectToAction("Index");   
+            }
+            return View(model);
         }
     }
 }

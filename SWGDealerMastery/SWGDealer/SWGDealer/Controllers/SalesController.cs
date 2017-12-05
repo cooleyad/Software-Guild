@@ -9,7 +9,18 @@ namespace SWGDealer.Controllers
     public class SalesController : Controller
     {
         // GET: Sales
-        public ActionResult Index()
+        public ActionResult Sales()
+        {
+            return View();
+        }
+
+        public ActionResult Purchase()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Purchase(PurchaseviewModel model)
         {
             return View();
         }

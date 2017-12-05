@@ -101,8 +101,8 @@ namespace SWGDealer.Data.MockRepos
             _purchaseType = new List<PurchaseType>
             {
                 new PurchaseType{PurchaseTypeId=1, Description="Bank Finance"},
-                new PurchaseType{PurchaseTypeId=2, Description="Lease"},
-                new PurchaseType{PurchaseTypeId=3, Description="straight cash homie"}
+                new PurchaseType{PurchaseTypeId=2, Description="Dealer Finance"},
+                new PurchaseType{PurchaseTypeId=3, Description="Straight Cash Homie"}
             };
 
             _users = new List<AppUser>

@@ -9,11 +9,11 @@ namespace SWGDealer.Models
 {
     public class LoginViewModel
     {
-        [Required]
+        [Required(ErrorMessage ="Incorrect email")]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessage ="Incorrect password")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
 

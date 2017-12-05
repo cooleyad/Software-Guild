@@ -1,7 +1,47 @@
 ﻿@model SWGDealer.Models.DealerModels.Contact
 @{
-    ViewBag.Title = "Contact";
+	ViewBag.Title = "Contact";
 }
 
-<h2>Contact</h2>
-
+<div class="row">
+	<div class="col-md-12">
+		<h1 class="text-center">Contact Us</h1>
+		<hr />
+		@using (Html.BeginForm())
+		{
+			<div>
+				@Html.ValidationSummary("", new { @class = "text-danger" })
+				<label>First Name</label>
+				@Html.TextBoxFor(n => n.FirstName, new { @class = "form-control" })
+			</div>
+			<div>
+				<label>Last Name</label>
+				@Html.TextBoxFor(n => n.LastName, new { @class = "form-control" })
+			</div>
+			<div>
+				<label>Phone Number</label>
+				@Html.TextBoxFor(n => n.Phone, new { @class = "form-control" })
+			</div>
+			<div>
+				<label>Email</label>
+				@Html.TextBoxFor(n => n.Email, new { @class = "form-control" })
+			</div>
+			<div>
+				<label>Message</label>
+				@Html.TextAreaFor(m => m.Message, new { @class = "form-control" })
+			</div>
+			<br />
+			<div>
+				<button class="btn btn-primary">Submit</button>
+			</div>
+			<hr />
+		}
+		<div class="col-md-6">
+			<iframe width="600"
+					height="450"
+					frameborder="0" style="border:0"
+					src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAS39CCqb_YxuMaF7ZLKKotVTcSzRjABds
+					&q=Space+Needle,Seattle+WA" allowfullscreen></iframe>
+		</div>
+	</div>
+</div>

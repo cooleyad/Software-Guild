@@ -59,6 +59,10 @@
     <Compile Include="Migrations\201712041702153_init.Designer.cs">
       <DependentUpon>201712041702153_init.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712050214197_addMessage.cs" />
+    <Compile Include="Migrations\201712050214197_addMessage.Designer.cs">
+      <DependentUpon>201712050214197_addMessage.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MockRepos\EFDealerRepository.cs" />
     <Compile Include="MockRepos\MockDealerRepository.cs" />
@@ -81,6 +85,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201712041702153_init.resx">
       <DependentUpon>201712041702153_init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712050214197_addMessage.resx">
+      <DependentUpon>201712050214197_addMessage.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
