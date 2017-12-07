@@ -208,7 +208,6 @@
     <Compile Include="Models\PurchaseViewModel.cs" />
     <Compile Include="Models\SalesSpecialViewModel.cs" />
     <Compile Include="Models\UpdatePasswordViewModel.cs" />
-    <Compile Include="Models\UserViewModel.cs" />
     <Compile Include="Models\VehicleViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

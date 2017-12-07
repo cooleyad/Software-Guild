@@ -6,10 +6,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
 using SWGDealer.Models.DealerModels;
+using SWGDealer.Models.Identity;
 
 namespace SWGDealer.Data
 {
-    public class SWGDealerDbContext :IdentityDbContext
+    public class SWGDealerDbContext :IdentityDbContext<AppUser>
     {
         public SWGDealerDbContext(): base ("SWGDealer")
         {
@@ -28,5 +29,7 @@ namespace SWGDealer.Data
         {
             base.OnModelCreating(modelBuilder);
         }
+
+        public DbSet<AppRole> IdentityRoles { get; set; }
     }
 }

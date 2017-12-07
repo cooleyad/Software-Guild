@@ -12,6 +12,7 @@ namespace SWGDealer.Data.MockRepos
 {
     public class MockDealerRepository : ISWGDealerRepo
     {
+
         private static List <Contact> _contacts;
         private static List<Vehicle> _vehicles;
         private static List<SalesSpecials> _salesSpecials;
@@ -120,14 +121,12 @@ namespace SWGDealer.Data.MockRepos
                 new AppUser{Id="1",
                     FirstName ="Jerry",
                     LastName ="Lundegaard",
-                    Email="J.Lundegaard@SWGDealer.com",
-                    Role="Admin",
+                    Email="J.Lundegaard@SWGDealer.com"
                 },
                 new AppUser{Id="2",
                     FirstName ="Gil",
                     LastName ="Gunderson",
-                    Email="G.Gunderson@SWGDealer.com",
-                    Role="Sales"
+                    Email="G.Gunderson@SWGDealer.com"
                 }
 
             };
@@ -418,6 +417,11 @@ namespace SWGDealer.Data.MockRepos
         public Vehicle GetVehicleById(int vehicleId)
         {
             return _vehicles.FirstOrDefault(v => v.VehicleId == vehicleId);
+        }
+
+        public void EditUser(UserViewModel model)
+        {
+            throw new NotImplementedException();
         }
     }
 }

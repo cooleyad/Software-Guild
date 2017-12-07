@@ -7,11 +7,16 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Identity.EntityFramework;
 using SWGDealer.Models.DealerModels;
 using SWGDealer.Models.Identity;
+using Microsoft.AspNet.Identity;
 
 namespace SWGDealer.Data.MockRepos
 {
     public class EFDealerRepository : ISWGDealerRepo
     {
+        SWGDealerDbContext context = new SWGDealerDbContext();
+
+        public bool ModelState { get; private set; }
+
         public void AddContact(Contact newContact)
         {
             throw new NotImplementedException();
@@ -39,7 +44,13 @@ namespace SWGDealer.Data.MockRepos
 
         public void AddUser(AppUser user)
         {
-            throw new NotImplementedException();
+            var userMgr = new UserManager<AppUser>(new UserStore<AppUser>(context));
+            var roleMgr = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+
+            if (userMgr.Users.Any(u => u.UserName == u.Email))
+            {
+                var addedUser = userMgr.Create(user);
+            }
         }
 
         public void AddVehicle(Vehicle newVehicle)
@@ -104,8 +115,16 @@ namespace SWGDealer.Data.MockRepos
 
         public void EditUser(AppUser user)
         {
-            throw new NotImplementedException();
+            context.Entry(user).State = System.Data.Entity.EntityState.Modified;
+            context.SaveChanges();
         }
+
+        //public void EditUser(UserViewModel model)
+        //{
+        //    var userMgr = new UserManager<AppUser>(new UserStore<AppUser>(context));
+        //    var roleMgr = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+        //    context.Entry(model)
+        //}
 
         public void EditVehicle(Vehicle editedVehicle)
         {
@@ -134,7 +153,7 @@ namespace SWGDealer.Data.MockRepos
 
         public IEnumerable<IdentityRole> GetAllRoles()
         {
-            throw new NotImplementedException();
+            return context.Roles.ToList();
         }
 
         public List<SalesSpecials> GetAllSpecials()
@@ -144,7 +163,22 @@ namespace SWGDealer.Data.MockRepos
 
         public List<AppUser> GetAllUsers()
         {
-            throw new NotImplementedException();
+            var users = context.Users.ToList();
+            var roles = context.Roles.ToList();
+
+            foreach (var u in users)
+            {
+                foreach (var r in u.Roles)
+                {
+                    if (roles.Any(ur => ur.Id == r.RoleId))
+                    {
+                        var roleFound = roles.First(ur => ur.Id == r.RoleId);
+
+                        u.RoleName = roleFound.Name;
+                    }
+                }
+            }
+            return users;
         }
 
         public List<Vehicle> GetAllVehicles()
@@ -189,7 +223,7 @@ namespace SWGDealer.Data.MockRepos
 
         public AppUser GetUser(string id)
         {
-            throw new NotImplementedException();
+            return context.Users.FirstOrDefault(u => u.Id == id);
         }
 
         public Vehicle GetVehicleById(int vehicleId)

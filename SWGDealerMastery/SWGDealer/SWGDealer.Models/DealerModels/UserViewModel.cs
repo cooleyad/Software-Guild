@@ -7,7 +7,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace SWGDealer.Models
+namespace SWGDealer.Models.DealerModels
 {
     public class UserViewModel
     {

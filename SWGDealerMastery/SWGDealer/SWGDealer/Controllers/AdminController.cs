@@ -1,6 +1,5 @@
 ﻿using SWGDealer.Data.Interfaces;
 using SWGDealer.Models;
-using SWGDealer.Models.DealerModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,12 +9,14 @@ using SWGDealer.Data;
 using SWGDealer.Models.Identity;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using SWGDealer.Models.DealerModels;
 
 namespace SWGDealer.Controllers
 {
     public class AdminController : Controller
     {
         ISWGDealerRepo repo = SWGDealerManagerFactory.Create();
+        SWGDealerDbContext context = new SWGDealerDbContext();
 
 
         [Authorize(Roles ="admin")]
@@ -75,7 +76,6 @@ namespace SWGDealer.Controllers
         public ActionResult AddUser(UserViewModel model)
         {
             model.AppUser.UserName = model.AppUser.Email;
-            var context = new SWGDealerDbContext();
             var userMgr = new UserManager<AppUser>(new UserStore<AppUser>(context));
             var roleMgr = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
 
@@ -96,7 +96,7 @@ namespace SWGDealer.Controllers
                     FirstName = model.AppUser.FirstName,
                     LastName=model.AppUser.LastName,
                     UserName=model.AppUser.UserName,
-                    Email=model.AppUser.Email                    
+                    Email=model.AppUser.Email
                 };
                 userMgr.Create(newUser, model.NewPassword);
             }
@@ -111,16 +111,37 @@ namespace SWGDealer.Controllers
         public ActionResult EditUser(string id)
         {
             var model = new UserViewModel();
-            model.SetRoleItems(repo.GetAllRoles());
+            var user= repo.GetAllUsers().FirstOrDefault(u => u.Id == id);
             model.AppUser = repo.GetUser(id);
+            model.SetRoleItems(repo.GetAllRoles());
             return View(model);
 
         }
 
         [HttpPost]
-        public ActionResult EditUser(UserViewModel user)
+        public ActionResult EditUser(UserViewModel model)
         {
-            return View();
+            model.AppUser.UserName = model.AppUser.Id;
+            var userMgr = new UserManager<AppUser>(new UserStore<AppUser>(context));
+            var roleMgr = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+            var user = userMgr.FindById(model.AppUser.Id);
+            if (userMgr.FindById(model.AppUser.Id) != null)
+            {
+                var editedUser = user;
+                {
+                    user.FirstName = model.AppUser.FirstName;
+                    user.LastName = model.AppUser.LastName;
+                    user.Email = model.AppUser.Email;
+                    user.UserName = model.AppUser.Email;
+                };
+                userMgr.Update(editedUser);
+            }
+            var role = context.Roles.SingleOrDefault(r => r.Id == model.Role.Id);
+            //string[] allUserRoles = userMgr.GetRoles(user.Id).ToArray();
+            userMgr.RemoveFromRoles(user.Id, role.Name);
+            userMgr.AddToRole(user.Id, role.Name);
+            context.SaveChanges();
+            return RedirectToAction("Users");
         }
 
         public ActionResult AddModel()

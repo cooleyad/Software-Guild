@@ -67,6 +67,22 @@
     <Compile Include="Migrations\201712051904386_updateAppUser.Designer.cs">
       <DependentUpon>201712051904386_updateAppUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712060219256_moreUserStuff.cs" />
+    <Compile Include="Migrations\201712060219256_moreUserStuff.Designer.cs">
+      <DependentUpon>201712060219256_moreUserStuff.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712060319085_userAgain.cs" />
+    <Compile Include="Migrations\201712060319085_userAgain.Designer.cs">
+      <DependentUpon>201712060319085_userAgain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712061739412_moreUserUpdates.cs" />
+    <Compile Include="Migrations\201712061739412_moreUserUpdates.Designer.cs">
+      <DependentUpon>201712061739412_moreUserUpdates.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712062008558_userMapping.cs" />
+    <Compile Include="Migrations\201712062008558_userMapping.Designer.cs">
+      <DependentUpon>201712062008558_userMapping.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MockRepos\EFDealerRepository.cs" />
     <Compile Include="MockRepos\MockDealerRepository.cs" />
@@ -95,6 +111,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201712051904386_updateAppUser.resx">
       <DependentUpon>201712051904386_updateAppUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712060219256_moreUserStuff.resx">
+      <DependentUpon>201712060219256_moreUserStuff.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712060319085_userAgain.resx">
+      <DependentUpon>201712060319085_userAgain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712061739412_moreUserUpdates.resx">
+      <DependentUpon>201712061739412_moreUserUpdates.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712062008558_userMapping.resx">
+      <DependentUpon>201712062008558_userMapping.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
