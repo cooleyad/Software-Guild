@@ -12,10 +12,11 @@ namespace SWGDealer.Data.Migrations
                 c => new
                     {
                         ContactId = c.Int(nullable: false, identity: true),
-                        FirstName = c.String(),
+                        FirstName = c.String(nullable: false),
                         LastName = c.String(),
-                        Email = c.String(),
+                        Email = c.String(nullable: false),
                         Phone = c.String(),
+                        Message = c.String(nullable: false),
                     })
                 .PrimaryKey(t => t.ContactId);
             
@@ -28,6 +29,30 @@ namespace SWGDealer.Data.Migrations
                         SpecialDesc = c.String(),
                     })
                 .PrimaryKey(t => t.SalesSpecialsId);
+            
+            CreateTable(
+                "dbo.AspNetRoles",
+                c => new
+                    {
+                        Id = c.String(nullable: false, maxLength: 128),
+                        Name = c.String(nullable: false, maxLength: 256),
+                        Discriminator = c.String(nullable: false, maxLength: 128),
+                    })
+                .PrimaryKey(t => t.Id)
+                .Index(t => t.Name, unique: true, name: "RoleNameIndex");
+            
+            CreateTable(
+                "dbo.AspNetUserRoles",
+                c => new
+                    {
+                        UserId = c.String(nullable: false, maxLength: 128),
+                        RoleId = c.String(nullable: false, maxLength: 128),
+                    })
+                .PrimaryKey(t => new { t.UserId, t.RoleId })
+                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
+                .ForeignKey("dbo.AspNetRoles", t => t.RoleId, cascadeDelete: true)
+                .Index(t => t.UserId)
+                .Index(t => t.RoleId);
             
             CreateTable(
                 "dbo.Purchases",
@@ -82,6 +107,8 @@ namespace SWGDealer.Data.Migrations
                 c => new
                     {
                         Id = c.String(nullable: false, maxLength: 128),
+                        FirstName = c.String(),
+                        LastName = c.String(),
                         Email = c.String(maxLength: 256),
                         EmailConfirmed = c.Boolean(nullable: false),
                         PasswordHash = c.String(),
@@ -93,10 +120,6 @@ namespace SWGDealer.Data.Migrations
                         LockoutEnabled = c.Boolean(nullable: false),
                         AccessFailedCount = c.Int(nullable: false),
                         UserName = c.String(nullable: false, maxLength: 256),
-                        FirstName = c.String(),
-                        LastName = c.String(),
-                        Role = c.String(),
-                        Discriminator = c.String(nullable: false, maxLength: 128),
                     })
                 .PrimaryKey(t => t.Id)
                 .Index(t => t.UserName, unique: true, name: "UserNameIndex");
@@ -125,19 +148,6 @@ namespace SWGDealer.Data.Migrations
                 .PrimaryKey(t => new { t.LoginProvider, t.ProviderKey, t.UserId })
                 .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
                 .Index(t => t.UserId);
-            
-            CreateTable(
-                "dbo.AspNetUserRoles",
-                c => new
-                    {
-                        UserId = c.String(nullable: false, maxLength: 128),
-                        RoleId = c.String(nullable: false, maxLength: 128),
-                    })
-                .PrimaryKey(t => new { t.UserId, t.RoleId })
-                .ForeignKey("dbo.AspNetRoles", t => t.RoleId, cascadeDelete: true)
-                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
-                .Index(t => t.UserId)
-                .Index(t => t.RoleId);
             
             CreateTable(
                 "dbo.Vehicles",
@@ -172,10 +182,14 @@ namespace SWGDealer.Data.Migrations
                         VehicleModelId = c.Int(nullable: false, identity: true),
                         VehicleModelName = c.String(),
                         VehicleMakeId = c.Int(nullable: false),
+                        DateAdded = c.DateTime(nullable: false),
+                        User_Id = c.String(maxLength: 128),
                     })
                 .PrimaryKey(t => t.VehicleModelId)
                 .ForeignKey("dbo.VehicleMakes", t => t.VehicleMakeId, cascadeDelete: true)
-                .Index(t => t.VehicleMakeId);
+                .ForeignKey("dbo.AspNetUsers", t => t.User_Id)
+                .Index(t => t.VehicleMakeId)
+                .Index(t => t.User_Id);
             
             CreateTable(
                 "dbo.VehicleMakes",
@@ -183,39 +197,34 @@ namespace SWGDealer.Data.Migrations
                     {
                         VehicleMakeId = c.Int(nullable: false, identity: true),
                         VehicleMakeName = c.String(),
+                        DateAdded = c.DateTime(nullable: false),
+                        UserName = c.String(),
+                        User_Id = c.String(maxLength: 128),
                     })
-                .PrimaryKey(t => t.VehicleMakeId);
-            
-            CreateTable(
-                "dbo.AspNetRoles",
-                c => new
-                    {
-                        Id = c.String(nullable: false, maxLength: 128),
-                        Name = c.String(nullable: false, maxLength: 256),
-                        Discriminator = c.String(nullable: false, maxLength: 128),
-                    })
-                .PrimaryKey(t => t.Id)
-                .Index(t => t.Name, unique: true, name: "RoleNameIndex");
+                .PrimaryKey(t => t.VehicleMakeId)
+                .ForeignKey("dbo.AspNetUsers", t => t.User_Id)
+                .Index(t => t.User_Id);
             
         }
         
         public override void Down()
         {
-            DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
-            DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
-            DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
             DropForeignKey("dbo.Purchases", "VehicleId", "dbo.Vehicles");
             DropForeignKey("dbo.Vehicles", "Model_VehicleModelId", "dbo.VehicleModels");
+            DropForeignKey("dbo.VehicleModels", "User_Id", "dbo.AspNetUsers");
             DropForeignKey("dbo.VehicleModels", "VehicleMakeId", "dbo.VehicleMakes");
+            DropForeignKey("dbo.VehicleMakes", "User_Id", "dbo.AspNetUsers");
             DropForeignKey("dbo.Purchases", "User_Id", "dbo.AspNetUsers");
+            DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.Purchases", "PurchaseTypeId", "dbo.PurchaseTypes");
             DropForeignKey("dbo.Purchases", "CustomerId", "dbo.Customers");
-            DropIndex("dbo.AspNetRoles", "RoleNameIndex");
+            DropIndex("dbo.VehicleMakes", new[] { "User_Id" });
+            DropIndex("dbo.VehicleModels", new[] { "User_Id" });
             DropIndex("dbo.VehicleModels", new[] { "VehicleMakeId" });
             DropIndex("dbo.Vehicles", new[] { "Model_VehicleModelId" });
-            DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
-            DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
@@ -223,17 +232,20 @@ namespace SWGDealer.Data.Migrations
             DropIndex("dbo.Purchases", new[] { "CustomerId" });
             DropIndex("dbo.Purchases", new[] { "VehicleId" });
             DropIndex("dbo.Purchases", new[] { "PurchaseTypeId" });
-            DropTable("dbo.AspNetRoles");
+            DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
+            DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
+            DropIndex("dbo.AspNetRoles", "RoleNameIndex");
             DropTable("dbo.VehicleMakes");
             DropTable("dbo.VehicleModels");
             DropTable("dbo.Vehicles");
-            DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");
             DropTable("dbo.PurchaseTypes");
             DropTable("dbo.Customers");
             DropTable("dbo.Purchases");
+            DropTable("dbo.AspNetUserRoles");
+            DropTable("dbo.AspNetRoles");
             DropTable("dbo.SalesSpecials");
             DropTable("dbo.Contacts");
         }

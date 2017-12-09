@@ -1,0 +1,34 @@
+﻿@model List<SWGDealer.Models.DealerModels.VehicleModel>
+
+@{
+    ViewBag.Title = "Models";
+}
+
+<h2>Models</h2>
+
+<div class="row">
+	<div class="col-md-12">
+		@Html.ActionLink("Add Model", "AddModel", "Admin", new { @class = "btn btn-primary" })
+		<table class="table table-bordered table-striped">
+			<thead>
+				<tr>
+					<th>Make</th>
+					<th>Model</th>
+					<th>Date Added</th>
+					<th>User</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var car in Model)
+				{
+					<tr>
+						<td>@car.Make.VehicleMakeName</td>
+						<td>@car.VehicleModelName</td>
+						<td>@car.DateAdded</td>
+						<td>@car.User.UserName</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
+</div>

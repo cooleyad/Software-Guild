@@ -2,8 +2,11 @@
 <html>
 <head>
 	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>@ViewBag.Title - My ASP.NET Application</title>
+	<meta name="viewport" content="width=device-width">
+	<title>@ViewBag.Title</title>
+	@Scripts.Render("~/bundles/modernizr")
+	@Styles.Render("~/Content/Homepage.css")
+	@Scripts.Render("~/bundles/modernizr")
 	<link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
 	<link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
 	<script src="~/Scripts/modernizr-2.6.2.js"></script>
@@ -84,14 +87,16 @@
 		@RenderBody()
 		<hr />
 		<footer>
-			<p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+			<p>&copy; @DateTime.Now.Year - Software Guild Dealership</p>
 		</footer>
 	</div>
 
+	@Scripts.Render("~/bundles/jquery")
+	@Scripts.Render("~/bundles/bootstrap")
 	<script src="~/Scripts/jquery-3.2.1.min.js"></script>
-	<script src="@Url.Content("~/js/jquery.min.js")"></script>
-	<script src="@Url.Content("~/js/bootstrap.min.js")"></script>
-	<script src="@Url.Content("~/js/metisMenu.min.js")"></script>
-	<script src="@Url.Content("~/js/sb-admin-2.js")"></script>
+	<script src="~/js/jquery.min.js"></script>
+	<script src="~/js/sb-admin-2.js"></script>
+	<script src="~/Scripts/Home.js"></script>
+	@RenderSection("scripts", required: false)
 </body>
 </html>

@@ -41,11 +41,12 @@ namespace SWGDealer.Controllers
             var hash = userMgr.HasPassword(allUsers.First().Id);
             AppUser user = userMgr.Find(model.Email, model.Password);
 
+
             if (user == null)
             {
                 return Redirect(Url.Action("Login", "Auth"));
             }
-
+            
             var userToLogin = userMgr.CreateIdentity(user, DefaultAuthenticationTypes.ApplicationCookie);
             authMgr.SignIn(userToLogin);
 

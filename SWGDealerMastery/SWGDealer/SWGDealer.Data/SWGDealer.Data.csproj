@@ -55,33 +55,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Interfaces\ISWGDealerRepo.cs" />
-    <Compile Include="Migrations\201712041702153_init.cs" />
-    <Compile Include="Migrations\201712041702153_init.Designer.cs">
-      <DependentUpon>201712041702153_init.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201712050214197_addMessage.cs" />
-    <Compile Include="Migrations\201712050214197_addMessage.Designer.cs">
-      <DependentUpon>201712050214197_addMessage.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201712051904386_updateAppUser.cs" />
-    <Compile Include="Migrations\201712051904386_updateAppUser.Designer.cs">
-      <DependentUpon>201712051904386_updateAppUser.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201712060219256_moreUserStuff.cs" />
-    <Compile Include="Migrations\201712060219256_moreUserStuff.Designer.cs">
-      <DependentUpon>201712060219256_moreUserStuff.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201712060319085_userAgain.cs" />
-    <Compile Include="Migrations\201712060319085_userAgain.Designer.cs">
-      <DependentUpon>201712060319085_userAgain.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201712061739412_moreUserUpdates.cs" />
-    <Compile Include="Migrations\201712061739412_moreUserUpdates.Designer.cs">
-      <DependentUpon>201712061739412_moreUserUpdates.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201712062008558_userMapping.cs" />
-    <Compile Include="Migrations\201712062008558_userMapping.Designer.cs">
-      <DependentUpon>201712062008558_userMapping.cs</DependentUpon>
+    <Compile Include="Migrations\201712092027012_init.cs" />
+    <Compile Include="Migrations\201712092027012_init.Designer.cs">
+      <DependentUpon>201712092027012_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MockRepos\EFDealerRepository.cs" />
@@ -103,26 +79,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201712041702153_init.resx">
-      <DependentUpon>201712041702153_init.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201712050214197_addMessage.resx">
-      <DependentUpon>201712050214197_addMessage.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201712051904386_updateAppUser.resx">
-      <DependentUpon>201712051904386_updateAppUser.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201712060219256_moreUserStuff.resx">
-      <DependentUpon>201712060219256_moreUserStuff.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201712060319085_userAgain.resx">
-      <DependentUpon>201712060319085_userAgain.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201712061739412_moreUserUpdates.resx">
-      <DependentUpon>201712061739412_moreUserUpdates.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201712062008558_userMapping.resx">
-      <DependentUpon>201712062008558_userMapping.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201712092027012_init.resx">
+      <DependentUpon>201712092027012_init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

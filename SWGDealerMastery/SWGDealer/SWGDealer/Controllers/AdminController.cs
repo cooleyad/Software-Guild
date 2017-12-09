@@ -48,15 +48,17 @@ namespace SWGDealer.Controllers
             return View();
         }
 
-        public ActionResult Delete()
+        public ActionResult Delete(int id)
         {
-            return View();
+            var vehicle = repo.GetVehicleById(id);
+            return View(vehicle);
         }
 
         [HttpPost]
         public ActionResult Delete(Vehicle vehicle)
         {
-            return View();
+            repo.DeleteVehicle(vehicle.VehicleId);
+            return RedirectToAction("Admin");
         }
 
         public ActionResult Users()
@@ -127,14 +129,11 @@ namespace SWGDealer.Controllers
             var user = userMgr.FindByName(model.AppUser.UserName);
             if (userMgr.FindByName(model.AppUser.UserName) != null)
             {
-                var editedUser = user;
-                {
-                    user.FirstName = model.AppUser.FirstName;
-                    user.LastName = model.AppUser.LastName;
-                    user.Email = model.AppUser.Email;
-                    user.UserName = model.AppUser.Email;
-                };
-                userMgr.Update(editedUser);
+                user.FirstName = model.AppUser.FirstName;
+                user.LastName = model.AppUser.LastName;
+                user.Email = model.AppUser.Email;
+                user.UserName = model.AppUser.Email;
+                userMgr.Update(user);                
             }
             var role = context.Roles.SingleOrDefault(r => r.Id == model.Role.Id);
             string[] allUserRoles = userMgr.GetRoles(user.Id).ToArray();
@@ -144,15 +143,43 @@ namespace SWGDealer.Controllers
             return RedirectToAction("Users");
         }
 
+        public ActionResult Models()
+        {
+            var model = repo.GetAllModels();
+            return View(model);
+        }
+
         public ActionResult AddModel()
         {
-            return View();
+            var model = new AddModelViewModel();
+            model.SetMakes(repo.GetAllMakes());
+            return View(model);
         }
 
         [HttpPost]
-        public ActionResult AddModel(VehicleModel model)
+        public ActionResult AddModel(AddModelViewModel model)
         {
-            return View();
+            VehicleModel vModel = new VehicleModel();
+            if (ModelState.IsValid)
+            {
+                //model.ModelType = vModel.VehicleModelName;
+                //model.VehicleModelId = vModel.VehicleModelId;
+                //model.Added = vModel.DateAdded;
+                model.ModelType = vModel.VehicleModelName;
+                var userId = User.Identity.GetUserId();
+                var user = repo.GetUser(userId);
+                var make = repo.GetMakeById(model.VehicleMakeId);
+                model.User = user;
+            }
+            //model.VehicleModelId = addModel.VehicleModelId;
+            repo.AddModel(vModel);
+            return RedirectToAction("Models");
+        }
+        
+        public ActionResult Makes()
+        {
+            var model = repo.GetAllMakes();
+            return View(model);
         }
 
         public ActionResult AddMake()
@@ -163,7 +190,11 @@ namespace SWGDealer.Controllers
         [HttpPost]
         public ActionResult AddMake(VehicleMake make)
         {
-            return View();
+            var userId = User.Identity.GetUserId();
+            var user = repo.GetUser(userId);
+            make.User = user;
+            repo.AddMake(make);
+            return RedirectToAction("Makes");
         }
 
         public ActionResult AddSpecial()
@@ -175,6 +206,18 @@ namespace SWGDealer.Controllers
         public ActionResult AddSpecial(SalesSpecials special)
         {
             return View();
+        }
+
+        public ActionResult DeleteSpecial()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult DeleteSpecial(SalesSpecials special)
+        {
+            repo.DeleteSpecial(special.SalesSpecialsId);
+            return RedirectToAction("AddSpecial");
         }
     }
 }

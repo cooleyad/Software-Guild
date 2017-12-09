@@ -1,7 +1,26 @@
-﻿
+﻿@model SWGDealer.Models.DealerModels.VehicleMake
 @{
-    ViewBag.Title = "AddMake";
+	ViewBag.Title = "AddMake";
 }
 
-<h2>Add Make</h2>
+<h1>Add Make</h1>
+@using (Html.BeginForm())
+{
+	<div class="panel-body">
+		<div class="form-group">
+			<label>New Vehicle Make:</label>
+			@Html.TextBoxFor(m => m.VehicleMakeName, new { @class = "form-control" })
+			<br />
+			<button class="btn btn-primary">Save</button>
+		</div>
+	</div>
+	<div>
+		<div id="makeDetails">
 
+
+		</div>
+	</div>
+}
+@section scripts{
+	<script src="~/Scripts/MakeAndModel.js"></script>
+}

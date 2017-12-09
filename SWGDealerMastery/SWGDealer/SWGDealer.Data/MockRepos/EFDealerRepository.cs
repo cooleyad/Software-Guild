@@ -24,12 +24,42 @@ namespace SWGDealer.Data.MockRepos
 
         public void AddMake(VehicleMake newMake)
         {
-            throw new NotImplementedException();
+            if (context.VehicleMakes.Count()==0)
+            {
+                newMake.VehicleMakeId = 1;
+            }
+            else
+            {
+                var make = context.VehicleMakes.ToList();
+                newMake.DateAdded = DateTime.Now;
+                var vehicleId = context.VehicleMakes.Max(c => c.VehicleMakeId);
+                newMake.VehicleMakeId = vehicleId + 1;
+
+            }
+            context.VehicleMakes.Add(newMake);
+            context.SaveChanges();
         }
 
         public void AddModel(VehicleModel newModel)
         {
-            throw new NotImplementedException();
+            var addModel = new AddModelViewModel();
+            if (context.VehicleModels.Count()==0)
+            {
+                newModel.VehicleMakeId = 1;
+            }
+            else
+            {
+                var model = context.VehicleModels.ToList();
+                newModel.Make = context.VehicleMakes.FirstOrDefault(m => m.VehicleMakeId == newModel.VehicleMakeId);
+                newModel.DateAdded = DateTime.Now;
+                var modelId = context.VehicleModels.Max(m => m.VehicleModelId);
+                newModel.VehicleModelId = modelId + 1;
+            }
+            context.VehicleModels.Add(newModel);
+            context.SaveChanges();
+            //newModel.Make = context.VehicleMakes.FirstOrDefault(m => m.VehicleMakeId == newModel.Make.VehicleMakeId);
+            //newModel.User = context.Users.FirstOrDefault(u => u.Id == newModel.User.UserName);
+
         }
 
         public void AddPurchase(Purchase newPurchase)
@@ -75,7 +105,9 @@ namespace SWGDealer.Data.MockRepos
 
         public void DeleteSpecial(int id)
         {
-            throw new NotImplementedException();
+            var specialDelete = context.DealerSalesSpecials.FirstOrDefault(s => s.SalesSpecialsId == id);
+            context.DealerSalesSpecials.Remove(specialDelete);
+            context.SaveChanges();
         }
 
         public void DeleteUser(int id)
@@ -85,7 +117,9 @@ namespace SWGDealer.Data.MockRepos
 
         public void DeleteVehicle(int id)
         {
-            throw new NotImplementedException();
+            var vehicleDelete = context.Vehicles.FirstOrDefault(v => v.VehicleId == id);
+            context.Vehicles.Remove(vehicleDelete);
+            context.SaveChanges();
         }
 
         public void EditContact(Contact editedContact)
@@ -136,14 +170,21 @@ namespace SWGDealer.Data.MockRepos
             throw new NotImplementedException();
         }
 
+        public List<Vehicle> GetAllFeatured()
+        {
+            return context.Vehicles.Where(v => v.VehicleFeatured == true && v.VehicleIsSold == false).ToList();
+        }
+
         public List<VehicleMake> GetAllMakes()
         {
-            throw new NotImplementedException();
+            return context.VehicleMakes.Include("User").ToList();
         }
 
         public List<VehicleModel> GetAllModels()
         {
-            throw new NotImplementedException();
+            var user = context.Users.ToList();
+            var make = context.VehicleMakes.ToList();
+            return context.VehicleModels.Include("User").Include("Make").ToList();
         }
 
         public List<Purchase> GetAllPurchases()
@@ -158,7 +199,7 @@ namespace SWGDealer.Data.MockRepos
 
         public List<SalesSpecials> GetAllSpecials()
         {
-            throw new NotImplementedException();
+            return context.DealerSalesSpecials.ToList();
         }
 
         public List<AppUser> GetAllUsers()
@@ -193,7 +234,7 @@ namespace SWGDealer.Data.MockRepos
 
         public VehicleMake GetMakeById(int id)
         {
-            throw new NotImplementedException();
+            return context.VehicleMakes.FirstOrDefault(m => m.VehicleMakeId == id);
         }
 
         public VehicleModel GetModelById(int id)

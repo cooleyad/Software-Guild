@@ -1,7 +1,17 @@
-﻿@model SWGDealer.Models.DealerModels.SalesSpecials
-@{
-    ViewBag.Title = "Specials";
+﻿@{
+	ViewBag.Title = "Specials";
 }
 
 <h2>Specials</h2>
 
+@if (User.IsInRole("admin"))
+{
+	@Html.ActionLink("Add Special", "AddSpecial", "Admin")
+}
+
+<div id="specialsShown">
+
+</div>
+@section scripts{
+	@Scripts.Render("~/Scripts/Home.js")
+}

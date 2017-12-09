@@ -423,5 +423,10 @@ namespace SWGDealer.Data.MockRepos
         {
             throw new NotImplementedException();
         }
+
+        public List<Vehicle> GetAllFeatured()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

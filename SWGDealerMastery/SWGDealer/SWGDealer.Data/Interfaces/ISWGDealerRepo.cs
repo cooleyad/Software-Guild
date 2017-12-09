@@ -14,6 +14,7 @@ namespace SWGDealer.Data.Interfaces
         List<Vehicle> GetAllVehicles();
         List<Vehicle> GetNewVehicles();
         List<Vehicle> GetUsedVehicles();
+        List<Vehicle> GetAllFeatured();
         Vehicle GetVehicleById(int vehicleId);
         void AddVehicle(Vehicle newVehicle);
         void EditVehicle(Vehicle editedVehicle);
@@ -54,6 +55,8 @@ namespace SWGDealer.Data.Interfaces
         Purchase GetPurchaseById(int id);
         void AddPurchase(Purchase newPurchase);
         void EditPurchase(Purchase editedPurchase);
+
+
 
     }
 }
