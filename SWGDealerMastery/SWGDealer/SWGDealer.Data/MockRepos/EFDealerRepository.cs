@@ -42,13 +42,13 @@ namespace SWGDealer.Data.MockRepos
 
         public void AddModel(VehicleModel newModel)
         {
-            var addModel = new AddModelViewModel();
             if (context.VehicleModels.Count()==0)
             {
                 newModel.VehicleMakeId = 1;
             }
             else
             {
+                //newModel.VehicleModelName= new AddModelViewModel().ModelType;
                 var model = context.VehicleModels.ToList();
                 newModel.Make = context.VehicleMakes.FirstOrDefault(m => m.VehicleMakeId == newModel.VehicleMakeId);
                 newModel.DateAdded = DateTime.Now;

@@ -19,7 +19,7 @@ namespace SWGDealer.Controllers
         SWGDealerDbContext context = new SWGDealerDbContext();
 
 
-        [Authorize(Roles ="admin")]
+        [Authorize(Roles = "admin")]
         // GET: Admin
         public ActionResult Admin()
         {
@@ -96,9 +96,9 @@ namespace SWGDealer.Controllers
                 var newUser = new AppUser()
                 {
                     FirstName = model.AppUser.FirstName,
-                    LastName=model.AppUser.LastName,
-                    UserName=model.AppUser.UserName,
-                    Email=model.AppUser.Email
+                    LastName = model.AppUser.LastName,
+                    UserName = model.AppUser.UserName,
+                    Email = model.AppUser.Email
                 };
                 userMgr.Create(newUser, model.NewPassword);
             }
@@ -113,7 +113,7 @@ namespace SWGDealer.Controllers
         public ActionResult EditUser(string id)
         {
             var model = new UserViewModel();
-            var user= repo.GetAllUsers().FirstOrDefault(u => u.Id == id);
+            var user = repo.GetAllUsers().FirstOrDefault(u => u.Id == id);
             model.AppUser = repo.GetUser(id);
             model.SetRoleItems(repo.GetAllRoles());
             return View(model);
@@ -133,7 +133,7 @@ namespace SWGDealer.Controllers
                 user.LastName = model.AppUser.LastName;
                 user.Email = model.AppUser.Email;
                 user.UserName = model.AppUser.Email;
-                userMgr.Update(user);                
+                userMgr.Update(user);
             }
             var role = context.Roles.SingleOrDefault(r => r.Id == model.Role.Id);
             string[] allUserRoles = userMgr.GetRoles(user.Id).ToArray();
@@ -160,22 +160,22 @@ namespace SWGDealer.Controllers
         public ActionResult AddModel(AddModelViewModel model)
         {
             VehicleModel vModel = new VehicleModel();
-            if (ModelState.IsValid)
-            {
-                //model.ModelType = vModel.VehicleModelName;
-                //model.VehicleModelId = vModel.VehicleModelId;
-                //model.Added = vModel.DateAdded;
-                model.ModelType = vModel.VehicleModelName;
-                var userId = User.Identity.GetUserId();
-                var user = repo.GetUser(userId);
-                var make = repo.GetMakeById(model.VehicleMakeId);
-                model.User = user;
-            }
-            //model.VehicleModelId = addModel.VehicleModelId;
+
+            var modName = model.ModelType; 
+            vModel.VehicleModelName = modName;
+            //vModel.VehicleModelName =model.ModelType;
+            //model.VehicleModelId = vModel.VehicleModelId;
+            //model.Added = vModel.DateAdded;
+            //model.ModelType = vModel.VehicleModelName;
+            var userId = User.Identity.GetUserId();
+            var user = repo.GetUser(userId);
+            var make = repo.GetMakeById(model.VehicleMakeId);
+            vModel.User = user;
+            vModel.VehicleMakeId = model.VehicleMakeId;
             repo.AddModel(vModel);
             return RedirectToAction("Models");
         }
-        
+
         public ActionResult Makes()
         {
             var model = repo.GetAllMakes();
