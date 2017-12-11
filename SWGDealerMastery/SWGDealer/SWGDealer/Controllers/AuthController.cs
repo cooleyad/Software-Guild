@@ -42,7 +42,7 @@ namespace SWGDealer.Controllers
             AppUser user = userMgr.Find(model.Email, model.Password);
 
 
-            if (user == null)
+            if (user == null || user.RoleName=="disabled")
             {
                 return Redirect(Url.Action("Login", "Auth"));
             }

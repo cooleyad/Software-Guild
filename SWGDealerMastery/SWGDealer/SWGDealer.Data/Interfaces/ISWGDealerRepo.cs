@@ -56,7 +56,7 @@ namespace SWGDealer.Data.Interfaces
         void AddPurchase(Purchase newPurchase);
         void EditPurchase(Purchase editedPurchase);
 
-
+        List<PurchaseType> GetAllPurchaseTypes();
 
     }
 }

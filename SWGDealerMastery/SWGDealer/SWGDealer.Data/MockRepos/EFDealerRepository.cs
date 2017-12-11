@@ -69,7 +69,17 @@ namespace SWGDealer.Data.MockRepos
 
         public void AddSpecial(SalesSpecials newSpecial)
         {
-            throw new NotImplementedException();
+            if(context.DealerSalesSpecials.Count()==0)
+            {
+                newSpecial.SalesSpecialsId = 1;
+            }
+            else
+            {
+                var max = context.DealerSalesSpecials.Max(m => m.SalesSpecialsId);
+                newSpecial.SalesSpecialsId = max;
+            }
+            context.DealerSalesSpecials.Add(newSpecial);
+            context.SaveChanges();
         }
 
         public void AddUser(AppUser user)
@@ -190,6 +200,11 @@ namespace SWGDealer.Data.MockRepos
         public List<Purchase> GetAllPurchases()
         {
             throw new NotImplementedException();
+        }
+
+        public List<PurchaseType> GetAllPurchaseTypes()
+        {
+            return context.PurchaseTypes.ToList();
         }
 
         public IEnumerable<IdentityRole> GetAllRoles()

@@ -28,7 +28,11 @@ namespace SWGDealer.Controllers
 
         public ActionResult Add()
         {
-            return View();
+            var model = new VehicleViewModel();
+            model.SetMakes(repo.GetAllMakes());
+            model.SetModels(repo.GetAllModels());
+            model.SetPurchaseTypes(repo.GetAllPurchaseTypes());
+            return View(model);
         }
 
         [HttpPost]
@@ -161,12 +165,8 @@ namespace SWGDealer.Controllers
         {
             VehicleModel vModel = new VehicleModel();
 
-            var modName = model.ModelType; 
+            var modName = model.ModelType;
             vModel.VehicleModelName = modName;
-            //vModel.VehicleModelName =model.ModelType;
-            //model.VehicleModelId = vModel.VehicleModelId;
-            //model.Added = vModel.DateAdded;
-            //model.ModelType = vModel.VehicleModelName;
             var userId = User.Identity.GetUserId();
             var user = repo.GetUser(userId);
             var make = repo.GetMakeById(model.VehicleMakeId);
@@ -199,13 +199,20 @@ namespace SWGDealer.Controllers
 
         public ActionResult AddSpecial()
         {
-            return View();
+            return View(new SalesSpecials());
         }
 
         [HttpPost]
         public ActionResult AddSpecial(SalesSpecials special)
         {
-            return View();
+            SalesSpecials specialK = new SalesSpecials
+            {
+                SpecialsName = special.SpecialsName,
+                SpecialDesc = special.SpecialDesc
+
+            };
+            repo.AddSpecial(specialK);
+            return View(special);
         }
 
         public ActionResult DeleteSpecial()

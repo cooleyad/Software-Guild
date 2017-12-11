@@ -428,5 +428,10 @@ namespace SWGDealer.Data.MockRepos
         {
             throw new NotImplementedException();
         }
+
+        public List<PurchaseType> GetAllPurchaseTypes()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

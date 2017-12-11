@@ -22,7 +22,7 @@ namespace SWGDealer.Data
         public DbSet <Vehicle> Vehicles { get; set; }
         public DbSet <VehicleMake> VehicleMakes { get; set; }
         public DbSet <VehicleModel> VehicleModels { get; set; }
-
+        public DbSet<PurchaseType> PurchaseTypes { get; set; }
 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

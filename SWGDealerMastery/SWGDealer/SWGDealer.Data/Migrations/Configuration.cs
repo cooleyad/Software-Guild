@@ -137,6 +137,7 @@ namespace SWGDealer.Data.Migrations
                 new VehicleModel
                 {
                     Make = context.VehicleMakes.FirstOrDefault(m => m.VehicleMakeName == "Audi"),
+                    VehicleMakeId =1 ,
                     VehicleModelName = "S8",
                     DateAdded = DateTime.Now,
                     User = context.Users.FirstOrDefault(u => u.UserName == "jlundegaard@swgdealer.com")
@@ -144,6 +145,7 @@ namespace SWGDealer.Data.Migrations
                 new VehicleModel
                 {
                     Make = context.VehicleMakes.FirstOrDefault(m => m.VehicleMakeName == "Honda"),
+                    VehicleMakeId=4,
                     VehicleModelName = "Civic",
                     DateAdded = DateTime.Now,
                     User = context.Users.FirstOrDefault(u => u.UserName == "jlundegaard@swgdealer.com")
@@ -152,18 +154,200 @@ namespace SWGDealer.Data.Migrations
                 {
                     Make = context.VehicleMakes.FirstOrDefault(m => m.VehicleMakeName == "Toyota"),
                     VehicleModelName = "Camry",
+                    VehicleMakeId=7,
                     DateAdded = DateTime.Now,
                     User = context.Users.FirstOrDefault(u => u.UserName == "jlundegaard@swgdealer.com")
                 },
                 new VehicleModel
                 {
                     Make = context.VehicleMakes.FirstOrDefault(m => m.VehicleMakeName == "Yugo"),
+                    VehicleMakeId=9,
                     VehicleModelName = "The Proletariat's Car",
                     DateAdded = DateTime.Now,
                     User = context.Users.FirstOrDefault(u => u.UserName == "jlundegaard@swgdealer.com")
+                },
+                new VehicleModel
+                {
+                    Make=context.VehicleMakes.FirstOrDefault(m=>m.VehicleMakeName=="Land Rover"),
+                    VehicleMakeId=5,
+                    VehicleModelName="Defender",
+                    DateAdded=DateTime.Now,
+                    User=context.Users.FirstOrDefault(u=>u.UserName== "jlundegaard@swgdealer.com")
                 }
                 );
             context.SaveChanges();
+
+            context.PurchaseTypes.AddOrUpdate(p => p.Description,
+                new PurchaseType {Description="Bank" },
+                new PurchaseType {Description="Cash" },
+                new PurchaseType {Description="Dealer" }
+
+                );
+            context.SaveChanges();
+
+            context.Vehicles.AddOrUpdate(v=>v.Vin,
+               new Vehicle
+               {
+                   Model =context.VehicleModels.FirstOrDefault(m=>m.VehicleModelName=="S8"),
+                   Vin= "1A2B3CDEFGH456789",
+                   Year=2017,
+                   BodyStyle="Sedan",
+                   TransmissionType="Automatic",
+                   Color="Durple",
+                   InteriorColor="Black",
+                   Odometer=50,
+                   SalePrice=75000,
+                   MSRP=80000,
+                   Description="It's gota V8",
+                   Image="",
+                  VehicleIsNew=true,
+                  VehicleFeatured=true,
+                  VehicleIsSold=false
+               },
+               new Vehicle {
+                   Model=context.VehicleModels.FirstOrDefault(m=>m.VehicleModelName=="Camry"),
+                   Vin= "1A2B3CDEFGH456789",
+                   Year=2017,
+                   BodyStyle="Sedan",
+                   TransmissionType="Automatic",
+                   Color="Silver",
+                   InteriorColor="Gray",
+                   Odometer=0,
+                   SalePrice=20000,
+                   MSRP=25000,
+                   Description="It's a Camry, not much to say, it'll get you on your way",
+                   Image="",
+                   VehicleIsNew=true,
+                   VehicleFeatured=true,
+                   VehicleIsSold=false
+               },
+               new Vehicle
+               {
+                   Model = context.VehicleModels.FirstOrDefault(m=>m.VehicleModelName=="Civic"),
+                   Vin = "1A2B3CDEFGH456789",
+                   Year = 2017,
+                   BodyStyle = "Coupe",
+                   TransmissionType = "Manual",
+                   Color = "Red",
+                   InteriorColor = "Black",
+                   Odometer = 0,
+                   SalePrice = 20000,
+                   MSRP = 25000,
+                   Description = "Civic Coupe, for the practical that still want to have fun",
+                   Image = "",
+                   VehicleIsNew = true,
+                   VehicleFeatured = true,
+                   VehicleIsSold = false
+               },
+               new Vehicle
+               {
+                   Model = context.VehicleModels.FirstOrDefault(m=>m.VehicleModelName=="Defender"),
+                   Vin = "1A2B3CDEFGH456789",
+                   Year = 2017,
+                   BodyStyle = "SUV",
+                   TransmissionType = "Manual",
+                   Color = "Black",
+                   InteriorColor = "Black",
+                   Odometer = 0,
+                   SalePrice = 20000,
+                   MSRP = 25000,
+                   Description = "It's a friggen Defender",
+                   Image = "",
+                   VehicleIsNew = true,
+                   VehicleFeatured = true,
+                   VehicleIsSold = false
+               },
+               new Vehicle
+               {
+                   Model = context.VehicleModels.FirstOrDefault(m => m.VehicleModelName == "Civic"),
+                   Vin = "1A2B3CDEFGH456789",
+                   Year = 2017,
+                   BodyStyle = "Coupe",
+                   TransmissionType = "Manual",
+                   Color = "Blue",
+                   InteriorColor = "Black",
+                   Odometer = 0,
+                   SalePrice = 20000,
+                   MSRP = 25000,
+                   Description = "Civic Coupe, for the practical that still want to have fun",
+                   Image = "",
+                   VehicleIsNew = true,
+                   VehicleFeatured = true,
+                   VehicleIsSold = false
+               },
+               new Vehicle
+               {
+                   Model = context.VehicleModels.FirstOrDefault(m => m.VehicleModelName == "Civic"),
+                   Vin = "1A2B3CDEFGH456789",
+                   Year = 2017,
+                   BodyStyle = "Sedan",
+                   TransmissionType = "Automatic",
+                   Color = "Silver",
+                   InteriorColor = "Black",
+                   Odometer = 0,
+                   SalePrice = 20000,
+                   MSRP = 25000,
+                   Description = "Civic Sedan, it'll never let you down",
+                   Image = "",
+                   VehicleIsNew = false,
+                   VehicleFeatured = true,
+                   VehicleIsSold = false
+               },
+               new Vehicle
+               {
+                   Model = context.VehicleModels.FirstOrDefault(m=>m.VehicleModelName== "The Proletariat's Car"),
+                   Vin = "1A2B3CDEFGH456789",
+                   Year = 2017,
+                   BodyStyle = "Sedan",
+                   TransmissionType = "Manual",
+                   Color = "Beige",
+                   InteriorColor = "Beige",
+                   Odometer = 1000000000,
+                   SalePrice = 20000,
+                   MSRP = 25000,
+                   Description = "If you think that you should not look wealthier than your brethren, then boy do we have the right car for you",
+                   Image = "",
+                   VehicleIsNew = false,
+                   VehicleFeatured = true,
+                   VehicleIsSold = false
+               },
+               new Vehicle
+               {
+                   Model = context.VehicleModels.FirstOrDefault(m => m.VehicleModelName == "Civic"),
+                   Vin = "1A2B3CDEFGH456789",
+                   Year = 2017,
+                   BodyStyle = "Sedan",
+                   TransmissionType = "Automatic",
+                   Color = "Silver",
+                   InteriorColor = "Black",
+                   Odometer = 0,
+                   SalePrice = 20000,
+                   MSRP = 25000,
+                   Description = "Civic Sedan, it'll never let you down",
+                   Image = "",
+                   VehicleIsNew = false,
+                   VehicleFeatured = true,
+                   VehicleIsSold = false
+               },
+               new Vehicle
+               {
+                   Model = context.VehicleModels.FirstOrDefault(m => m.VehicleModelName == "Civic"),
+                   Vin = "1A2B3CDEFGH456789",
+                   Year = 2017,
+                   BodyStyle = "Sedan",
+                   TransmissionType = "Automatic",
+                   Color = "Silver",
+                   InteriorColor = "Black",
+                   Odometer = 0,
+                   SalePrice = 20000,
+                   MSRP = 25000,
+                   Description = "Civic Sedan, it'll never let you down",
+                   Image = "",
+                   VehicleIsNew = false,
+                   VehicleFeatured = true,
+                   VehicleIsSold = false
+               }
+               );
         }
     }
 }
