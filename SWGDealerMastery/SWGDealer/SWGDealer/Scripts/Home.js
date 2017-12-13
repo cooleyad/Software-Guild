@@ -19,8 +19,8 @@
 					var image = vehicle.image;
 					var price = vehicle.salePrice;
 
-					row = '<div class="col-xs-3" style=text-align :center; display="overflow:hidden";">< img src= "' + image + '" height= "100%" width="100%" style="border:2px solid black;">';
-					row += '<h6>' + year + ' ' + make + ' ' + model; 
+					row = '<div class = "col-md-3" style="text-align:center; display= "overflow:hidden";"><img src="' + image + '" height="100%" width="100%" style ="border:2px solid black;">';
+					row += '<h6>' + year + ' ' + make + ' ' + model;
 					row += '</h6><p>Sale Price: $' + price + '</p></h5></div>';
 
 					$('#featured').append(row);
@@ -45,7 +45,7 @@
 					var title = salesSpecials.specialsName;
 					var desc = salesSpecials.specialDesc;
 
-					var row = '<div class="row" style=text-align :center; display="overflow:hidden";style="border:2px solid black; margin-bottom:10px"><h4>' + title + '</h4>' + '</hr>';
+					var row = '<div class="row" style="text-align :center; display="overflow:hidden";style="border:2px solid black; margin-bottom:10px"><h4>' + title + '</h4>' + '</hr>';
 					row += '<p>' + desc + '<p>' + '</div>';
 					$('#specialsShown').append(row);
 				});

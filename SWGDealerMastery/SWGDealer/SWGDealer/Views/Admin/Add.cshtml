@@ -1,4 +1,4 @@
-﻿@model SWGDealer.Models.DealerModels.VehicleViewModel
+﻿@model SWGDealer.Models.NewVehicleViewModel
 
 @{
 	ViewBag.Title = "Add";
@@ -10,12 +10,6 @@
 {
 	<div class="form-group">
 		<div class="row">
-			<div class="row">
-				<div class="col-md-3">
-					<h5>Purchase Type</h5>
-					@Html.DropDownListFor(m=>m.PurchaseTypeId, Model.PurchaseTypes, "-Choose One-", new { @class = "form-control" })
-				</div>
-			</div>
 			<div class="col-md-3">
 				<h5>Make</h5>
 				@Html.DropDownListFor(m => m.VehicleMakeId, Model.Makes.ToList(), "-Choose One-", new { @class = "form-control" })
@@ -32,8 +26,8 @@
 				<h5>New or Used</h5>
 				@Html.DropDownListFor(m => m.IsNew, new List<SelectListItem>
 	   {
-		   new SelectListItem{Text="New", Value="New" },
-		   new SelectListItem{Text="Used", Value="Used" }
+		   new SelectListItem{Text="New", Value="true" },
+		   new SelectListItem{Text="Used", Value="false" }
 	   },
 	   "-Choose New or Used-", new { @class = "form-control" })
 			</div>

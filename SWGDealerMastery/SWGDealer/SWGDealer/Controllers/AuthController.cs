@@ -15,6 +15,7 @@ namespace SWGDealer.Controllers
 {
     public class AuthController : Controller
     {
+        SWGDealerDbContext context = new SWGDealerDbContext();
         // GET: Auth
         public ActionResult Login(string returnUrl)
         {
@@ -41,12 +42,12 @@ namespace SWGDealer.Controllers
             var hash = userMgr.HasPassword(allUsers.First().Id);
             AppUser user = userMgr.Find(model.Email, model.Password);
 
-
-            if (user == null || user.RoleName=="disabled")
+            if (user == null || user.LockoutEnabled==true)
             {
                 return Redirect(Url.Action("Login", "Auth"));
             }
-            
+
+
             var userToLogin = userMgr.CreateIdentity(user, DefaultAuthenticationTypes.ApplicationCookie);
             authMgr.SignIn(userToLogin);
 

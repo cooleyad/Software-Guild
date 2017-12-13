@@ -10,6 +10,7 @@ using SWGDealer.Models.Identity;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using SWGDealer.Models.DealerModels;
+using System.IO;
 
 namespace SWGDealer.Controllers
 {
@@ -28,7 +29,7 @@ namespace SWGDealer.Controllers
 
         public ActionResult Add()
         {
-            var model = new VehicleViewModel();
+            var model = new NewVehicleViewModel();
             model.SetMakes(repo.GetAllMakes());
             model.SetModels(repo.GetAllModels());
             model.SetPurchaseTypes(repo.GetAllPurchaseTypes());
@@ -36,18 +37,56 @@ namespace SWGDealer.Controllers
         }
 
         [HttpPost]
-        public ActionResult Add(VehicleViewModel model)
+        public ActionResult Add(NewVehicleViewModel model)
         {
-            return View();
+            if(ModelState.IsValid)
+            {
+                if(model.Image!=null)
+                {
+                    string picture = Path.GetFileName(model.Image.FileName);
+                    string imgPath = Path.Combine(Server.MapPath("~/Images/"), picture);
+
+                    model.Image.SaveAs(imgPath);
+                }
+                Vehicle newVehicle = new Vehicle
+                {
+                    VehicleId=model.VehicleId,
+                    Vin = model.VIN,
+                    Year = model.Year,
+                    BodyStyle=model.BodyStyle,
+                    ModelId=model.VehicleModelId,
+                    Image="http://localhost:53012/Images/" + model.Image.FileName,
+                    Color=model.Color,
+                    InteriorColor=model.InteriorColor,
+                    Odometer=model.Odometer,
+                    MSRP=model.MSRP,
+                    SalePrice=model.SalePrice,
+                    TransmissionType=model.TransmissionType,
+                    Description=model.Description,
+                    VehicleFeatured=model.Featured,
+                    VehicleIsNew=model.IsNew,
+
+                };
+                repo.AddVehicle(newVehicle);
+                return RedirectToAction("Admin");
+            }
+            else
+            {
+                return View(model);
+            }
         }
 
         public ActionResult Edit()
         {
-            return View();
+            var model = new NewVehicleViewModel();
+            model.SetMakes(repo.GetAllMakes());
+            model.SetModels(repo.GetAllModels());
+            model.SetPurchaseTypes(repo.GetAllPurchaseTypes());
+            return View(model);
         }
 
         [HttpPost]
-        public ActionResult Edit(VehicleViewModel model)
+        public ActionResult Edit(NewVehicleViewModel model)
         {
             return View();
         }
@@ -143,6 +182,12 @@ namespace SWGDealer.Controllers
             string[] allUserRoles = userMgr.GetRoles(user.Id).ToArray();
             userMgr.RemoveFromRoles(user.Id, allUserRoles);
             userMgr.AddToRole(user.Id, role.Name);
+            if (role.Name == "disabled")
+            {
+                userMgr.SetLockoutEnabled(user.Id, true);
+                userMgr.SetLockoutEndDate(user.Id, DateTime.Today.AddYears(1000));
+                userMgr.Update(user);
+            }
             context.SaveChanges();
             return RedirectToAction("Users");
         }

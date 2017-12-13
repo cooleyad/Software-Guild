@@ -95,7 +95,17 @@ namespace SWGDealer.Data.MockRepos
 
         public void AddVehicle(Vehicle newVehicle)
         {
-            throw new NotImplementedException();
+            if (context.Vehicles.Count()==0)
+            {
+                newVehicle.VehicleId = 1;
+            }
+            else
+            {
+                var id = context.Vehicles.Max(v => v.VehicleId);
+                newVehicle.VehicleId = id + 1;
+            }
+            context.Vehicles.Add(newVehicle);
+            context.SaveChanges();
         }
 
         public void DeleteContact(int id)

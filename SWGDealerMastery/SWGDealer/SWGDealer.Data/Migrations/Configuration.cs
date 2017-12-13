@@ -199,7 +199,7 @@ namespace SWGDealer.Data.Migrations
                    SalePrice=75000,
                    MSRP=80000,
                    Description="It's gota V8",
-                   Image="",
+                   Image="http://localhost:53012/Images/S8.jpg",
                   VehicleIsNew=true,
                   VehicleFeatured=true,
                   VehicleIsSold=false
@@ -216,7 +216,7 @@ namespace SWGDealer.Data.Migrations
                    SalePrice=20000,
                    MSRP=25000,
                    Description="It's a Camry, not much to say, it'll get you on your way",
-                   Image="",
+                   Image= "http://localhost:53012/Images/Camry.png",
                    VehicleIsNew=true,
                    VehicleFeatured=true,
                    VehicleIsSold=false
@@ -234,7 +234,7 @@ namespace SWGDealer.Data.Migrations
                    SalePrice = 20000,
                    MSRP = 25000,
                    Description = "Civic Coupe, for the practical that still want to have fun",
-                   Image = "",
+                   Image = "http://localhost:53012/Images/Civic_Coupe.jpg",
                    VehicleIsNew = true,
                    VehicleFeatured = true,
                    VehicleIsSold = false
@@ -252,7 +252,7 @@ namespace SWGDealer.Data.Migrations
                    SalePrice = 20000,
                    MSRP = 25000,
                    Description = "It's a friggen Defender",
-                   Image = "",
+                   Image = "http://localhost:53012/Images/Defender.jpg",
                    VehicleIsNew = true,
                    VehicleFeatured = true,
                    VehicleIsSold = false
@@ -270,7 +270,7 @@ namespace SWGDealer.Data.Migrations
                    SalePrice = 20000,
                    MSRP = 25000,
                    Description = "Civic Coupe, for the practical that still want to have fun",
-                   Image = "",
+                   Image = "http://localhost:53012/Images/Civic_Coupe.jpg",
                    VehicleIsNew = true,
                    VehicleFeatured = true,
                    VehicleIsSold = false
@@ -288,7 +288,7 @@ namespace SWGDealer.Data.Migrations
                    SalePrice = 20000,
                    MSRP = 25000,
                    Description = "Civic Sedan, it'll never let you down",
-                   Image = "",
+                   Image = "http://localhost:53012/Images/Civic.jpg",
                    VehicleIsNew = false,
                    VehicleFeatured = true,
                    VehicleIsSold = false
@@ -306,7 +306,7 @@ namespace SWGDealer.Data.Migrations
                    SalePrice = 20000,
                    MSRP = 25000,
                    Description = "If you think that you should not look wealthier than your brethren, then boy do we have the right car for you",
-                   Image = "",
+                   Image = "http://localhost:53012/Images/Yugo.jpg",
                    VehicleIsNew = false,
                    VehicleFeatured = true,
                    VehicleIsSold = false
@@ -324,7 +324,7 @@ namespace SWGDealer.Data.Migrations
                    SalePrice = 20000,
                    MSRP = 25000,
                    Description = "Civic Sedan, it'll never let you down",
-                   Image = "",
+                   Image = "http://localhost:53012/Images/Civic.jpg",
                    VehicleIsNew = false,
                    VehicleFeatured = true,
                    VehicleIsSold = false
@@ -342,7 +342,7 @@ namespace SWGDealer.Data.Migrations
                    SalePrice = 20000,
                    MSRP = 25000,
                    Description = "Civic Sedan, it'll never let you down",
-                   Image = "",
+                   Image = "http://localhost:53012/Images/Civic.jpg",
                    VehicleIsNew = false,
                    VehicleFeatured = true,
                    VehicleIsSold = false

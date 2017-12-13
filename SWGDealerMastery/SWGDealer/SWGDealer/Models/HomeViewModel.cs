@@ -7,6 +7,5 @@ namespace SWGDealer.Models
 {
     public class HomeViewModel
     {
-
     }
 }
