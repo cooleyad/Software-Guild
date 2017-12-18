@@ -234,7 +234,7 @@ namespace SWGDealer.Data.Migrations
                    SalePrice = 20000,
                    MSRP = 25000,
                    Description = "Civic Coupe, for the practical that still want to have fun",
-                   Image = "http://localhost:53012/Images/Civic_Coupe.jpg",
+                   Image = "http://localhost:53012/Images/CivicCoupe.jpg",
                    VehicleIsNew = true,
                    VehicleFeatured = true,
                    VehicleIsSold = false
@@ -270,7 +270,7 @@ namespace SWGDealer.Data.Migrations
                    SalePrice = 20000,
                    MSRP = 25000,
                    Description = "Civic Coupe, for the practical that still want to have fun",
-                   Image = "http://localhost:53012/Images/Civic_Coupe.jpg",
+                   Image = "http://localhost:53012/Images/CivicCoupe.jpg",
                    VehicleIsNew = true,
                    VehicleFeatured = true,
                    VehicleIsSold = false

@@ -47,5 +47,49 @@ namespace SWGDealer.Controllers
                 return Ok(saleReturn);
             }
         }
+
+        [Route("vehicle/{type}/{searchKey}/{minYear}/{maxYear}/{minPrice}/{maxPrice}")]
+        [AcceptVerbs("GET")]
+        public IHttpActionResult Search(string type, string searchKey, int minYear, int maxYear, decimal minPrice, decimal maxPrice)
+        {
+            List<Vehicle> carReturn = repo.GetAllVehicles(type, searchKey, minYear, maxYear, minPrice, maxPrice);
+            if(carReturn==null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(carReturn);
+            }
+        }
+
+        //[Route("vehicle/")]
+        //[AcceptVerbs("GET")]
+        //public IHttpActionResult SearchNew()
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        //[Route("")]
+        //[AcceptVerbs("GET")]
+        //public IHttpActionResult SearchUsed()
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        [Route("vehicle/{id}")]
+        [AcceptVerbs("Get")]
+        public IHttpActionResult SearchId(int id)
+        {
+            Vehicle carReturn = repo.GetVehicleById(id);
+            if (carReturn == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(carReturn);
+            }
+        }
     }
 }

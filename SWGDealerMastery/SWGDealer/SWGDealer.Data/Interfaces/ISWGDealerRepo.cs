@@ -11,7 +11,7 @@ namespace SWGDealer.Data.Interfaces
 {
     public interface ISWGDealerRepo
     {
-        List<Vehicle> GetAllVehicles();
+        List<Vehicle> GetAllVehicles(string type, string searchKey, int yearMin, int yearMax, decimal minPrice, decimal maxPrice);
         List<Vehicle> GetNewVehicles();
         List<Vehicle> GetUsedVehicles();
         List<Vehicle> GetAllFeatured();

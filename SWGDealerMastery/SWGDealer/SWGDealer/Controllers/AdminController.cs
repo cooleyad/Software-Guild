@@ -39,9 +39,9 @@ namespace SWGDealer.Controllers
         [HttpPost]
         public ActionResult Add(NewVehicleViewModel model)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                if(model.Image!=null)
+                if (model.Image != null)
                 {
                     string picture = Path.GetFileName(model.Image.FileName);
                     string imgPath = Path.Combine(Server.MapPath("~/Images/"), picture);
@@ -50,21 +50,25 @@ namespace SWGDealer.Controllers
                 }
                 Vehicle newVehicle = new Vehicle
                 {
-                    VehicleId=model.VehicleId,
+                    VehicleId = model.VehicleId,
                     Vin = model.VIN,
                     Year = model.Year,
-                    BodyStyle=model.BodyStyle,
-                    ModelId=model.VehicleModelId,
-                    Image="http://localhost:53012/Images/" + model.Image.FileName,
-                    Color=model.Color,
-                    InteriorColor=model.InteriorColor,
-                    Odometer=model.Odometer,
-                    MSRP=model.MSRP,
-                    SalePrice=model.SalePrice,
-                    TransmissionType=model.TransmissionType,
-                    Description=model.Description,
-                    VehicleFeatured=model.Featured,
-                    VehicleIsNew=model.IsNew,
+                    BodyStyle = model.BodyStyle,
+                    Model = model.GetModel,
+                    //Model=new VehicleModel
+                    //{
+                    //    VehicleModelId = model.GetModel.VehicleModelId,
+                    //},
+                    Image = "http://localhost:53012/Images/" + model.Image.FileName,
+                    Color = model.Color,
+                    InteriorColor = model.InteriorColor,
+                    Odometer = model.Odometer,
+                    MSRP = model.MSRP,
+                    SalePrice = model.SalePrice,
+                    TransmissionType = model.TransmissionType,
+                    Description = model.Description,
+                    VehicleFeatured = model.Featured,
+                    VehicleIsNew = model.IsNew,
 
                 };
                 repo.AddVehicle(newVehicle);
@@ -76,19 +80,73 @@ namespace SWGDealer.Controllers
             }
         }
 
-        public ActionResult Edit()
+        public ActionResult Edit(int id)
         {
-            var model = new NewVehicleViewModel();
+            var v = repo.GetVehicleById(id);
+            var model = new EditVehicleViewModel {
+                VehicleId = v.VehicleId,
+                VehicleMakeId = v.Model.VehicleMakeId,
+                GetModel = v.Model,
+                IsNew = v.VehicleIsNew,
+                Year=v.Year,
+                VIN=v.Vin,
+                BodyStyle=v.BodyStyle,
+                TransmissionType=v.TransmissionType,
+                Color=v.Color,
+                InteriorColor=v.InteriorColor,
+                Odometer=v.Odometer,
+                SalePrice=v.SalePrice,
+                MSRP=v.MSRP,
+                Description=v.Description,
+                ImagePath=v.Image,
+                Featured=v.VehicleFeatured,
+            };
             model.SetMakes(repo.GetAllMakes());
             model.SetModels(repo.GetAllModels());
-            model.SetPurchaseTypes(repo.GetAllPurchaseTypes());
             return View(model);
         }
 
         [HttpPost]
-        public ActionResult Edit(NewVehicleViewModel model)
+        public ActionResult Edit(EditVehicleViewModel model)
         {
-            return View();
+            if (model.Image != null && model.Image.ContentLength>0)
+            {
+                string picture = Path.GetFileName(model.Image.FileName);
+                string imgPath = Path.Combine(Server.MapPath("~/Images/"), picture);
+
+                model.Image.SaveAs(imgPath);
+                model.ImagePath = "http://localhost:53012/Images/" + model.Image.FileName;
+            }
+
+            if (ModelState.IsValid)
+            {
+                Vehicle editedVehicle = new Vehicle
+                {
+                    VehicleId = model.VehicleId,
+                    Vin = model.VIN,
+                    Year = model.Year,
+                    BodyStyle = model.BodyStyle,
+                    Model = model.GetModel,
+                    Image = model.ImagePath,
+                    Color = model.Color,
+                    InteriorColor = model.InteriorColor,
+                    Odometer = model.Odometer,
+                    MSRP = model.MSRP,
+                    SalePrice = model.SalePrice,
+                    TransmissionType = model.TransmissionType,
+                    Description = model.Description,
+                    VehicleFeatured = model.Featured,
+                    VehicleIsNew = model.IsNew,
+                };
+                repo.EditVehicle(editedVehicle);
+                return RedirectToAction("Admin");
+            }
+            else
+            {
+                model.SetMakes(repo.GetAllMakes());
+                model.SetModels(repo.GetAllModels());
+                return View(model);
+            }
         }
 
         public ActionResult Delete(int id)

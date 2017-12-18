@@ -5,3 +5,54 @@
 
 <h2>Sales</h2>
 
+@using (Html.BeginForm())
+{
+	<div id="searchZone">
+		Quick Search
+		<br />
+		<input type="text" id="searchKey" />
+		<br />
+		List Price:
+		<br />
+		<select id="minPrice" class="form-control">
+			<option value="0">No Minimum</option>
+			@for (int i = 0; i <= 50000; i += 5000)
+			{
+				<option value="@i">$@i</option>
+			}
+		</select>
+		<select id="maxPrice" class="form-control">
+			<option value="1000000">No Maximum</option>
+			@for (int i = 5000; i <= 100000; i += 5000)
+			{
+				<option value="@i">$@i</option>
+			}
+		</select>
+		Year:
+		<br />
+		<select id="minYear" class="form-control">
+			<option value="0">No Maximum</option>
+			@for (int i = 2000; i <= 2018; i++)
+			{
+				<option value="@i">@i</option>
+			}
+		</select>
+		<select id="maxYear" class="form-control">
+			<option value="2018">No Maximum</option>
+			@for (int i = 2001; i <= 2018; i++)
+			{
+				<option value="@i">@i</option>
+			}
+		</select>
+		<button type="button" class="btn btn-default" onclick="search()">Search</button>
+	</div>
+}
+<div>
+	<div id="searchResults">
+
+	</div>
+</div>
+
+@section scripts{
+<script src="~/Scripts/Sales.js"></script>
+}

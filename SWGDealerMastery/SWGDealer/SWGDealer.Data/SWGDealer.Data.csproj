@@ -84,6 +84,10 @@
     <Compile Include="Migrations\201712101600328_vehicleUps.Designer.cs">
       <DependentUpon>201712101600328_vehicleUps.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712170215544_modelstuff.cs" />
+    <Compile Include="Migrations\201712170215544_modelstuff.Designer.cs">
+      <DependentUpon>201712170215544_modelstuff.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MockRepos\EFDealerRepository.cs" />
     <Compile Include="MockRepos\MockDealerRepository.cs" />
@@ -112,6 +116,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201712101600328_vehicleUps.resx">
       <DependentUpon>201712101600328_vehicleUps.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712170215544_modelstuff.resx">
+      <DependentUpon>201712170215544_modelstuff.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

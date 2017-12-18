@@ -95,12 +95,13 @@ namespace SWGDealer.Data.MockRepos
 
         public void AddVehicle(Vehicle newVehicle)
         {
-            if (context.Vehicles.Count()==0)
+            if (context.Vehicles.Count() == 0)
             {
                 newVehicle.VehicleId = 1;
             }
             else
             {
+                newVehicle.Model = context.VehicleModels.FirstOrDefault(m => m.VehicleModelId == newVehicle.Model.VehicleModelId);
                 var id = context.Vehicles.Max(v => v.VehicleId);
                 newVehicle.VehicleId = id + 1;
             }
@@ -173,16 +174,11 @@ namespace SWGDealer.Data.MockRepos
             context.SaveChanges();
         }
 
-        //public void EditUser(UserViewModel model)
-        //{
-        //    var userMgr = new UserManager<AppUser>(new UserStore<AppUser>(context));
-        //    var roleMgr = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
-        //    context.Entry(model)
-        //}
-
         public void EditVehicle(Vehicle editedVehicle)
         {
-            throw new NotImplementedException();
+            context.Entry(editedVehicle).State = System.Data.Entity.EntityState.Modified;
+            editedVehicle.Model = context.VehicleModels.FirstOrDefault(m => m.VehicleModelId == editedVehicle.Model.VehicleModelId);
+            context.SaveChanges();
         }
 
         public List<Contact> GetAllContacts()
@@ -247,9 +243,28 @@ namespace SWGDealer.Data.MockRepos
             return users;
         }
 
-        public List<Vehicle> GetAllVehicles()
+        //public List<Vehicle> GetAllVehicles()
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        public List<Vehicle> GetAllVehicles(string type, string searchKey, int minYear, int maxYear, decimal minPrice, decimal maxPrice)
         {
-            throw new NotImplementedException();
+            var carReturn = new List<Vehicle>();
+            foreach(var v in context.Vehicles.Include("Model").Include("Model.Make"))
+            {
+                if((type=="new" && v.VehicleIsNew) || (type=="used" && !v.VehicleIsNew) || (type=="both" && !v.VehicleIsSold))
+                {
+                    if (v.SalePrice>minPrice && v.SalePrice <maxPrice && v.Year>minYear && v.Year<maxYear)
+                    {
+                        if (v.Model.VehicleModelName==searchKey || v.Model.Make.VehicleMakeName==searchKey || v.Year.ToString()==searchKey)
+                        {
+                            carReturn.Add(v);
+                        }
+                    }
+                }
+            }
+            return carReturn.Take(20).ToList();
         }
 
         public Contact GetContactById(int id)
@@ -269,7 +284,7 @@ namespace SWGDealer.Data.MockRepos
 
         public List<Vehicle> GetNewVehicles()
         {
-            throw new NotImplementedException();
+            return context.Vehicles.Where(v => v.VehicleIsNew == true && v.VehicleIsSold==false).ToList();
         }
 
         public Purchase GetPurchaseById(int id)
@@ -284,7 +299,7 @@ namespace SWGDealer.Data.MockRepos
 
         public List<Vehicle> GetUsedVehicles()
         {
-            throw new NotImplementedException();
+            return context.Vehicles.Where(v => v.VehicleIsNew == false && v.VehicleIsSold==false).ToList();
         }
 
         public AppUser GetUser(string id)
@@ -294,7 +309,7 @@ namespace SWGDealer.Data.MockRepos
 
         public Vehicle GetVehicleById(int vehicleId)
         {
-            throw new NotImplementedException();
+            return context.Vehicles.FirstOrDefault(v => v.VehicleId == vehicleId);
         }
     }
 }

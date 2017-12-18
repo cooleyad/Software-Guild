@@ -433,5 +433,15 @@ namespace SWGDealer.Data.MockRepos
         {
             throw new NotImplementedException();
         }
+
+        public List<Vehicle> GetAllVehicles(string searchKey, int yearMin, int yearMax, decimal minPrice, decimal maxPrice)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Vehicle> GetAllVehicles(string type, string searchKey, int yearMin, int yearMax, decimal minPrice, decimal maxPrice)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

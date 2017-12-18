@@ -8,11 +8,12 @@ using System.Web.Mvc;
 
 namespace SWGDealer.Models
 {
-    public class NewVehicleViewModel
+    public class EditVehicleViewModel
     {
+        public Vehicle Vehicle { get; set; }
         public int VehicleId { get; set; }
         [Required(ErrorMessage = "Vehicle Make is required ")]
-        public int VehicleMakeId { get; set; }
+        public int? VehicleMakeId { get; set; }
         [Required(ErrorMessage = "Vehicle Model is required")]
         public int VehicleModelId { get; set; }
         public virtual VehicleModel GetModel { get; set; }
@@ -37,7 +38,6 @@ namespace SWGDealer.Models
         public string Description { get; set; }
         public string ImagePath { get; set; }
         public int PurchaseTypeId { get; set; }
-        [Required(ErrorMessage = "An image is required")]
         public HttpPostedFileBase Image { get; set; }
 
         public List<SelectListItem> Makes { get; set; }
@@ -52,7 +52,7 @@ namespace SWGDealer.Models
         public bool Featured { get; set; }
 
 
-        public NewVehicleViewModel()
+        public EditVehicleViewModel()
         {
             Makes = new List<SelectListItem>();
             Models = new List<SelectListItem>();
@@ -79,17 +79,6 @@ namespace SWGDealer.Models
                 {
                     Value = model.VehicleModelId.ToString(),
                     Text = model.VehicleModelName
-                });
-            }
-        }
-        public void SetPurchaseTypes(IEnumerable<PurchaseType> purchaseType)
-        {
-            foreach (var type in purchaseType)
-            {
-                PurchaseTypes.Add(new SelectListItem()
-                {
-                    Value = type.PurchaseTypeId.ToString(),
-                    Text = type.Description
                 });
             }
         }
