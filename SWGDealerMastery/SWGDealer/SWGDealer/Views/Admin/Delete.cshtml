@@ -1,7 +1,19 @@
-﻿
+﻿@model SWGDealer.Models.DealerModels.Vehicle
 @{
-    ViewBag.Title = "Delete";
+	ViewBag.Title = "Delete";
 }
 
-<h2>Delete</h2>
+<h1>Delete</h1>
+<hr />
+<div class="row">
+	<div class="col-md-12">
+		@using (Html.BeginForm("Delete", "Admin", FormMethod.Post))
+		{
+			@Html.HiddenFor(v=>v.VehicleId)
+			<p>Are you sure you want to delete this vehicle @Html.DisplayFor(v=>v.Year) @Html.DisplayFor(v=>v.Model.Make.VehicleMakeName) @Html.DisplayFor(v=>v.Model.VehicleModelName)?</p>
+			<button type="submit" class="btn btn-sm btn-danger">Delete</button>
+			@Html.ActionLink("Cancel", "Admin", "Admin", null, new { @class = "btn btn-sm btn-info" })
+		}
 
+	</div>
+</div>

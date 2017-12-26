@@ -1,7 +1,67 @@
-﻿
+﻿@model SWGDealer.Models.PurchaseViewModel
 @{
-    ViewBag.Title = "Purchase";
+	ViewBag.Title = "Purchase";
 }
 
-<h2>Purchase</h2>
+<h1>Purchase</h1>
+<div id="details" style="display:block">
+
+</div>
+@Html.ValidationSummary("", new { @class = "text-danger" })
+<div class="col-md-12">
+	@using (Html.BeginForm("Purchase", "Sales", FormMethod.Post))
+	{
+		@Html.HiddenFor(v => v.VehicleId)
+		<div class="form-group">
+			<div class="col-md-6">
+				<h5>Name</h5>
+				@Html.TextBoxFor(m => m.Name, new { @class = "form-group" })
+			</div>
+			<div class="col-md-6">
+				<h5>Email</h5>
+				@Html.TextBoxFor(m => m.Email, new { @class = "form-group" })
+			</div>
+			<div class="col-md-12">
+				<h5>Phone</h5>
+				@Html.TextBoxFor(m => m.Phone, new { @class = "form-group" })
+			</div>
+			<div class="col-md-6">
+				<h5>Street 1</h5>
+				@Html.TextBoxFor(m => m.Street1, new { @class = "form-group" })
+			</div>
+			<div class="col-md-6">
+				<h5>Street 2</h5>
+				@Html.TextBoxFor(m => m.Street2, new { @class = "form-group" })
+			</div>
+			<div class="col-md-12">
+				<h5>City</h5>
+				@Html.TextBoxFor(m => m.City, new { @class = "form-group" })
+			</div>
+			<div class="col-md-6">
+				<h5>State</h5>
+				@Html.TextBoxFor(m => m.State, new { @class = "form-group" })
+			</div>
+			<div class="col-md-6">
+				<h5>ZIP</h5>
+				@Html.TextBoxFor(m => m.Zip, new { @class = "form-group" })
+			</div>
+			<div class="col-md-12">
+				<h5>Sale Price</h5>
+				@Html.TextBoxFor(m => m.SalePrice, new { @class = "form-group" })
+			</div>
+			<div class="col-md-12">
+				<h5>Purchase Type</h5>
+				@Html.DropDownListFor(m => m.PurchaseType.PurchaseTypeId, Model.PurchaseTypes, "-Purchase Type-", new { @class = "form-group" })
+			</div>
+		</div>
+		<br />
+		<div class="col-md-12">
+			<button class="btn btn-primary">Submit</button>
+		</div>
+	}
+</div>
+<br />
+<hr />
+<script src="~/Scripts/Sales.js"></script>
+
 

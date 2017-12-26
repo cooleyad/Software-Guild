@@ -64,7 +64,19 @@ namespace SWGDealer.Data.MockRepos
 
         public void AddPurchase(Purchase newPurchase)
         {
-            throw new NotImplementedException();
+            if(context.Purchases.Count()==0)
+            {
+                newPurchase.PurchaseId = 1;
+            }
+            else
+            {
+                var max = context.Purchases.Max(p => p.PurchaseId);
+                newPurchase.PurchaseId = max;
+            }
+            newPurchase.User = context.Users.FirstOrDefault(u => u.UserName == newPurchase.User.UserName);
+            context.Customer.Add(newPurchase.Customer);
+            context.Purchases.Add(newPurchase);
+            context.SaveChanges();
         }
 
         public void AddSpecial(SalesSpecials newSpecial)
@@ -243,11 +255,6 @@ namespace SWGDealer.Data.MockRepos
             return users;
         }
 
-        //public List<Vehicle> GetAllVehicles()
-        //{
-        //    throw new NotImplementedException();
-        //}
-
         public List<Vehicle> GetAllVehicles(string type, string searchKey, int minYear, int maxYear, decimal minPrice, decimal maxPrice)
         {
             var carReturn = new List<Vehicle>();
@@ -257,7 +264,7 @@ namespace SWGDealer.Data.MockRepos
                 {
                     if (v.SalePrice>minPrice && v.SalePrice <maxPrice && v.Year>minYear && v.Year<maxYear)
                     {
-                        if (v.Model.VehicleModelName==searchKey || v.Model.Make.VehicleMakeName==searchKey || v.Year.ToString()==searchKey)
+                        if (v.Model.VehicleModelName.Contains(searchKey) || v.Model.Make.VehicleMakeName.Contains(searchKey) || v.Year.ToString()==searchKey)
                         {
                             carReturn.Add(v);
                         }

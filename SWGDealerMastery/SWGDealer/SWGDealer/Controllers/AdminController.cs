@@ -182,16 +182,6 @@ namespace SWGDealer.Controllers
             var userMgr = new UserManager<AppUser>(new UserStore<AppUser>(context));
             var roleMgr = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
 
-            if (!roleMgr.RoleExists("admin"))
-            {
-                roleMgr.Create(new IdentityRole() { Name = "admin" });
-            }
-
-            if (!roleMgr.RoleExists("sales"))
-            {
-                roleMgr.Create(new IdentityRole() { Name = "sales" });
-            }
-
             if (userMgr.FindByName(model.AppUser.UserName) == null)
             {
                 var newUser = new AppUser()
@@ -227,8 +217,9 @@ namespace SWGDealer.Controllers
             model.AppUser.UserName = model.AppUser.Email;
             var userMgr = new UserManager<AppUser>(new UserStore<AppUser>(context));
             var roleMgr = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
-            var user = userMgr.FindByName(model.AppUser.UserName);
-            if (userMgr.FindByName(model.AppUser.UserName) != null)
+            var user = userMgr.FindById(model.AppUser.Id);
+
+            if (userMgr.FindById(model.AppUser.Id) != null)
             {
                 user.FirstName = model.AppUser.FirstName;
                 user.LastName = model.AppUser.LastName;

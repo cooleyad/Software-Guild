@@ -17,6 +17,7 @@ namespace SWGDealer.Data
         }
 
         public DbSet <Contact> Contacts { get; set; }
+        public DbSet<Customer> Customer { get; set; }
         public DbSet <Purchase> Purchases { get; set; }
         public DbSet <SalesSpecials> DealerSalesSpecials { get; set; }
         public DbSet <Vehicle> Vehicles { get; set; }

@@ -88,6 +88,10 @@
     <Compile Include="Migrations\201712170215544_modelstuff.Designer.cs">
       <DependentUpon>201712170215544_modelstuff.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712202215460_customerStuff.cs" />
+    <Compile Include="Migrations\201712202215460_customerStuff.Designer.cs">
+      <DependentUpon>201712202215460_customerStuff.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MockRepos\EFDealerRepository.cs" />
     <Compile Include="MockRepos\MockDealerRepository.cs" />
@@ -119,6 +123,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201712170215544_modelstuff.resx">
       <DependentUpon>201712170215544_modelstuff.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712202215460_customerStuff.resx">
+      <DependentUpon>201712202215460_customerStuff.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
