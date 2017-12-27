@@ -209,7 +209,6 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\PurchaseviewModel.cs" />
     <Compile Include="Controllers\SalesController.cs" />
     <Compile Include="Controllers\VehicleController.cs" />
     <Compile Include="Global.asax.cs">
@@ -223,7 +222,6 @@
     <Compile Include="Models\PurchaseViewModel.cs" />
     <Compile Include="Models\SalesSpecialViewModel.cs" />
     <Compile Include="Models\UpdatePasswordViewModel.cs" />
-    <Compile Include="Models\VehicleViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
