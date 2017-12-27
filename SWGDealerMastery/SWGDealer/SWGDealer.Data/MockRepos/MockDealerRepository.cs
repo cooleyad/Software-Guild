@@ -48,7 +48,6 @@ namespace SWGDealer.Data.MockRepos
             {
                 new Vehicle{VehicleId=1,
                 Vin="1A2B3CDEFGH456789",
-                ModelId=1,
                 Year=2015,
                 BodyStyle="Coupe",
                 TransmissionType="Manual",
@@ -67,7 +66,6 @@ namespace SWGDealer.Data.MockRepos
                 {
                 VehicleId=2,
                 Vin="9H8G7FEDCBA654321",
-                ModelId=2,
                 Year=2017,
                 BodyStyle="SUV",
                 TransmissionType="Automatic",

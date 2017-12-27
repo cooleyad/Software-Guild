@@ -137,7 +137,7 @@ namespace SWGDealer.Data.Migrations
                 new VehicleModel
                 {
                     Make = context.VehicleMakes.FirstOrDefault(m => m.VehicleMakeName == "Audi"),
-                    VehicleMakeId =1 ,
+                    VehicleMakeId = 1,
                     VehicleModelName = "S8",
                     DateAdded = DateTime.Now,
                     User = context.Users.FirstOrDefault(u => u.UserName == "jlundegaard@swgdealer.com")
@@ -145,7 +145,7 @@ namespace SWGDealer.Data.Migrations
                 new VehicleModel
                 {
                     Make = context.VehicleMakes.FirstOrDefault(m => m.VehicleMakeName == "Honda"),
-                    VehicleMakeId=4,
+                    VehicleMakeId = 4,
                     VehicleModelName = "Civic",
                     DateAdded = DateTime.Now,
                     User = context.Users.FirstOrDefault(u => u.UserName == "jlundegaard@swgdealer.com")
@@ -154,76 +154,77 @@ namespace SWGDealer.Data.Migrations
                 {
                     Make = context.VehicleMakes.FirstOrDefault(m => m.VehicleMakeName == "Toyota"),
                     VehicleModelName = "Camry",
-                    VehicleMakeId=7,
+                    VehicleMakeId = 7,
                     DateAdded = DateTime.Now,
                     User = context.Users.FirstOrDefault(u => u.UserName == "jlundegaard@swgdealer.com")
                 },
                 new VehicleModel
                 {
                     Make = context.VehicleMakes.FirstOrDefault(m => m.VehicleMakeName == "Yugo"),
-                    VehicleMakeId=9,
+                    VehicleMakeId = 9,
                     VehicleModelName = "The Proletariat's Car",
                     DateAdded = DateTime.Now,
                     User = context.Users.FirstOrDefault(u => u.UserName == "jlundegaard@swgdealer.com")
                 },
                 new VehicleModel
                 {
-                    Make=context.VehicleMakes.FirstOrDefault(m=>m.VehicleMakeName=="Land Rover"),
-                    VehicleMakeId=5,
-                    VehicleModelName="Defender",
-                    DateAdded=DateTime.Now,
-                    User=context.Users.FirstOrDefault(u=>u.UserName== "jlundegaard@swgdealer.com")
+                    Make = context.VehicleMakes.FirstOrDefault(m => m.VehicleMakeName == "Land Rover"),
+                    VehicleMakeId = 5,
+                    VehicleModelName = "Defender",
+                    DateAdded = DateTime.Now,
+                    User = context.Users.FirstOrDefault(u => u.UserName == "jlundegaard@swgdealer.com")
                 }
                 );
             context.SaveChanges();
 
             context.PurchaseTypes.AddOrUpdate(p => p.Description,
-                new PurchaseType {Description="Bank" },
-                new PurchaseType {Description="Cash" },
-                new PurchaseType {Description="Dealer" }
+                new PurchaseType { Description = "Bank" },
+                new PurchaseType { Description = "Cash" },
+                new PurchaseType { Description = "Dealer" }
 
                 );
             context.SaveChanges();
 
-            context.Vehicles.AddOrUpdate(v=>v.Vin,
+            context.Vehicles.AddOrUpdate(v => v.Vin,
                new Vehicle
                {
-                   Model =context.VehicleModels.FirstOrDefault(m=>m.VehicleModelName=="S8"),
-                   Vin= "1A2B3CDEFGH456789",
-                   Year=2017,
-                   BodyStyle="Sedan",
-                   TransmissionType="Automatic",
-                   Color="Durple",
-                   InteriorColor="Black",
-                   Odometer=50,
-                   SalePrice=75000,
-                   MSRP=80000,
-                   Description="It's gota V8",
-                   Image="http://localhost:53012/Images/S8.jpg",
-                  VehicleIsNew=true,
-                  VehicleFeatured=true,
-                  VehicleIsSold=false
-               },
-               new Vehicle {
-                   Model=context.VehicleModels.FirstOrDefault(m=>m.VehicleModelName=="Camry"),
-                   Vin= "1A2B3CDEFGH456789",
-                   Year=2017,
-                   BodyStyle="Sedan",
-                   TransmissionType="Automatic",
-                   Color="Silver",
-                   InteriorColor="Gray",
-                   Odometer=0,
-                   SalePrice=20000,
-                   MSRP=25000,
-                   Description="It's a Camry, not much to say, it'll get you on your way",
-                   Image= "http://localhost:53012/Images/Camry.png",
-                   VehicleIsNew=true,
-                   VehicleFeatured=true,
-                   VehicleIsSold=false
+                   Model = context.VehicleModels.FirstOrDefault(m => m.VehicleModelName == "S8"),
+                   Vin = "1A2B3CDEFGH456789",
+                   Year = 2017,
+                   BodyStyle = "Sedan",
+                   TransmissionType = "Automatic",
+                   Color = "Durple",
+                   InteriorColor = "Black",
+                   Odometer = 50,
+                   SalePrice = 75000,
+                   MSRP = 80000,
+                   Description = "It's gota V8",
+                   Image = "http://localhost:53012/Images/S8.jpg",
+                   VehicleIsNew = true,
+                   VehicleFeatured = true,
+                   VehicleIsSold = false
                },
                new Vehicle
                {
-                   Model = context.VehicleModels.FirstOrDefault(m=>m.VehicleModelName=="Civic"),
+                   Model = context.VehicleModels.FirstOrDefault(m => m.VehicleModelName == "Camry"),
+                   Vin = "1A2B3CDEFGH456789",
+                   Year = 2017,
+                   BodyStyle = "Sedan",
+                   TransmissionType = "Automatic",
+                   Color = "Silver",
+                   InteriorColor = "Gray",
+                   Odometer = 0,
+                   SalePrice = 20000,
+                   MSRP = 25000,
+                   Description = "It's a Camry, not much to say, it'll get you on your way",
+                   Image = "http://localhost:53012/Images/Camry.png",
+                   VehicleIsNew = true,
+                   VehicleFeatured = true,
+                   VehicleIsSold = false
+               },
+               new Vehicle
+               {
+                   Model = context.VehicleModels.FirstOrDefault(m => m.VehicleModelName == "Civic"),
                    Vin = "1A2B3CDEFGH456789",
                    Year = 2017,
                    BodyStyle = "Coupe",
@@ -241,7 +242,7 @@ namespace SWGDealer.Data.Migrations
                },
                new Vehicle
                {
-                   Model = context.VehicleModels.FirstOrDefault(m=>m.VehicleModelName=="Defender"),
+                   Model = context.VehicleModels.FirstOrDefault(m => m.VehicleModelName == "Defender"),
                    Vin = "1A2B3CDEFGH456789",
                    Year = 2017,
                    BodyStyle = "SUV",
@@ -295,7 +296,7 @@ namespace SWGDealer.Data.Migrations
                },
                new Vehicle
                {
-                   Model = context.VehicleModels.FirstOrDefault(m=>m.VehicleModelName== "The Proletariat's Car"),
+                   Model = context.VehicleModels.FirstOrDefault(m => m.VehicleModelName == "The Proletariat's Car"),
                    Vin = "1A2B3CDEFGH456789",
                    Year = 2017,
                    BodyStyle = "Sedan",
@@ -349,5 +350,6 @@ namespace SWGDealer.Data.Migrations
                }
                );
         }
+
     }
 }

@@ -13,7 +13,7 @@ namespace SWGDealer.Models.DealerModels
         public int VehicleId { get; set; }
         public string Vin { get; set; }
         public virtual VehicleModel Model { get; set; }
-        public int ModelId { get; set; }
+        //public int ModelId { get; set; }
         public int Year { get; set; }
         public string BodyStyle { get; set; }
         public string TransmissionType { get; set; }

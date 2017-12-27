@@ -21,6 +21,22 @@ namespace SWGDealer.Data.Migrations
                 .PrimaryKey(t => t.ContactId);
             
             CreateTable(
+                "dbo.Customers",
+                c => new
+                    {
+                        CustomerId = c.Int(nullable: false, identity: true),
+                        Name = c.String(),
+                        Street1 = c.String(),
+                        Street2 = c.String(),
+                        City = c.String(),
+                        State = c.String(),
+                        ZipCode = c.Int(nullable: false),
+                        Email = c.String(),
+                        PhoneNumber = c.String(),
+                    })
+                .PrimaryKey(t => t.CustomerId);
+            
+            CreateTable(
                 "dbo.SalesSpecials",
                 c => new
                     {
@@ -75,23 +91,6 @@ namespace SWGDealer.Data.Migrations
                 .Index(t => t.VehicleId)
                 .Index(t => t.CustomerId)
                 .Index(t => t.User_Id);
-            
-            CreateTable(
-                "dbo.Customers",
-                c => new
-                    {
-                        CustomerId = c.Int(nullable: false, identity: true),
-                        FirstName = c.String(),
-                        LastName = c.String(),
-                        Street1 = c.String(),
-                        Street2 = c.String(),
-                        City = c.String(),
-                        State = c.String(),
-                        ZipCode = c.Int(nullable: false),
-                        Email = c.String(),
-                        PhoneNumber = c.String(),
-                    })
-                .PrimaryKey(t => t.CustomerId);
             
             CreateTable(
                 "dbo.PurchaseTypes",
@@ -155,7 +154,6 @@ namespace SWGDealer.Data.Migrations
                     {
                         VehicleId = c.Int(nullable: false, identity: true),
                         Vin = c.String(),
-                        ModelId = c.Int(nullable: false),
                         Year = c.Int(nullable: false),
                         BodyStyle = c.String(),
                         TransmissionType = c.String(),
@@ -181,12 +179,12 @@ namespace SWGDealer.Data.Migrations
                     {
                         VehicleModelId = c.Int(nullable: false, identity: true),
                         VehicleModelName = c.String(),
-                        VehicleMakeId = c.Int(nullable: false),
+                        VehicleMakeId = c.Int(),
                         DateAdded = c.DateTime(nullable: false),
                         User_Id = c.String(maxLength: 128),
                     })
                 .PrimaryKey(t => t.VehicleModelId)
-                .ForeignKey("dbo.VehicleMakes", t => t.VehicleMakeId, cascadeDelete: true)
+                .ForeignKey("dbo.VehicleMakes", t => t.VehicleMakeId)
                 .ForeignKey("dbo.AspNetUsers", t => t.User_Id)
                 .Index(t => t.VehicleMakeId)
                 .Index(t => t.User_Id);
@@ -242,11 +240,11 @@ namespace SWGDealer.Data.Migrations
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");
             DropTable("dbo.PurchaseTypes");
-            DropTable("dbo.Customers");
             DropTable("dbo.Purchases");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetRoles");
             DropTable("dbo.SalesSpecials");
+            DropTable("dbo.Customers");
             DropTable("dbo.Contacts");
         }
     }

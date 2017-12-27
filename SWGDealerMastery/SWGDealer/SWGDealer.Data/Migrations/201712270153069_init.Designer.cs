@@ -7,13 +7,13 @@ namespace SWGDealer.Data.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class customerStuff : IMigrationMetadata
+    public sealed partial class init : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(customerStuff));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(init));
         
         string IMigrationMetadata.Id
         {
-            get { return "201712202215460_customerStuff"; }
+            get { return "201712270153069_init"; }
         }
         
         string IMigrationMetadata.Source
