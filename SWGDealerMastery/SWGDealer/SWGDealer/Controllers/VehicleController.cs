@@ -53,7 +53,8 @@ namespace SWGDealer.Controllers
         public IHttpActionResult Search(string type, string searchKey, int minYear, int maxYear, decimal minPrice, decimal maxPrice)
         {
             List<Vehicle> carReturn = repo.GetAllVehicles(type, searchKey, minYear, maxYear, minPrice, maxPrice);
-            if(carReturn==null)
+
+            if (carReturn==null)
             {
                 return NotFound();
             }

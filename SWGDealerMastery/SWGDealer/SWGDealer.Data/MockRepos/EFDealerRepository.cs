@@ -258,13 +258,14 @@ namespace SWGDealer.Data.MockRepos
         public List<Vehicle> GetAllVehicles(string type, string searchKey, int minYear, int maxYear, decimal minPrice, decimal maxPrice)
         {
             var carReturn = new List<Vehicle>();
+
             foreach(var v in context.Vehicles.Include("Model").Include("Model.Make"))
             {
-                if((type=="new" && v.VehicleIsNew) || (type=="used" && !v.VehicleIsNew) || (type=="both" && !v.VehicleIsSold))
+                if ((type=="new" && v.VehicleIsNew && !v.VehicleIsSold) || (type=="used" && !v.VehicleIsNew && !v.VehicleIsSold) || (type=="both" && !v.VehicleIsSold))
                 {
-                    if (v.SalePrice>minPrice && v.SalePrice <maxPrice && v.Year>minYear && v.Year<maxYear)
+                    if (v.SalePrice>=minPrice && v.SalePrice <=maxPrice && v.Year>=minYear && v.Year<=maxYear)
                     {
-                        if (v.Model.VehicleModelName.Contains(searchKey) || v.Model.Make.VehicleMakeName.Contains(searchKey) || v.Year.ToString()==searchKey)
+                        if (v.Model.VehicleModelName.Contains(searchKey) || v.Model.Make.VehicleMakeName.Contains(searchKey) || v.Year.ToString()==searchKey || searchKey=="all")
                         {
                             carReturn.Add(v);
                         }

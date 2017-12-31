@@ -3,7 +3,7 @@
 
 });
 
-function showCars() {
+function adminSearch() {
 	$('#searchResults').show();
 	search();
 }
@@ -14,6 +14,10 @@ function search() {
 	var maxYear = $('#maxYear').val();
 	var minPrice = $('#minPrice').val();
 	var maxPrice = $('#maxPrice').val();
+
+	if (searchKey == "") {
+		searchKey = 'all'
+	}
 
 	$.ajax({
 		url: 'http://localhost:53012/vehicle/both/' + searchKey + '/' + minYear + '/' + maxYear + '/' + minPrice + '/' + maxPrice,

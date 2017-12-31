@@ -15,8 +15,6 @@ namespace SWGDealer
             var jsonSerializerSettings = GlobalConfiguration.Configuration.Formatters.JsonFormatter.SerializerSettings;
             jsonSerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
             jsonSerializerSettings.Formatting = Newtonsoft.Json.Formatting.Indented;
-
-
             // Web API routes
             config.MapHttpAttributeRoutes();
 

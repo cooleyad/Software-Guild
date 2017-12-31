@@ -22,12 +22,18 @@ function search(type) {
 	var minPrice = $('#minPrice').val();
 	var maxPrice = $('#maxPrice').val();
 
+
+	if (searchKey == "") {
+		searchKey='all'
+	}
+
 	$.ajax({
 		url: 'http://localhost:53012/vehicle/' + type + '/' + searchKey + '/' + minYear + '/' + maxYear + '/' + minPrice + '/' + maxPrice,
 		type: 'GET',
 
 		success: function (results) {
 			$('#searchResults').empty();
+			
 
 			$.each(results, function (index, vehicle) {
 
