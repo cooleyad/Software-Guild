@@ -20,7 +20,5 @@ namespace SWGDealer.Models
 
         [HiddenInput(DisplayValue = false)]
         public string ReturnUrl { get; set; }
-
-        public AppRole Role { get; set; }
     }
 }

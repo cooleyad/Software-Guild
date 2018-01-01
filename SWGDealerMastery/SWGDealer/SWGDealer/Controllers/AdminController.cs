@@ -234,7 +234,11 @@ namespace SWGDealer.Controllers
             if (role.Name == "disabled")
             {
                 userMgr.SetLockoutEnabled(user.Id, true);
-                userMgr.SetLockoutEndDate(user.Id, DateTime.Today.AddYears(1000));
+                userMgr.Update(user);
+            }
+            if (role.Name=="sales" || role.Name=="admin")
+            {
+                userMgr.SetLockoutEnabled(user.Id, false);
                 userMgr.Update(user);
             }
             context.SaveChanges();

@@ -51,7 +51,7 @@ namespace SWGDealer.Controllers
                     PhoneNumber = model.Phone,
                     
                 };
-                purchase.PurchaseType.Description = model.PurchaseType.Description;
+                purchase.PurchaseTypeId = model.PurchaseType.PurchaseTypeId;
                 purchase.PurchasePrice = model.SalePrice;
                 purchase.DatePurchased = DateTime.Now;
                 purchase.User=new AppUser
