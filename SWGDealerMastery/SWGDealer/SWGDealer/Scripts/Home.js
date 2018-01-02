@@ -19,7 +19,7 @@
 					var image = vehicle.image;
 					var price = vehicle.salePrice;
 
-					row = '<div class = "col-md-3" style="text-align:center; display= "overflow:hidden";"><img src="' + image + '" height="100%" width="100%" style ="border:2px solid black;">';
+					row = '<div class = "col-md-4" style="text-align:center; display= "overflow:hidden";"><img src="' + image + '" height="100%" width="100%" style ="border:2px solid black;">';
 					row += '<h6>' + year + ' ' + make + ' ' + model;
 					row += '</h6><p>Sale Price: $' + price + '</p></h5></div>';
 

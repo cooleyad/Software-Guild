@@ -226,6 +226,10 @@ namespace SWGDealer.Controllers
                 user.Email = model.AppUser.Email;
                 user.UserName = model.AppUser.Email;
                 userMgr.Update(user);
+                if (!string.IsNullOrWhiteSpace(model.NewPassword) && !string.IsNullOrWhiteSpace(model.ConfirmPassword))
+                {
+                    user.PasswordHash = userMgr.PasswordHasher.HashPassword(model.ConfirmPassword);
+                }
             }
             var role = context.Roles.SingleOrDefault(r => r.Id == model.Role.Id);
             string[] allUserRoles = userMgr.GetRoles(user.Id).ToArray();
