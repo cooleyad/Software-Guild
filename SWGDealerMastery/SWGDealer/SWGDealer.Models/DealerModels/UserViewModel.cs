@@ -14,8 +14,9 @@ namespace SWGDealer.Models.DealerModels
         public AppUser AppUser { get; set; }
         public AppRole Role { get; set; }
         public List<SelectListItem> RoleItems { get; set; }
+        public string RoleId { get; set; }
 
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Password is Required")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Password is required")]
         [StringLength(100, ErrorMessage = "The new password must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         public string NewPassword { get; set; }

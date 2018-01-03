@@ -18,6 +18,7 @@ namespace SWGDealer.Models
         public virtual VehicleModel GetModel { get; set; }
         [Range(2000, 2018)]
         public int Year { get; set; }
+        [StringLength(17, ErrorMessage = "VIN must be 17 digits long", MinimumLength = 17), MaxLength(17)]
         [Required(ErrorMessage = "VIN is required")]
         public string VIN { get; set; }
         [Required(ErrorMessage = "Body Style is required")]
@@ -32,6 +33,7 @@ namespace SWGDealer.Models
         public int Odometer { get; set; }
         [Required(ErrorMessage = "Sale Price is required")]
         public decimal SalePrice { get; set; }
+        [Required(ErrorMessage = "MSRP is required")]
         public decimal MSRP { get; set; }
         [Required(ErrorMessage = "Description is required")]
         public string Description { get; set; }

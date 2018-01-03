@@ -65,13 +65,29 @@
 		<div class="row">
 			<div class="col-md-3">
 				<label>Color</label>
-				@Html.TextBoxFor(m => m.Color, new { @class = "form-control" })
+				@Html.DropDownListFor(m => m.Color, new List<SelectListItem>
+				{
+				new SelectListItem{Text="Black", Value="Black" },
+				new SelectListItem{Text="Blue", Value="Blue" },
+				new SelectListItem{Text="Silver", Value="Silver" },
+				new SelectListItem{Text="White", Value="White" },
+				new SelectListItem{Text="Red", Value="Red" }
+				},
+				"-Choose Exterior Color-", new { @class = "form-control" })
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-md-3">
 				<label>Interior Color</label>
-				@Html.TextBoxFor(m => m.InteriorColor, new { @class = "form-control" })
+				@Html.DropDownListFor(m => m.InteriorColor, new List <SelectListItem>
+				{
+				new SelectListItem{Text="Black", Value="Black" },
+				new SelectListItem{Text="Gray", Value="Gray" },
+				new SelectListItem{Text="Tan", Value="Tan" },
+				new SelectListItem{Text="Black/Gray", Value="Black/Gray" },
+				new SelectListItem{Text="Brown", Value="Brown" }
+				},
+				"-Choose Interior Color-", new { @class = "form-control" })
 			</div>
 		</div>
 		<div class="row">

@@ -11,6 +11,7 @@ using System.Web.Mvc;
 
 namespace SWGDealer.Controllers
 {
+    [Authorize(Roles = "admin, sales")]
     public class SalesController : Controller
     {
         ISWGDealerRepo repo = SWGDealerManagerFactory.Create();

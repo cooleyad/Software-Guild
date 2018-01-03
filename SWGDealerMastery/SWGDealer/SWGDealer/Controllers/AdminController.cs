@@ -14,13 +14,13 @@ using System.IO;
 
 namespace SWGDealer.Controllers
 {
+    [Authorize(Roles = "admin")]
     public class AdminController : Controller
     {
         ISWGDealerRepo repo = SWGDealerManagerFactory.Create();
         SWGDealerDbContext context = new SWGDealerDbContext();
 
 
-        [Authorize(Roles = "admin")]
         // GET: Admin
         public ActionResult Admin()
         {
@@ -178,34 +178,58 @@ namespace SWGDealer.Controllers
         [HttpPost]
         public ActionResult AddUser(UserViewModel model)
         {
-            model.AppUser.UserName = model.AppUser.Email;
-            var userMgr = new UserManager<AppUser>(new UserStore<AppUser>(context));
-            var roleMgr = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
-
-            if (userMgr.FindByName(model.AppUser.UserName) == null)
+            if (string.IsNullOrEmpty(model.AppUser.FirstName))
             {
-                var newUser = new AppUser()
-                {
-                    FirstName = model.AppUser.FirstName,
-                    LastName = model.AppUser.LastName,
-                    UserName = model.AppUser.UserName,
-                    Email = model.AppUser.Email
-                };
-                userMgr.Create(newUser, model.NewPassword);
+                ModelState.AddModelError("FirstName", "First name is required");
             }
 
-            var user = userMgr.FindByName(model.AppUser.UserName);
-            var role = context.Roles.SingleOrDefault(r => r.Id == model.Role.Id);
-            userMgr.AddToRole(user.Id, role.Name);
-            context.SaveChanges();
-            return RedirectToAction("Users");
+            if (string.IsNullOrEmpty(model.AppUser.LastName))
+            {
+                ModelState.AddModelError("LastName", "Last name is required");
+            }
+
+            if (string.IsNullOrEmpty(model.AppUser.Email))
+            {
+                ModelState.AddModelError("Email", "Email is required");
+            }
+            if (string.IsNullOrEmpty(model.Role.Id))
+            {
+                ModelState.AddModelError("Id", "Role is required");
+            }
+            if (ModelState.IsValid)
+            {
+                model.AppUser.UserName = model.AppUser.Email;
+                var userMgr = new UserManager<AppUser>(new UserStore<AppUser>(context));
+                var roleMgr = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+
+                if (userMgr.FindByName(model.AppUser.UserName) == null)
+                {
+                    var newUser = new AppUser()
+                    {
+                        FirstName = model.AppUser.FirstName,
+                        LastName = model.AppUser.LastName,
+                        UserName = model.AppUser.UserName,
+                        Email = model.AppUser.Email
+                    };
+                    userMgr.Create(newUser, model.NewPassword);
+                }
+
+                var user = userMgr.FindByName(model.AppUser.UserName);
+                var role = context.Roles.SingleOrDefault(r => r.Id == model.Role.Id);
+                userMgr.AddToRole(user.Id, role.Name);
+                context.SaveChanges();
+                return RedirectToAction("Users");
+            }
+            return View(model);
+           
         }
 
         public ActionResult EditUser(string id)
         {
             var model = new UserViewModel();
-            var user = repo.GetAllUsers().FirstOrDefault(u => u.Id == id);
-            model.AppUser = repo.GetUser(id);
+            var user = repo.GetUser(id);
+            model.AppUser = user;
+            model.RoleId=user.Roles.Single().RoleId;
             model.SetRoleItems(repo.GetAllRoles());
             return View(model);
 
@@ -228,10 +252,13 @@ namespace SWGDealer.Controllers
                 userMgr.Update(user);
                 if (!string.IsNullOrWhiteSpace(model.NewPassword) && !string.IsNullOrWhiteSpace(model.ConfirmPassword))
                 {
-                    user.PasswordHash = userMgr.PasswordHasher.HashPassword(model.ConfirmPassword);
+                    if (ModelState.IsValid)
+                    {
+                        user.PasswordHash = userMgr.PasswordHasher.HashPassword(model.ConfirmPassword);
+                    }
                 }
             }
-            var role = context.Roles.SingleOrDefault(r => r.Id == model.Role.Id);
+            var role = context.Roles.SingleOrDefault(r => r.Id == model.RoleId);
             string[] allUserRoles = userMgr.GetRoles(user.Id).ToArray();
             userMgr.RemoveFromRoles(user.Id, allUserRoles);
             userMgr.AddToRole(user.Id, role.Name);
@@ -240,7 +267,7 @@ namespace SWGDealer.Controllers
                 userMgr.SetLockoutEnabled(user.Id, true);
                 userMgr.Update(user);
             }
-            if (role.Name=="sales" || role.Name=="admin")
+            if (role.Name == "sales" || role.Name == "admin")
             {
                 userMgr.SetLockoutEnabled(user.Id, false);
                 userMgr.Update(user);
