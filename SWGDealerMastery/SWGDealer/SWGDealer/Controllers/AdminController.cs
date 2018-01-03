@@ -48,6 +48,12 @@ namespace SWGDealer.Controllers
 
                     model.Image.SaveAs(imgPath);
                 }
+
+                if(model.SalePrice>model.MSRP)
+                {
+                    ModelState.AddModelError("SalePrice", "Sale price cannot exceed MSRP");
+                }
+
                 Vehicle newVehicle = new Vehicle
                 {
                     VehicleId = model.VehicleId,
@@ -116,6 +122,10 @@ namespace SWGDealer.Controllers
 
                 model.Image.SaveAs(imgPath);
                 model.ImagePath = "http://localhost:53012/Images/" + model.Image.FileName;
+            }
+            if (model.SalePrice > model.MSRP)
+            {
+                ModelState.AddModelError("SalePrice", "Sale price cannot exceed MSRP");
             }
 
             if (ModelState.IsValid)

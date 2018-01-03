@@ -60,7 +60,7 @@ namespace SWGDealer.Controllers
                     UserName = User.Identity.Name
                 };
                 repo.AddPurchase(purchase);
-                RedirectToAction("Sales");
+                return RedirectToAction("Sales");
             }
             return View(model);
         }
